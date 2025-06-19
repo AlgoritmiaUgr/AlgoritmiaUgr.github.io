@@ -3,11 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Club de Algorítmica UGR</title>
+    <title>Club de Programación Competitiva</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Importar Nunito Sans desde Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap" rel="stylesheet">
+    <!-- Iconos de Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         :root {
@@ -118,7 +120,8 @@
 
     <header class="hero-banner py-10 md:py-12 shadow-md">
         <div class="container mx-auto px-4 sm:px-6 flex justify-center items-center">
-             <svg class="w-16 h-16 mr-4 hidden md:block" viewBox="0 0 100 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+             <!-- Logo SVG Integrado -->
+            <svg class="w-16 h-16 mr-4 hidden md:block" viewBox="0 0 100 50" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <circle cx="25" cy="25" r="14" stroke="white" stroke-width="3"/>
                 <path d="M40 25H75" stroke="white" stroke-width="3"/>
                 <path d="M65 15L75 25L65 35" stroke="white" stroke-width="3"/>
@@ -307,13 +310,14 @@
                 </div>
 
                 <div id="contenido-recursos" class="md:w-2/3 lg:w-3/4 resource-content-area p-4 md:p-6 rounded-lg shadow-inner min-h-[250px] md:min-h-[300px]">
+                    <!-- Estructuras de Datos -->
                     <div id="recurso-array" class="recurso-contenido hidden">
                         <h3 class="text-xl md:text-2xl" style="color: var(--ugr-red);">1. Array</h3><p class="my-2 text-sm md:text-base" style="color: var(--ugr-text-secondary);">Estructuras de datos fundamentales para almacenar colecciones de elementos.</p>
                         <div class="mt-4 grid grid-cols-1 md:grid-cols-2 gap-3">
-                             <a href="pdfs/array_explicacion.pdf" target="_blank" class="btn-primary w-full flex items-center justify-center text-center font-semibold py-2.5 px-4 rounded-lg text-sm">
+                             <a href="./recursos/EstructurasDeDatos/Array/1.Array(Teoria).pdf" target="_blank" class="btn-primary w-full flex items-center justify-center text-center font-semibold py-2.5 px-4 rounded-lg text-sm">
                                 <i class="fas fa-book-open mr-2"></i>Ver Explicación
                             </a>
-                            <a href="pdfs/array_retos.pdf" target="_blank" class="btn-primary w-full flex items-center justify-center text-center font-semibold py-2.5 px-4 rounded-lg text-sm">
+                            <a href="./recursos/EstructurasDeDatos/Array/1.Array(Ejercicios).pdf" target="_blank" class="btn-primary w-full flex items-center justify-center text-center font-semibold py-2.5 px-4 rounded-lg text-sm">
                                 <i class="fas fa-puzzle-piece mr-2"></i>Ver Retos
                             </a>
                         </div>
@@ -410,10 +414,10 @@
                         <h3 class="text-xl md:text-2xl" style="color: var(--ugr-red);">3. Two Pointers</h3>
                         <p class="my-2 text-sm md:text-base" style="color: var(--ugr-text-secondary);">Una técnica muy eficiente para recorrer secuencias de datos. Se basa en el uso coordinado de dos punteros para reducir la complejidad temporal.</p>
                         <div class="mt-4 grid grid-cols-1 md:grid-cols-2 gap-3">
-                            <a href="https://algoritmiaugr.github.io/recursos/Algoritmos/3.TwoPointers.pdf" target="_blank">
+                            <a href="https://AlgoritmiaUgr.github.io/recursos/Algoritmos/3.TwoPointers.pdf" target="_blank" class="btn-primary w-full flex items-center justify-center text-center font-semibold py-2.5 px-4 rounded-lg text-sm">
                                 <i class="fas fa-book-open mr-2"></i>Ver Explicación
                             </a>
-                           <a href="https://raw.githubusercontent.com/AlgoritmiaUgr/AlgoritmiaUgr.github.io/main/recursos/Algoritmos/3.TwoPointers.pdf" target="_blank">
+                            <a href="pdfs/algoritmia/two_pointers_retos.pdf" target="_blank" class="btn-primary w-full flex items-center justify-center text-center font-semibold py-2.5 px-4 rounded-lg text-sm">
                                 <i class="fas fa-puzzle-piece mr-2"></i>Ver Retos
                             </a>
                         </div>
@@ -503,6 +507,7 @@
                         </div>
                     </div>
 
+                    <!-- Grafos -->
                     <div id="recurso-grafos-conceptos" class="recurso-contenido hidden">
                         <h3 class="text-xl md:text-2xl" style="color: var(--ugr-red);">1. Conceptos y Recorridos</h3>
                         <p class="my-2 text-sm md:text-base" style="color: var(--ugr-text-secondary);">Introducción a la teoría de grafos, sus representaciones (matriz/lista de adyacencia) y los recorridos fundamentales: Búsqueda en Anchura (BFS) y Búsqueda en Profundidad (DFS).</p>
