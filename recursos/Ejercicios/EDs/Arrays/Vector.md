@@ -1,13 +1,13 @@
 ﻿# Ejercicios para conocer < vector >
-A modo de recordatorio!!
-vector <tipo\> nombre(tamaño):Declaración de un array unidimensional. 
-vector <vector<tipo\>\> nombre(tamaño, vector<tipo\>(tamaño)):Declaración de un array bidimensional.
-vector.push_back(elemento):Añade el elemento al final del vector.
-vector.find(elemento):Busca un elemento.
-vector.pop_back():Elimina el último elemento.
-vector.empty():Devuelve true o false en función de si es vacío o no.
-vector.assign(vector2): Reemplaza el contenido de vector por el de vector2.
-## 1.-Remove element -> [Leetcode](https://leetcode.com/problems/remove-element/description/?envType=problem-list-v2&envId=array)
+A modo de recordatorio!! <br>
+vector <tipo\> nombre(tamaño):Declaración de un array unidimensional.<br>
+vector <vector<tipo\>\> nombre(tamaño, vector<tipo\>(tamaño)):Declaración de un array bidimensional. <br>
+vector.push_back(elemento):Añade el elemento al final del vector. <br>
+vector.find(elemento):Busca un elemento. <br>
+vector.pop_back():Elimina el último elemento. <br>
+vector.empty():Devuelve true o false en función de si es vacío o no. <br>
+vector.assign(vector2): Reemplaza el contenido de vector por el de vector2. <br>
+## 1.-Remove element -> [Leetcode](https://leetcode.com/problems/remove-element/description/?envType=problem-list-v2&envId=array) 
 Este problema pese a ser básico lo recomendamos simplemente para empezar a hacer uso del vector de la STL. Una solución (sin usar sets) es:
 
        class  Solution {
@@ -27,8 +27,8 @@ Este problema pese a ser básico lo recomendamos simplemente para empezar a hace
 Como se ve, el uso de esta biblioteca es igual al de los arrays vistos en FP/MP, con la singularidad de que existen funciones hechas muy útiles (tales como arr.size() que nos dice el tamaño del vector).
 ## 2.-Spiral Matrix -> [Leetcode](https://leetcode.com/problems/spiral-matrix/?envType=problem-list-v2&envId=array)
 Este problema puede ser útil para seguir entrenando la lógica de programación y la práctica con el vector de la STL. 
-A continuación hay una serie de pistas por si se necesitan (lo normal si es vuestro primer ejercicio así):
-1.-Trata de replicar la espiral.
+A continuación hay una serie de pistas por si se necesitan (lo normal si es vuestro primer ejercicio así):<br>
+1.-Trata de replicar la espiral. <br>
 2.-Usa bools para marcar la subida, bajada, izquierda o derecha.
 _____
 **Esto solo es una posible solución, puede hacerse otras formas.**
