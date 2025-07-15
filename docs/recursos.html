@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Club de Programación Competitiva - Recursos</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="text-base">
+
+    <header class="hero-banner py-10 md:py-12 shadow-md">
+        <div class="container mx-auto px-4 sm:px-6 flex justify-center items-center">
+             <svg class="w-16 h-16 mr-4 hidden md:block" viewBox="0 0 100 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="25" cy="25" r="14" stroke="white" stroke-width="3"/>
+                <path d="M40 25H75" stroke="white" stroke-width="3"/>
+                <path d="M65 15L75 25L65 35" stroke="white" stroke-width="3"/>
+                <rect x="75" y="10" width="30" height="30" rx="3" stroke="white" stroke-width="3" fill="var(--ugr-red)"/>
+            </svg>
+            <div class="text-center md:text-left">
+                <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold">Club de Programación Competitiva UGR</h1>
+                <p class="mt-3 sm:mt-4 text-md sm:text-lg">Tu espacio para aprender, competir y crecer en el mundo de los algoritmos.</p>
+            </div>
+        </div>
+    </header>
+
+    <nav class="nav-bar sticky top-0 z-50 shadow">
+        <div class="container mx-auto px-4 sm:px-6 py-3">
+            <ul id="main-navigation" class="flex flex-wrap justify-center items-center space-y-2 sm:space-y-0 sm:space-x-6 md:space-x-8">
+                <li><a href="index.html" class="nav-link font-medium p-2 rounded-md">Presentación</a></li>
+                <li><a href="calendario.html" class="nav-link font-medium p-2 rounded-md">Calendario</a></li>
+                <li><a href="recursos.html" class="nav-link font-medium p-2 rounded-md">Recursos</a></li>
+                <li><a href="retos.html" class="nav-link font-medium p-2 rounded-md">Retos</a></li>
+                <li><a href="iniciativas.html" class="nav-link font-medium p-2 rounded-md">Iniciativas</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="container mx-auto px-4 sm:px-6 py-8">
+        <section id="recursos" class="main-section section-card mb-10 md:mb-12 p-6 rounded-lg shadow-lg">
+            <h2 class="section-title text-2xl md:text-3xl font-semibold mb-6 border-b-2 pb-2">📚 Recursos de Aprendizaje</h2>
+            <p class="mb-6 md:mb-8 text-sm md:text-base leading-relaxed">Selecciona un tema de la lista para ver los materiales de estudio detallados. Utiliza los PDFs para la teoría y los retos.</p>
+
+            <div class="flex flex-col md:flex-row gap-4 md:gap-6">
+                <div class="md:w-1/3 lg:w-1/4" id="lista-recursos-container">
+
+                    <details open>
+                        <summary class="recursos-subtitle">Estructuras de Datos</summary>
+                        <ul class="space-y-2 mt-2">
+                            <li><a href="#" data-target="recurso-array" class="recurso-item-lista block p-3 rounded-md font-medium text-sm md:text-base" data-tooltip-text="Colecciones ordenadas de elementos, acceso por índice.">1. Array</a></li>
+                            <li><a href="#" data-target="recurso-sets" class="recurso-item-lista block p-3 rounded-md font-medium text-sm md:text-base" data-tooltip-text="Colecciones de elementos únicos, operaciones de conjunto.">2. Sets</a></li>
+                            <li><a href="#" data-target="recurso-maps" class="recurso-item-lista block p-3 rounded-md font-medium text-sm md:text-base" data-tooltip-text="Estructuras clave-valor para búsquedas rápidas por clave.">3. Maps</a></li>
+                            <li><a href="#" data-target="recurso-linked-list" class="recurso-item-lista block p-3 rounded-md font-medium text-sm md:text-base" data-tooltip-text="Secuencia de nodos enlazados, inserción/eliminación flexible.">4. Linked List</a></li>
+                            <li><a href="#" data-target="recurso-arboles" class="recurso-item-lista block p-3 rounded-md font-medium text-sm md:text-base" data-tooltip-text="Estructuras jerárquicas para organizar datos eficientemente.">5. Árboles</a></li>
+                            <li><a href="#" data-target="recurso-pila-colas" class="recurso-item-lista block p-3 rounded-md font-medium text-sm md:text-base" data-tooltip-text="Estructuras LIFO (Pila) y FIFO (Cola) para diversas tareas.">6. Pila y Colas</a></li>
+                        </ul>
+                    </details>
+
+                    <details open>
+                        <summary class="recursos-subtitle">Algoritmia</summary>
+                         <ul class="space-y-2 mt-2">
+                            <li><a href="#" data-target="recurso-introduccion" class="recurso-item-lista block p-3 rounded-md font-medium text-sm md:text-base" data-tooltip-text="Fundamentos de algorítmica, eficiencia y Notación Big O.">1. Introducción</a></li>
+                            <li><a href="#" data-target="recurso-recursividad" class="recurso-item-lista block p-3 rounded-md font-medium text-sm md:text-base" data-tooltip-text="Técnica para resolver problemas dividiéndolos en subproblemas.">2. Recursividad</a></li>
+                            <li><a href="#" data-target="recurso-two-pointers" class="recurso-item-lista block p-3 rounded-md font-medium text-sm md:text-base" data-tooltip-text="Uso de dos punteros para recorrer secuencias eficientemente.">3. Two Pointers</a></li>
+                            <li><a href="#" data-target="recurso-prefix-sum" class="recurso-item-lista block p-3 rounded-md font-medium text-sm md:text-base" data-tooltip-text="Pre-cálculo de sumas acumuladas para consultas rápidas de rangos.">4. Prefix Sum</a></li>
+                            <li><a href="#" data-target="recurso-sliding-window" class="recurso-item-lista block p-3 rounded-md font-medium text-sm md:text-base" data-tooltip-text="Técnica para procesar sub-arrays/sub-cadenas contiguas.">5. Sliding Window</a></li>
+                            <li><a href="#" data-target="recurso-ordenacion" class="recurso-item-lista block p-3 rounded-md font-medium text-sm md:text-base" data-tooltip-text="Algoritmos para ordenar elementos, como MergeSort o QuickSort.">6. Algoritmos de Ordenación</a></li>
+                            <li><a href="#" data-target="recurso-busqueda" class="recurso-item-lista block p-3 rounded-md font-medium text-sm md:text-base" data-tooltip-text="Algoritmos para encontrar elementos, como la Búsqueda Binaria.">7. Algoritmos de Búsqueda</a></li>
+                            <li><a href="#" data-target="recurso-backtracking" class="recurso-item-lista block p-3 rounded-md font-medium text-sm md:text-base" data-tooltip-text="Exploración recursiva de todas las soluciones posibles.">8. Backtracking</a></li>
+                            <li><a href="#" data-target="recurso-divide-venceras" class="recurso-item-lista block p-3 rounded-md font-medium text-sm md:text-base" data-tooltip-text="Dividir el problema en sub-problemas más pequeños y combinar resultados.">9. Divide y Vencerás</a></li>
+                            <li><a href="#" data-target="recurso-dp" class="recurso-item-lista block p-3 rounded-md font-medium text-sm md:text-base" data-tooltip-text="Resolución de problemas complejos guardando sub-problemas.">10. Prog. Dinámica</a></li>
+                        </ul>
+                    </details>
+
+                    <details open>
+                        <summary class="recursos-subtitle">Grafos</summary>
+                        <ul class="space-y-2 mt-2">
+                            <li><a href="#" data-target="recurso-grafos-conceptos" class="recurso-item-lista block p-3 rounded-md font-medium text-sm md:text-base" data-tooltip-text="Modelado de relaciones entre objetos y sus recorridos (BFS, DFS).">1. Conceptos y Recorridos</a></li>
+                            <li><a href="#" data-target="recurso-grafos-shortest-path" class="recurso-item-lista block p-3 rounded-md font-medium text-sm md:text-base" data-tooltip-text="Algoritmos para encontrar el camino más corto, como Dijkstra.">2. Caminos Mínimos</a></li>
+                            <li><a href="#" data-target="recurso-grafos-mst" class="recurso-item-lista block p-3 rounded-md font-medium text-sm md:text-base" data-tooltip-text="Algoritmos para encontrar el árbol de expansión mínima (Prim, Kruskal).">3. Árbol de Expansión Mínima</a></li>
+                            <li><a href="#" data-target="recurso-grafos-topological" class="recurso-item-lista block p-3 rounded-md font-medium text-sm md:text-base" data-tooltip-text="Ordenación de nodos en grafos dirigidos acíclicos (DAGs).">4. Ordenación Topológica</a></li>
+                        </ul>
+                    </details>
+
+                </div>
+
+                <div id="contenido-recursos" class="md:w-2/3 lg:w-3/4 resource-content-area p-4 md:p-6 rounded-lg shadow-inner min-h-[250px] md:min-h-[300px]">
+                    <div id="recurso-array" class="recurso-contenido hidden">
+                        <h3 class="text-xl md:text-2xl" style="color: var(--ugr-red);">1. Array</h3><p class="my-2 text-sm md:text-base" style="color: var(--ugr-text-secondary);">Estructuras de datos fundamentales para almacenar colecciones de elementos.</p>
+                        <div class="mt-4 grid grid-cols-1 md:grid-cols-2 gap-3">
+                             <a href="https://github.com/AlgoritmiaUgr/AlgoritmiaUgr.github.io/blob/3a7b96d1de65630810d7c62e708955910c1728f2/recursos/Estructuras%20de%20Datos/1.Arrays.pdf" target="_blank" class="btn-primary w-full flex items-center justify-center text-center font-semibold py-2.5 px-4 rounded-lg text-sm">
+                                <i class="fas fa-book-open mr-2"></i>Ver Explicación
+                            </a>
+                            <a href="./recursos/EstructurasDeDatos/Array/1.Array(Ejercicios).pdf" target="_blank" class="btn-primary w-full flex items-center justify-center text-center font-semibold py-2.5 px-4 rounded-lg text-sm">
+                                <i class="fas fa-puzzle-piece mr-2"></i>Ver Retos
+                            </a>
+                        </div>
+                        <p class="mt-3 md:mt-4 text-xs md:text-sm" style="color: var(--ugr-medium-gray);">Consulta los PDFs para aprender sobre Arrays, sus usos y problemas relacionados.</p>
+                    </div>
+                    <div id="recurso-sets" class="recurso-contenido hidden">
+                        <h3 class="text-xl md:text-2xl" style="color: var(--ugr-red);">2. Sets</h3><p class="my-2 text-sm md:text-base" style="color: var(--ugr-text-secondary);">Colecciones de elementos únicos, útiles para operaciones de pertenencia y conjunto.</p>
+                        <div class="mt-4 grid grid-cols-1 md:grid-cols-2 gap-3">
+                            <a href="https://github.com/AlgoritmiaUgr/AlgoritmiaUgr.github.io/blob/f20ce09c1fd066836afde7ae2f11de3bd8332635/recursos/Estructuras%20de%20Datos/2.HashSets.pdf" target="_blank" class="btn-primary w-full flex items-center justify-center text-center font-semibold py-2.5 px-4 rounded-lg text-sm">
+                                <i class="fas fa-book-open mr-2"></i>Ver Explicación
+                            </a>
+                            <a href="pdfs/sets_retos.pdf" target="_blank" class="btn-primary w-full flex items-center justify-center text-center font-semibold py-2.5 px-4 rounded-lg text-sm">
+                                <i class="fas fa-puzzle-piece mr-2"></i>Ver Retos
+                            </a>
+                        </div>
+                        <p class="mt-3 md:mt-4 text-xs md:text-sm" style="color: var(--ugr-medium-gray);">Los PDFs de Sets cubren cómo usarlos eficientemente y problemas de ejemplo.</p>
+                    </div>
+                    <div id="recurso-maps" class="recurso-contenido hidden">
+                        <h3 class="text-xl md:text-2xl" style="color: var(--ugr-red);">3. Maps</h3><p class="my-2 text-sm md:text-base" style="color: var(--ugr-text-secondary);">Estructuras de datos clave-valor para búsquedas eficientes.</p>
+                        <div class="mt-4 grid grid-cols-1 md:grid-cols-2 gap-3">
+                            <a href="https://github.com/AlgoritmiaUgr/AlgoritmiaUgr.github.io/blob/e054a996eb238f7f65237fee857b2de3b1583ac6/recursos/Estructuras%20de%20Datos/3.HashMaps.pdf" target="_blank" class="btn-primary w-full flex items-center justify-center text-center font-semibold py-2.5 px-4 rounded-lg text-sm">
+                                <i class="fas fa-book-open mr-2"></i>Ver Explicación
+                            </a>
+                            <a href="pdfs/maps_retos.pdf" target="_blank" class="btn-primary w-full flex items-center justify-center text-center font-semibold py-2.5 px-4 rounded-lg text-sm">
+                                <i class="fas fa-puzzle-piece mr-2"></i>Ver Retos
+                            </a>
+                        </div>
+                        <p class="mt-3 md:mt-4 text-xs md:text-sm" style="color: var(--ugr-medium-gray);">Aprende todo sobre Maps y sus aplicaciones con nuestros PDFs detallados.</p>
+                    </div>
+                    <div id="recurso-linked-list" class="recurso-contenido hidden">
+                        <h3 class="text-xl md:text-2xl" style="color: var(--ugr-red);">4. Linked List</h3><p class="my-2 text-sm md:text-base" style="color: var(--ugr-text-secondary);">Listas enlazadas para inserciones y eliminaciones dinámicas.</p>
+                        <div class="mt-4 grid grid-cols-1 md:grid-cols-2 gap-3">
+                            <a href="pdfs/linked_list_explicacion.pdf" target="_blank" class="btn-primary w-full flex items-center justify-center text-center font-semibold py-2.5 px-4 rounded-lg text-sm">
+                                <i class="fas fa-book-open mr-2"></i>Ver Explicación
+                            </a>
+                            <a href="pdfs/linked_list_retos.pdf" target="_blank" class="btn-primary w-full flex items-center justify-center text-center font-semibold py-2.5 px-4 rounded-lg text-sm">
+                                <i class="fas fa-puzzle-piece mr-2"></i>Ver Retos
+                            </a>
+                        </div>
+                        <p class="mt-3 md:mt-4 text-xs md:text-sm" style="color: var(--ugr-medium-gray);">Descubre las Listas Enlazadas, sus ventajas y retos en los PDFs.</p>
+                    </div>
+                    <div id="recurso-arboles" class="recurso-contenido hidden">
+                        <h3 class="text-xl md:text-2xl" style="color: var(--ugr-red);">5. Árboles</h3><p class="my-2 text-sm md:text-base" style="color: var(--ugr-text-secondary);">Estructuras jerárquicas para organizar datos eficientemente.</p>
+                        <div class="mt-4 grid grid-cols-1 md:grid-cols-2 gap-3">
+                            <a href="pdfs/arboles_explicacion.pdf" target="_blank" class="btn-primary w-full flex items-center justify-center text-center font-semibold py-2.5 px-4 rounded-lg text-sm">
+                                <i class="fas fa-book-open mr-2"></i>Ver Explicación
+                            </a>
+                            <a href="pdfs/arboles_retos.pdf" target="_blank" class="btn-primary w-full flex items-center justify-center text-center font-semibold py-2.5 px-4 rounded-lg text-sm">
+                                <i class="fas fa-puzzle-piece mr-2"></i>Ver Retos
+                            </a>
+                        </div>
+                        <p class="mt-3 md:mt-4 text-xs md:text-sm" style="color: var(--ugr-medium-gray);">Los PDFs sobre Árboles te guiarán a través de sus tipos y aplicaciones.</p>
+                    </div>
+                    <div id="recurso-pila-colas" class="recurso-contenido hidden">
+                        <h3 class="text-xl md:text-2xl" style="color: var(--ugr-red);">6. Pila y Colas</h3><p class="my-2 text-sm md:text-base" style="color: var(--ugr-text-secondary);">Estructuras de datos LIFO y FIFO para diversas aplicaciones.</p>
+                        <div class="mt-4 grid grid-cols-1 md:grid-cols-2 gap-3">
+                            <a href="pdfs/pila_colas_explicacion.pdf" target="_blank" class="btn-primary w-full flex items-center justify-center text-center font-semibold py-2.5 px-4 rounded-lg text-sm">
+                                <i class="fas fa-book-open mr-2"></i>Ver Explicación
+                            </a>
+                            <a href="pdfs/pila_colas_retos.pdf" target="_blank" class="btn-primary w-full flex items-center justify-center text-center font-semibold py-2.5 px-4 rounded-lg text-sm">
+                                <i class="fas fa-puzzle-piece mr-2"></i>Ver Retos
+                            </a>
+                        </div>
+                        <p class="mt-3 md:mt-4 text-xs md:text-sm" style="color: var(--ugr-medium-gray);">Domina Pilas y Colas con los ejemplos y problemas de los PDFs.</p>
+                    </div>
+
+                    <div id="recurso-introduccion" class="recurso-contenido hidden">
+                        <h3 class="text-xl md:text-2xl font-semibold mb-3 md:mb-4" style="color: var(--ugr-red);">1. Introducción a la Algorítmica</h3>
+                        <p class="mb-3 md:mb-4 text-sm md:text-base" style="color: var(--ugr-text-secondary);">Conceptos básicos, eficiencia, Notación Asintótica (Big O).</p>
+                        <div class="mt-4 grid grid-cols-1 md:grid-cols-2 gap-3">
+                            <a href="https://github.com/AlgoritmiaUgr/AlgoritmiaUgr.github.io/blob/172115890873959cbbb94db971e4800272ddb042/recursos/Algoritmos/1.Introduccion.pdf" target="_blank" class="btn-primary w-full flex items-center justify-center text-center font-semibold py-2.5 px-4 rounded-lg text-sm">
+                                <i class="fas fa-book-open mr-2"></i>Ver Explicación
+                            </a>
+                            <a href="pdfs/algoritmia/introduccion_retos.pdf" target="_blank" class="btn-primary w-full flex items-center justify-center text-center font-semibold py-2.5 px-4 rounded-lg text-sm">
+                                <i class="fas fa-puzzle-piece mr-2"></i>Ver Retos
+                            </a>
+                        </div>
+                         <p class="mt-3 md:mt-4 text-xs md:text-sm" style="color: var(--ugr-medium-gray);">Consulta los PDFs para la explicación detallada y los retos prácticos sobre Introducción a la Algorítmica.</p>
+                    </div>
+                    <div id="recurso-recursividad" class="recurso-contenido hidden">
+                        <h3 class="text-xl md:text-2xl font-semibold mb-3 md:mb-4" style="color: var(--ugr-red);">2. Recursividad</h3>
+                        <p class="mb-3 md:mb-4 text-sm md:text-base" style="color: var(--ugr-text-secondary);">Casos base, casos recursivos, ejemplos clásicos (Factorial, Fibonacci).</p>
+                        <div class="mt-4 grid grid-cols-1 md:grid-cols-2 gap-3">
+                            <a href="https://github.com/AlgoritmiaUgr/AlgoritmiaUgr.github.io/blob/172115890873959cbbb94db971e4800272ddb042/recursos/Algoritmos/2.Recursividad.pdf" target="_blank" class="btn-primary w-full flex items-center justify-center text-center font-semibold py-2.5 px-4 rounded-lg text-sm">
+                                <i class="fas fa-book-open mr-2"></i>Ver Explicación
+                            </a>
+                            <a href="pdfs/algoritmia/recursividad_retos.pdf" target="_blank" class="btn-primary w-full flex items-center justify-center text-center font-semibold py-2.5 px-4 rounded-lg text-sm">
+                                <i class="fas fa-puzzle-piece mr-2"></i>Ver Retos
+                            </a>
+                        </div>
+                         <p class="mt-3 md:mt-4 text-xs md:text-sm" style="color: var(--ugr-medium-gray);">Explora cómo resolver problemas dividiéndolos en subproblemas más pequeños con los PDFs de Recursividad.</p>
+                    </div>
+                    <div id="recurso-two-pointers" class="recurso-contenido hidden">
+                        <h3 class="text-xl md:text-2xl" style="color: var(--ugr-red);">3. Two Pointers</h3>
+                        <p class="my-2 text-sm md:text-base" style="color: var(--ugr-text-secondary);">Una técnica muy eficiente para recorrer secuencias de datos. Se basa en el uso coordinado de dos punteros para reducir la complejidad temporal.</p>
+                        <div class="mt-4 grid grid-cols-1 md:grid-cols-2 gap-3">
+                            <a href="https://github.com/AlgoritmiaUgr/AlgoritmiaUgr.github.io/blob/172115890873959cbbb94db971e4800272ddb042/recursos/Algoritmos/3.TwoPointers.pdf" target="_blank" class="btn-primary w-full flex items-center justify-center text-center font-semibold py-2.5 px-4 rounded-lg text-sm">
+                                <i class="fas fa-book-open mr-2"></i>Ver Explicación
+                            </a>
+                            <a href="pdfs/algoritmia/two_pointers_retos.pdf" target="_blank" class="btn-primary w-full flex items-center justify-center text-center font-semibold py-2.5 px-4 rounded-lg text-sm">
+                                <i class="fas fa-puzzle-piece mr-2"></i>Ver Retos
+                            </a>
+                        </div>
+                    </div>
+                    <div id="recurso-prefix-sum" class="recurso-contenido hidden">
+                        <h3 class="text-xl md:text-2xl" style="color: var(--ugr-red);">4. Prefix Sum</h3>
+                        <p class="my-2 text-sm md:text-base" style="color: var(--ugr-text-secondary);">Técnica que permite calcular la suma de elementos en cualquier rango de un array en tiempo constante, tras un pre-cálculo inicial.</p>
+                         <div class="mt-4 grid grid-cols-1 md:grid-cols-2 gap-3">
+                            <a href="https://github.com/AlgoritmiaUgr/AlgoritmiaUgr.github.io/blob/172115890873959cbbb94db971e4800272ddb042/recursos/Algoritmos/4.PrefixSum.pdf" target="_blank" class="btn-primary w-full flex items-center justify-center text-center font-semibold py-2.5 px-4 rounded-lg text-sm">
+                                <i class="fas fa-book-open mr-2"></i>Ver Explicación
+                            </a>
+                            <a href="pdfs/algoritmia/prefix_sum_retos.pdf" target="_blank" class="btn-primary w-full flex items-center justify-center text-center font-semibold py-2.5 px-4 rounded-lg text-sm">
+                                <i class="fas fa-puzzle-piece mr-2"></i>Ver Retos
+                            </a>
+                        </div>
+                    </div>
+                    <div id="recurso-sliding-window" class="recurso-contenido hidden">
+                        <h3 class="text-xl md:text-2xl" style="color: var(--ugr-red);">5. Sliding Window</h3>
+                        <p class="my-2 text-sm md:text-base" style="color: var(--ugr-text-secondary);">Patrón para procesar eficientemente sub-arrays o sub-cadenas contiguas. La "ventana" se desliza sobre los datos para encontrar resultados óptimos.</p>
+                         <div class="mt-4 grid grid-cols-1 md:grid-cols-2 gap-3">
+                            <a href="https://github.com/AlgoritmiaUgr/AlgoritmiaUgr.github.io/blob/172115890873959cbbb94db971e4800272ddb042/recursos/Algoritmos/5.SlidingWindow.pdf" target="_blank" class="btn-primary w-full flex items-center justify-center text-center font-semibold py-2.5 px-4 rounded-lg text-sm">
+                                <i class="fas fa-book-open mr-2"></i>Ver Explicación
+                            </a>
+                            <a href="pdfs/algoritmia/sliding_window_retos.pdf" target="_blank" class="btn-primary w-full flex items-center justify-center text-center font-semibold py-2.5 px-4 rounded-lg text-sm">
+                                <i class="fas fa-puzzle-piece mr-2"></i>Ver Retos
+                            </a>
+                        </div>
+                    </div>
+                     <div id="recurso-ordenacion" class="recurso-contenido hidden">
+                        <h3 class="text-xl md:text-2xl" style="color: var(--ugr-red);">6. Algoritmos de Ordenación</h3>
+                        <p class="my-2 text-sm md:text-base" style="color: var(--ugr-text-secondary);">Estudio de diferentes métodos para ordenar una colección de elementos, analizando su eficiencia (MergeSort, QuickSort, etc.).</p>
+                         <div class="mt-4 grid grid-cols-1 md:grid-cols-2 gap-3">
+                            <a href="https://github.com/AlgoritmiaUgr/AlgoritmiaUgr.github.io/blob/172115890873959cbbb94db971e4800272ddb042/recursos/Algoritmos/6.Ordenacion.pdf" target="_blank" class="btn-primary w-full flex items-center justify-center text-center font-semibold py-2.5 px-4 rounded-lg text-sm">
+                                <i class="fas fa-book-open mr-2"></i>Ver Explicación
+                            </a>
+                            <a href="pdfs/algoritmia/ordenacion_retos.pdf" target="_blank" class="btn-primary w-full flex items-center justify-center text-center font-semibold py-2.5 px-4 rounded-lg text-sm">
+                                <i class="fas fa-puzzle-piece mr-2"></i>Ver Retos
+                            </a>
+                        </div>
+                    </div>
+                    <div id="recurso-busqueda" class="recurso-contenido hidden">
+                        <h3 class="text-xl md:text-2xl" style="color: var(--ugr-red);">7. Algoritmos de Búsqueda</h3>
+                        <p class="my-2 text-sm md:text-base" style="color: var(--ugr-text-secondary);">Técnicas para encontrar un elemento dentro de una estructura de datos. Destaca la Búsqueda Binaria por su gran eficiencia en colecciones ordenadas.</p>
+                         <div class="mt-4 grid grid-cols-1 md:grid-cols-2 gap-3">
+                            <a href="https://github.com/AlgoritmiaUgr/AlgoritmiaUgr.github.io/blob/172115890873959cbbb94db971e4800272ddb042/recursos/Algoritmos/8.B%C3%BAsqueda.pdf" target="_blank" class="btn-primary w-full flex items-center justify-center text-center font-semibold py-2.5 px-4 rounded-lg text-sm">
+                                <i class="fas fa-book-open mr-2"></i>Ver Explicación
+                            </a>
+                            <a href="pdfs/algoritmia/busqueda_retos.pdf" target="_blank" class="btn-primary w-full flex items-center justify-center text-center font-semibold py-2.5 px-4 rounded-lg text-sm">
+                                <i class="fas fa-puzzle-piece mr-2"></i>Ver Retos
+                            </a>
+                        </div>
+                    </div>
+                     <div id="recurso-backtracking" class="recurso-contenido hidden">
+                        <h3 class="text-xl md:text-2xl" style="color: var(--ugr-red);">8. Backtracking</h3>
+                        <p class="my-2 text-sm md:text-base" style="color: var(--ugr-text-secondary);">Algoritmo recursivo para la resolución de problemas mediante la exploración de todas las soluciones posibles, descartando aquellas que no son válidas.</p>
+                        <div class="mt-4 grid grid-cols-1 md:grid-cols-2 gap-3">
+                            <a href="https://github.com/AlgoritmiaUgr/AlgoritmiaUgr.github.io/blob/172115890873959cbbb94db971e4800272ddb042/recursos/Algoritmos/7.Backtracking.pdf" target="_blank" class="btn-primary w-full flex items-center justify-center text-center font-semibold py-2.5 px-4 rounded-lg text-sm">
+                                <i class="fas fa-book-open mr-2"></i>Ver Explicación
+                            </a>
+                            <a href="pdfs/algoritmia/backtracking_retos.pdf" target="_blank" class="btn-primary w-full flex items-center justify-center text-center font-semibold py-2.5 px-4 rounded-lg text-sm">
+                                <i class="fas fa-puzzle-piece mr-2"></i>Ver Retos
+                            </a>
+                        </div>
+                    </div>
+                    <div id="recurso-divide-venceras" class="recurso-contenido hidden">
+                        <h3 class="text-xl md:text-2xl" style="color: var(--ugr-red);">9. Divide y Vencerás</h3>
+                        <p class="my-2 text-sm md:text-base" style="color: var(--ugr-text-secondary);">Estrategia algorítmica que consiste en dividir un problema en subproblemas más pequeños del mismo tipo, resolverlos y combinar sus soluciones.</p>
+                        <div class="mt-4 grid grid-cols-1 md:grid-cols-2 gap-3">
+                            <a href="https://github.com/AlgoritmiaUgr/AlgoritmiaUgr.github.io/blob/172115890873959cbbb94db971e4800272ddb042/recursos/Algoritmos/9.DyV.pdf" target="_blank" class="btn-primary w-full flex items-center justify-center text-center font-semibold py-2.5 px-4 rounded-lg text-sm">
+                                <i class="fas fa-book-open mr-2"></i>Ver Explicación
+                            </a>
+                            <a href="pdfs/algoritmia/divide_venceras_retos.pdf" target="_blank" class="btn-primary w-full flex items-center justify-center text-center font-semibold py-2.5 px-4 rounded-lg text-sm">
+                                <i class="fas fa-puzzle-piece mr-2"></i>Ver Retos
+                            </a>
+                        </div>
+                    </div>
+                     <div id="recurso-dp" class="recurso-contenido hidden">
+                        <h3 class="text-xl md:text-2xl" style="color: var(--ugr-red);">10. Programación Dinámica</h3>
+                        <p class="my-2 text-sm md:text-base" style="color: var(--ugr-text-secondary);">Técnica avanzada para resolver problemas complejos dividiéndolos en subproblemas más simples y almacenando sus resultados para evitar re-cálculos.</p>
+                        <div class="mt-4 grid grid-cols-1 md:grid-cols-2 gap-3">
+                            <a href="https://github.com/AlgoritmiaUgr/AlgoritmiaUgr.github.io/blob/172115890873959cbbb94db971e4800272ddb042/recursos/Algoritmos/10.DP.pdf" target="_blank" class="btn-primary w-full flex items-center justify-center text-center font-semibold py-2.5 px-4 rounded-lg text-sm">
+                                <i class="fas fa-book-open mr-2"></i>Ver Explicación
+                            </a>
+                            <a href="pdfs/algoritmia/dp_retos.pdf" target="_blank" class="btn-primary w-full flex items-center justify-center text-center font-semibold py-2.5 px-4 rounded-lg text-sm">
+                                <i class="fas fa-puzzle-piece mr-2"></i>Ver Retos
+                            </a>
+                        </div>
+                    </div>
+
+                    <div id="recurso-grafos-conceptos" class="recurso-contenido hidden">
+                        <h3 class="text-xl md:text-2xl" style="color: var(--ugr-red);">1. Conceptos y Recorridos</h3>
+                        <p class="my-2 text-sm md:text-base" style="color: var(--ugr-text-secondary);">Introducción a la teoría de grafos, sus representaciones (matriz/lista de adyacencia) y los recorridos fundamentales: Búsqueda en Anchura (BFS) y Búsqueda en Profundidad (DFS).</p>
+                        <p class="mt-4 text-sm font-semibold" style="color: var(--ugr-dark-gray);">Material en desarrollo. ¡Próximamente disponible!</p>
+                    </div>
+                    <div id="recurso-grafos-shortest-path" class="recurso-contenido hidden">
+                        <h3 class="text-xl md:text-2xl" style="color: var(--ugr-red);">2. Caminos Mínimos</h3>
+                        <p class="my-2 text-sm md:text-base" style="color: var(--ugr-text-secondary);">Algoritmos para encontrar el camino de coste mínimo entre nodos, como el algoritmo de Dijkstra (para pesos no negativos) y Bellman-Ford.</p>
+                        <p class="mt-4 text-sm font-semibold" style="color: var(--ugr-dark-gray);">Material en desarrollo. ¡Próximamente disponible!</p>
+                    </div>
+                    <div id="recurso-grafos-mst" class="recurso-contenido hidden">
+                        <h3 class="text-xl md:text-2xl" style="color: var(--ugr-red);">3. Árbol de Expansión Mínima (MST)</h3>
+                        <p class="my-2 text-sm md:text-base" style="color: var(--ugr-text-secondary);">Técnicas para encontrar un subconjunto de aristas que conecte todos los vértices con el mínimo coste total posible (algoritmos de Prim y Kruskal).</p>
+                        <p class="mt-4 text-sm font-semibold" style="color: var(--ugr-dark-gray);">Material en desarrollo. ¡Próximamente disponible!</p>
+                    </div>
+                    <div id="recurso-grafos-topological" class="recurso-contenido hidden">
+                        <h3 class="text-xl md:text-2xl" style="color: var(--ugr-red);">4. Ordenación Topológica</h3>
+                        <p class="my-2 text-sm md:text-base" style="color: var(--ugr-text-secondary);">Algoritmo para ordenar linealmente los vértices de un grafo dirigido acíclico (DAG), útil en la planificación de tareas con dependencias.</p>
+                        <p class="mt-4 text-sm font-semibold" style="color: var(--ugr-dark-gray);">Material en desarrollo. ¡Próximamente disponible!</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <button id="scrollTopBtn" title="Volver arriba">&#8679;</button>
+
+    <div id="customTooltip"></div>
+
+    <footer class="footer-bar text-center py-6 md:py-8 mt-10 md:mt-12">
+        <p class="text-sm md:text-base">&copy; <span id="currentYear"></span> Club de Programación Competitiva UGR. ¡Feliz codificación!</p>
+        <p class="text-sm md:text-base mt-1">Inspirado en los colores de la <a href="https://www.ugr.es" target="_blank" class="underline hover:text-white">Universidad de Granada</a>.</p>
+    </footer>
+
+    <script src="js/script.js"></script>
+    <script>
+        // JavaScript específico para la página de Recursos
+        document.addEventListener('DOMContentLoaded', function() {
+            const resourceTabLinks = document.querySelectorAll('#lista-recursos-container a.recurso-item-lista');
+            const resourceTabContents = document.querySelectorAll('#contenido-recursos .recurso-contenido');
+
+            if (resourceTabLinks.length > 0 && resourceTabContents.length > 0) {
+                // Desactivar todos los contenidos al inicio
+                resourceTabContents.forEach(c => {
+                    c.classList.add('hidden');
+                    c.classList.remove('active');
+                });
+                // Activar el primer recurso por defecto si existe
+                const firstLink = resourceTabLinks[0];
+                if(firstLink) {
+                    firstLink.classList.add('active');
+                    const firstTargetId = firstLink.getAttribute('data-target');
+                    const firstTargetContent = document.getElementById(firstTargetId);
+                    if (firstTargetContent) {
+                        firstTargetContent.classList.remove('hidden');
+                        firstTargetContent.classList.add('active');
+                    }
+                }
+
+                resourceTabLinks.forEach(link => {
+                    link.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        resourceTabLinks.forEach(l => l.classList.remove('active'));
+                        resourceTabContents.forEach(c => {
+                            c.classList.add('hidden');
+                            c.classList.remove('active');
+                        });
+                        this.classList.add('active');
+                        const targetId = this.getAttribute('data-target');
+                        const targetContent = document.getElementById(targetId);
+                        if (targetContent) {
+                            targetContent.classList.remove('hidden');
+                            targetContent.classList.add('active');
+                        }
+                    });
+                });
+
+            } else {
+                console.warn("Elementos para las pestañas de recursos no encontrados. La funcionalidad de pestañas podría no estar activa.");
+            }
+        });
+    </script>
+</body>
+</html>
