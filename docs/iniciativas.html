@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Club de Programación Competitiva - Iniciativas</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="text-base">
+
+    <header class="hero-banner py-10 md:py-12 shadow-md">
+        <div class="container mx-auto px-4 sm:px-6 flex justify-center items-center">
+             <svg class="w-16 h-16 mr-4 hidden md:block" viewBox="0 0 100 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="25" cy="25" r="14" stroke="white" stroke-width="3"/>
+                <path d="M40 25H75" stroke="white" stroke-width="3"/>
+                <path d="M65 15L75 25L65 35" stroke="white" stroke-width="3"/>
+                <rect x="75" y="10" width="30" height="30" rx="3" stroke="white" stroke-width="3" fill="var(--ugr-red)"/>
+            </svg>
+            <div class="text-center md:text-left">
+                <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold">Club de Programación Competitiva UGR</h1>
+                <p class="mt-3 sm:mt-4 text-md sm:text-lg">Tu espacio para aprender, competir y crecer en el mundo de los algoritmos.</p>
+            </div>
+        </div>
+    </header>
+
+    <nav class="nav-bar sticky top-0 z-50 shadow">
+        <div class="container mx-auto px-4 sm:px-6 py-3">
+            <ul id="main-navigation" class="flex flex-wrap justify-center items-center space-y-2 sm:space-y-0 sm:space-x-6 md:space-x-8">
+                <li><a href="index.html" class="nav-link font-medium p-2 rounded-md">Presentación</a></li>
+                <li><a href="calendario.html" class="nav-link font-medium p-2 rounded-md">Calendario</a></li>
+                <li><a href="recursos.html" class="nav-link font-medium p-2 rounded-md">Recursos</a></li>
+                <li><a href="retos.html" class="nav-link font-medium p-2 rounded-md">Retos</a></li>
+                <li><a href="iniciativas.html" class="nav-link font-medium p-2 rounded-md">Iniciativas</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="container mx-auto px-4 sm:px-6 py-8">
+        <section id="iniciativas" class="main-section section-card mb-10 md:mb-12 p-6 rounded-lg shadow-lg">
+            <h2 class="section-title text-2xl md:text-3xl font-semibold mb-6 border-b-2 pb-2">🚀 Iniciativas del Club</h2>
+            <p class="mb-8 text-sm md:text-base leading-relaxed">Aquí encontrarás información sobre nuestras actividades competitivas y proyectos colaborativos. ¡Participa y demuestra tus habilidades!</p>
+
+            <div class="mb-10">
+                <h3 class="text-xl md:text-2xl font-semibold mb-4 subsection-title">🏆 Competiciones</h3>
+                <p class="mb-6 text-sm md:text-base leading-relaxed">Preparación, participación en competiciones de programación y logros del club.</p>
+
+                <div class="mb-6 initiative-subsection p-4 rounded-md border">
+                    <h4 class="font-semibold text-lg md:text-xl mb-1">Calendario de Competiciones</h4>
+                    <p class="text-sm md:text-base text-gray-700">Próximamente: Lista de competiciones locales, nacionales e internacionales (ICPC, Google Code Jam, LeetCode Contests, etc.).</p>
+                </div>
+                <div class="mb-6 initiative-subsection p-4 rounded-md border">
+                    <h4 class="font-semibold text-lg md:text-xl mb-1">Formación de Equipos</h4>
+                    <p class="text-sm md:text-base text-gray-700">¿Interesado en formar un equipo para ICPC u otras competiciones? Anunciaremos los procesos y canales de comunicación en nuestro Discord.</p>
+                </div>
+                <div class="initiative-subsection p-4 rounded-md border">
+                    <h4 class="font-semibold text-lg md:text-xl mb-1">Salón de la Fama</h4>
+                    <p class="text-sm md:text-base text-gray-700">Aquí destacaremos los logros de nuestros miembros y equipos en diversas competiciones. ¡A por todas!</p>
+                </div>
+            </div>
+
+            <hr class="my-8 border-gray-300">
+
+            <div>
+                <h3 class="text-xl md:text-2xl font-semibold mb-4 subsection-title">💡 Proyectos del Club</h3>
+                <p class="mb-6 text-sm md:text-base leading-relaxed">Espacio para mostrar proyectos colaborativos desarrollados por los miembros del club, aplicando los conocimientos adquiridos.</p>
+                <div class="initiative-subsection p-4 rounded-md border">
+                    <h4 class="font-semibold text-lg md:text-xl mb-1">Proyecto: Visualizador de Algoritmos</h4>
+                    <p class="text-sm md:text-base text-gray-700 mb-2">Un proyecto para crear una herramienta web que visualice el funcionamiento de algoritmos de ordenación y búsqueda.</p>
+                    <p class="text-xs text-gray-600"><strong>Estado:</strong> En planificación</p>
+                    <p class="text-xs text-gray-600"><strong>Tecnologías:</strong> JavaScript, HTML, CSS (Quizás alguna librería de visualización)</p>
+                    <a href="#" class="text-xs hover:underline mt-1 inline-block" style="color: var(--ugr-dark-red);">[Enlace al Repositorio GitHub del Proyecto]</a>
+                </div>
+                 <p class="mt-6 text-xs md:text-sm text-gray-500"><em>(¿Tienes una idea para un proyecto? ¡Proponla en nuestro Discord!)</em></p>
+            </div>
+        </section>
+    </main>
+
+    <button id="scrollTopBtn" title="Volver arriba">&#8679;</button>
+
+    <div id="customTooltip"></div>
+
+    <footer class="footer-bar text-center py-6 md:py-8 mt-10 md:mt-12">
+        <p class="text-sm md:text-base">&copy; <span id="currentYear"></span> Club de Programación Competitiva UGR. ¡Feliz codificación!</p>
+        <p class="text-sm md:text-base mt-1">Inspirado en los colores de la <a href="https://www.ugr.es" target="_blank" class="underline hover:text-white">Universidad de Granada</a>.</p>
+    </footer>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
