@@ -57,6 +57,17 @@
                             <li><a href="#" data-target="recurso-linked-list" class="recurso-item-lista block p-3 rounded-md font-medium text-sm md:text-base" data-tooltip-text="Secuencia de nodos enlazados, inserción/eliminación flexible.">4. Linked List</a></li>
                             <li><a href="#" data-target="recurso-arboles" class="recurso-item-lista block p-3 rounded-md font-medium text-sm md:text-base" data-tooltip-text="Estructuras jerárquicas para organizar datos eficientemente.">5. Árboles</a></li>
                             <li><a href="#" data-target="recurso-pila-colas" class="recurso-item-lista block p-3 rounded-md font-medium text-sm md:text-base" data-tooltip-text="Estructuras LIFO (Pila) y FIFO (Cola) para diversas tareas.">6. Pila y Colas</a></li>
+
+                            <li>
+                                <details>
+                                    <summary class="recursos-subtitle" style="margin-top: 0.5rem; margin-bottom: 0.25rem;">7. Grafos</summary>
+                                    <ul class="space-y-2 mt-2 ml-4"> <li><a href="#" data-target="recurso-grafos-conceptos" class="recurso-item-lista block p-3 rounded-md font-medium text-sm md:text-base" data-tooltip-text="Modelado de relaciones entre objetos y sus recorridos (BFS, DFS).">1. Conceptos y Recorridos</a></li>
+                                        <li><a href="#" data-target="recurso-grafos-shortest-path" class="recurso-item-lista block p-3 rounded-md font-medium text-sm md:text-base" data-tooltip-text="Algoritmos para encontrar el camino más corto, como Dijkstra.">2. Caminos Mínimos</a></li>
+                                        <li><a href="#" data-target="recurso-grafos-mst" class="recurso-item-lista block p-3 rounded-md font-medium text-sm md:text-base" data-tooltip-text="Algoritmos para encontrar el árbol de expansión mínima (Prim, Kruskal).">3. Árbol de Expansión Mínima</a></li>
+                                        <li><a href="#" data-target="recurso-grafos-topological" class="recurso-item-lista block p-3 rounded-md font-medium text-sm md:text-base" data-tooltip-text="Ordenación de nodos en grafos dirigidos acíclicos (DAGs).">4. Ordenación Topológica</a></li>
+                                    </ul>
+                                </details>
+                            </li>
                         </ul>
                     </details>
 
@@ -75,24 +86,14 @@
                             <li><a href="#" data-target="recurso-dp" class="recurso-item-lista block p-3 rounded-md font-medium text-sm md:text-base" data-tooltip-text="Resolución de problemas complejos guardando sub-problemas.">10. Prog. Dinámica</a></li>
                         </ul>
                     </details>
-
-                    <details>
-                        <summary class="recursos-subtitle">Grafos</summary>
-                        <ul class="space-y-2 mt-2">
-                            <li><a href="#" data-target="recurso-grafos-conceptos" class="recurso-item-lista block p-3 rounded-md font-medium text-sm md:text-base" data-tooltip-text="Modelado de relaciones entre objetos y sus recorridos (BFS, DFS).">1. Conceptos y Recorridos</a></li>
-                            <li><a href="#" data-target="recurso-grafos-shortest-path" class="recurso-item-lista block p-3 rounded-md font-medium text-sm md:text-base" data-tooltip-text="Algoritmos para encontrar el camino más corto, como Dijkstra.">2. Caminos Mínimos</a></li>
-                            <li><a href="#" data-target="recurso-grafos-mst" class="recurso-item-lista block p-3 rounded-md font-medium text-sm md:text-base" data-tooltip-text="Algoritmos para encontrar el árbol de expansión mínima (Prim, Kruskal).">3. Árbol de Expansión Mínima</a></li>
-                            <li><a href="#" data-target="recurso-grafos-topological" class="recurso-item-lista block p-3 rounded-md font-medium text-sm md:text-base" data-tooltip-text="Ordenación de nodos en grafos dirigidos acíclicos (DAGs).">4. Ordenación Topológica</a></li>
-                        </ul>
-                    </details>
-
-                </div>
+                    
+                    </div>
 
                 <div id="contenido-recursos" class="md:w-2/3 lg:w-3/4 resource-content-area p-4 md:p-6 rounded-lg shadow-inner min-h-[250px] md:min-h-[300px]">
                     <div id="recurso-default" class="recurso-contenido">
                         <h3 class="text-xl md:text-2xl" style="color: var(--ugr-red);">¡Bienvenido a la sección de Recursos!</h3>
                         <p class="my-2 text-sm md:text-base" style="color: var(--ugr-text-secondary);">
-                            Aquí encontrarás **recursos de distintos tipos** para el aprendizaje de Estructuras de Datos, Algoritmia y Grafos.
+                            Aquí encontrarás <strong>recursos de distintos tipos</strong> para el aprendizaje de Estructuras de Datos, Algoritmia y Grafos.
                             Selecciona un tema de la lista de la izquierda para explorar explicaciones detalladas y retos prácticos.
                             ¡Haz clic y empieza a aprender!
                         </p>
@@ -172,6 +173,27 @@
                             </a>
                         </div>
                         <p class="mt-3 md:mt-4 text-xs md:text-sm" style="color: var(--ugr-medium-gray);">Domina Pilas y Colas con los ejemplos y problemas de los PDFs.</p>
+                    </div>
+
+                    <div id="recurso-grafos-conceptos" class="recurso-contenido hidden">
+                        <h3 class="text-xl md:text-2xl" style="color: var(--ugr-red);">1. Conceptos y Recorridos</h3>
+                        <p class="my-2 text-sm md:text-base" style="color: var(--ugr-text-secondary);">Introducción a la teoría de grafos, sus representaciones (matriz/lista de adyacencia) y los recorridos fundamentales: Búsqueda en Anchura (BFS) y Búsqueda en Profundidad (DFS).</p>
+                        <p class="mt-4 text-sm font-semibold" style="color: var(--ugr-dark-gray);">Material en desarrollo. ¡Próximamente disponible!</p>
+                    </div>
+                    <div id="recurso-grafos-shortest-path" class="recurso-contenido hidden">
+                        <h3 class="text-xl md:text-2xl" style="color: var(--ugr-red);">2. Caminos Mínimos</h3>
+                        <p class="my-2 text-sm md:text-base" style="color: var(--ugr-text-secondary);">Algoritmos para encontrar el camino de coste mínimo entre nodos, como el algoritmo de Dijkstra (para pesos no negativos) y Bellman-Ford.</p>
+                        <p class="mt-4 text-sm font-semibold" style="color: var(--ugr-dark-gray);">Material en desarrollo. ¡Próximamente disponible!</p>
+                    </div>
+                    <div id="recurso-grafos-mst" class="recurso-contenido hidden">
+                        <h3 class="text-xl md:text-2xl" style="color: var(--ugr-red);">3. Árbol de Expansión Mínima (MST)</h3>
+                        <p class="my-2 text-sm md:text-base" style="color: var(--ugr-text-secondary);">Técnicas para encontrar un subconjunto de aristas que conecte todos los vértices con el mínimo coste total posible (algoritmos de Prim y Kruskal).</p>
+                        <p class="mt-4 text-sm font-semibold" style="color: var(--ugr-dark-gray);">Material en desarrollo. ¡Próximamente disponible!</p>
+                    </div>
+                    <div id="recurso-grafos-topological" class="recurso-contenido hidden">
+                        <h3 class="text-xl md:text-2xl" style="color: var(--ugr-red);">4. Ordenación Topológica</h3>
+                        <p class="my-2 text-sm md:text-base" style="color: var(--ugr-text-secondary);">Algoritmo para ordenar linealmente los vértices de un grafo dirigido acíclico (DAG), útil en la planificación de tareas con dependencias.</p>
+                        <p class="mt-4 text-sm font-semibold" style="color: var(--ugr-dark-gray);">Material en desarrollo. ¡Próximamente disponible!</p>
                     </div>
 
                     <div id="recurso-introduccion" class="recurso-contenido hidden">
@@ -295,27 +317,6 @@
                                 <i class="fas fa-puzzle-piece mr-2"></i>Ver Retos
                             </a>
                         </div>
-                    </div>
-
-                    <div id="recurso-grafos-conceptos" class="recurso-contenido hidden">
-                        <h3 class="text-xl md:text-2xl" style="color: var(--ugr-red);">1. Conceptos y Recorridos</h3>
-                        <p class="my-2 text-sm md:text-base" style="color: var(--ugr-text-secondary);">Introducción a la teoría de grafos, sus representaciones (matriz/lista de adyacencia) y los recorridos fundamentales: Búsqueda en Anchura (BFS) y Búsqueda en Profundidad (DFS).</p>
-                        <p class="mt-4 text-sm font-semibold" style="color: var(--ugr-dark-gray);">Material en desarrollo. ¡Próximamente disponible!</p>
-                    </div>
-                    <div id="recurso-grafos-shortest-path" class="recurso-contenido hidden">
-                        <h3 class="text-xl md:text-2xl" style="color: var(--ugr-red);">2. Caminos Mínimos</h3>
-                        <p class="my-2 text-sm md:text-base" style="color: var(--ugr-text-secondary);">Algoritmos para encontrar el camino de coste mínimo entre nodos, como el algoritmo de Dijkstra (para pesos no negativos) y Bellman-Ford.</p>
-                        <p class="mt-4 text-sm font-semibold" style="color: var(--ugr-dark-gray);">Material en desarrollo. ¡Próximamente disponible!</p>
-                    </div>
-                    <div id="recurso-grafos-mst" class="recurso-contenido hidden">
-                        <h3 class="text-xl md:text-2xl" style="color: var(--ugr-red);">3. Árbol de Expansión Mínima (MST)</h3>
-                        <p class="my-2 text-sm md:text-base" style="color: var(--ugr-text-secondary);">Técnicas para encontrar un subconjunto de aristas que conecte todos los vértices con el mínimo coste total posible (algoritmos de Prim y Kruskal).</p>
-                        <p class="mt-4 text-sm font-semibold" style="color: var(--ugr-dark-gray);">Material en desarrollo. ¡Próximamente disponible!</p>
-                    </div>
-                    <div id="recurso-grafos-topological" class="recurso-contenido hidden">
-                        <h3 class="text-xl md:text-2xl" style="color: var(--ugr-red);">4. Ordenación Topológica</h3>
-                        <p class="my-2 text-sm md:text-base" style="color: var(--ugr-text-secondary);">Algoritmo para ordenar linealmente los vértices de un grafo dirigido acíclico (DAG), útil en la planificación de tareas con dependencias.</p>
-                        <p class="mt-4 text-sm font-semibold" style="color: var(--ugr-dark-gray);">Material en desarrollo. ¡Próximamente disponible!</p>
                     </div>
                 </div>
             </div>
