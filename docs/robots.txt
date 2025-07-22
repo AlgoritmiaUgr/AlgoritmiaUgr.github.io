@@ -1,0 +1,15 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://algoritmiaUgr.github.io/sitemap.xml
+
+# Específico para Googlebot
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 1
+
+# Específico para Bingbot
+User-agent: bingbot
+Allow: /
+Crawl-delay: 1

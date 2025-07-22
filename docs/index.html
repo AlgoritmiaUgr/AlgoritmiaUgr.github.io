@@ -3,124 +3,127 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Club de Programación Competitiva - Presentación</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Título optimizado para SEO -->
+    <title>Club de Programación Competitiva UGR | Algoritmos y Estructuras de Datos Universidad Granada</title>
+    
+    <!-- Meta descripción para SEO -->
+    <meta name="description" content="Club de Programación Competitiva de la Universidad de Granada (UGR). Aprende algoritmos, estructuras de datos y participa en competiciones. Algorítmica UGR, recursos DSA, entrevistas técnicas y más.">
+    
+    <!-- Palabras clave -->
+    <meta name="keywords" content="Club Programación Competitiva UGR, Algoritmos UGR, Estructuras Datos UGR, Algorítmica Granada, DSA UGR, Competitive Programming Granada, Club UGR, Universidad Granada Programación, Algoritmica UGR, Competitive Programming Spain, LeetCode UGR, Codeforces UGR, Ada Byron UGR, Entrevistas Técnicas UGR">
+    
+    <!-- Open Graph para redes sociales -->
+    <meta property="og:title" content="Club de Programación Competitiva UGR">
+    <meta property="og:description" content="Tu espacio para aprender algoritmos, estructuras de datos y competir en la Universidad de Granada">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://algoritmiaUgr.github.io">
+    <meta property="og:site_name" content="Club de Programación Competitiva UGR">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Club de Programación Competitiva UGR">
+    <meta name="twitter:description" content="Aprende algoritmos y estructuras de datos en la Universidad de Granada">
+    
+    <!-- Autor y organización -->
+    <meta name="author" content="Club de Programación Competitiva UGR">
+    <meta name="robots" content="index, follow">
+    <meta name="googlebot" content="index, follow">
+    
+    <!-- Datos estructurados JSON-LD -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Club de Programación Competitiva UGR",
+      "alternateName": ["Algorítmica UGR", "Club UGR Programación", "DSA UGR"],
+      "description": "Club estudiantil de programación competitiva de la Universidad de Granada especializado en algoritmos y estructuras de datos",
+      "url": "https://algoritmiaUgr.github.io",
+      "sameAs": [
+        "https://discord.gg/aJ2hhebnJ4"
+      ],
+      "memberOf": {
+        "@type": "EducationalOrganization",
+        "name": "Universidad de Granada",
+        "alternateName": "UGR"
+      },
+      "keywords": "programación competitiva, algoritmos, estructuras de datos, UGR, Universidad de Granada, competitive programming"
+    }
+    </script>
+    
+    <!-- CSS Externa -->
+    <link rel="stylesheet" href="css/main.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link rel="stylesheet" href="css/style.css"> </head>
-<body class="text-base">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Red neuronal de fondo -->
+    <div class="neural-network">
+        <canvas id="neural-canvas"></canvas>
+    </div>
 
-    <header class="hero-banner py-10 md:py-12 shadow-md">
-        <div class="container mx-auto px-4 sm:px-6 flex justify-center items-center">
-             <svg class="w-16 h-16 mr-4 hidden md:block" viewBox="0 0 100 50" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <circle cx="25" cy="25" r="14" stroke="white" stroke-width="3"/>
-                <path d="M40 25H75" stroke="white" stroke-width="3"/>
-                <path d="M65 15L75 25L65 35" stroke="white" stroke-width="3"/>
-                <rect x="75" y="10" width="30" height="30" rx="3" stroke="white" stroke-width="3" fill="var(--ugr-red)"/>
-            </svg>
-            <div class="text-center md:text-left">
-                <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold">Club de Programación Competitiva UGR</h1>
-                <p class="mt-3 sm:mt-4 text-md sm:text-lg">Tu espacio para aprender, competir y crecer en el mundo de los algoritmos.</p>
-            </div>
-        </div>
-    </header>
-
-    <nav class="nav-bar sticky top-0 z-50 shadow">
-        <div class="container mx-auto px-4 sm:px-6 py-3">
-            <ul id="main-navigation" class="flex flex-wrap justify-center items-center space-y-2 sm:space-y-0 sm:space-x-6 md:space-x-8">
-                <li><a href="index.html" class="nav-link font-medium p-2 rounded-md">Presentación</a></li>
-                <li><a href="calendario.html" class="nav-link font-medium p-2 rounded-md">Calendario</a></li>
-                <li><a href="recursos.html" class="nav-link font-medium p-2 rounded-md">Recursos</a></li>
-                <li><a href="retos.html" class="nav-link font-medium p-2 rounded-md">Retos</a></li>
-                <li><a href="iniciativas.html" class="nav-link font-medium p-2 rounded-md">Iniciativas</a></li>
-            </ul>
-        </div>
-    </nav>
-
-    <main class="container mx-auto px-4 sm:px-6 py-8">
-        <section id="presentacion" class="main-section section-card mb-10 md:mb-12 p-6 rounded-lg shadow-lg">
-            <h2 class="section-title text-2xl md:text-3xl font-semibold mb-6 border-b-2 pb-2">👋 Presentación</h2>
-            <p class="mb-4 text-sm md:text-base leading-relaxed">¡Bienvenido al Club de Programación Competitiva! Somos un grupo de estudiantes y entusiastas por las estructuras de datos y los algoritmos. Tras la competición Ada Byron 2025 nos dimos cuenta de la poca visibilidad que tenía este campo, por lo que quisimos crear una comunidad en la que compartir conocimientos y poder prepararnos para desafíos de programación y competiciones. Además, todo lo aprendido será de gran utilidad en las entrevistas técnicas, otra ventaja más.</p>
-            <p class="mb-8 text-sm md:text-base leading-relaxed">Si te gusta el diseño de soluciones eficientes y te diviertes con los retos lógicos, bienvenido al club.</p>
-
-            <hr class="my-8 border-gray-300">
-
-            <h3 class="text-xl md:text-2xl font-semibold mb-6 subsection-title">Preguntas Frecuentes (FAQ)</h3>
-            <div class="space-y-4 mb-8">
-                <div class="faq-item p-4 rounded-md border">
-                    <h4 class="font-semibold text-lg md:text-xl mb-1">¿Cómo me uno al club o participo?</h4>
-                    <p class="text-sm md:text-base text-gray-700">Para unirte, simplemente únete a nuestro servidor de Discord (enlace más abajo) y preséntate. ¡Todos son bienvenidos! La participación es abierta en nuestros eventos y discusiones.</p>
-                </div>
-                <div class="faq-item p-4 rounded-md border">
-                    <h4 class="font-semibold text-lg md:text-xl mb-1">¿Qué conocimientos previos se recomiendan?</h4>
-                    <p class="text-sm md:text-base text-gray-700">Se recomienda tener una base de programación en cualquier lenguaje, aunque muchos de nuestros ejemplos estarán en C++. Lo más importante es la curiosidad y las ganas de aprender. ¡Empezaremos desde lo básico!</p>
-                </div>
-                <div class="faq-item p-4 rounded-md border">
-                    <h4 class="font-semibold text-lg md:text-xl mb-1">¿Cómo configuro mi entorno de C++ para algorítmica?</h4>
-                    <p class="text-sm md:text-base text-gray-700">Puedes usar un IDE como VS Code con la extensión de C++, Code::Blocks, o simplemente un editor de texto y un compilador como g++. En nuestro Discord podemos ayudarte con la configuración.</p>
-                </div>
-                <div class="faq-item p-4 rounded-md border">
-                    <h4 class="font-semibold text-lg md:text-xl mb-1">¿Qué plataformas online usamos para practicar?</h4>
-                    <p class="text-sm md:text-base text-gray-700">Principalmente LeetCode para problemas individuales, y también exploraremos plataformas como Codeforces, AtCoder, y HackerRank para concursos y práctica adicional. Los enlaces a problemas específicos se compartirán en los recursos y el Discord.</p>
-                </div>
-            </div>
-
-            <hr class="my-8 border-gray-300">
-
-            <h3 class="text-xl md:text-2xl font-semibold mb-4 text-center subsection-title">Únete a Nuestra Conversación</h3>
-            <p class="mb-4 text-sm md:text-base leading-relaxed text-center">
-                ¡Conoce a otros miembros, resuelve dudas y participa en discusiones en nuestro servidor de Discord!
-            </p>
-            <div class="text-center mb-8">
-                <a href="https://discord.gg/aJ2hhebnJ4" target="_blank" class="btn-primary inline-flex items-center font-semibold py-2 px-6 rounded-md text-lg">
-                    <i class="fab fa-discord mr-2"></i> Únete a nuestro Discord
+    <!-- Contenido superpuesto -->
+    <div class="content-overlay">
+        <!-- Header moderno -->
+        <header class="modern-header">
+            <div class="header-content">
+                <a href="index.html" class="logo-section">
+                    <div class="logo-icon">
+                        <img src="web-rsc/logo.png" alt="Logo Algorítmica UGR">
+                    </div>
+                    <span>CPC UGR</span>
                 </a>
+                
+                <nav class="nav-section">
+                    <ul class="nav-links">
+                        <li><a href="inicio.html" class="nav-link">Inicio</a></li>
+                        <li><a href="sobre-nosotros.html" class="nav-link">Sobre Nosotros</a></li>
+                        <li><a href="aprende.html" class="nav-link">Aprende</a></li>
+                        <li><a href="compite.html" class="nav-link">Compite</a></li>
+                        <li><a href="comparte.html" class="nav-link">Comparte</a></li>
+                    </ul>
+                    
+                    <div class="social-icons">
+                        <a href="https://github.com/AlgoritmiaUgr" target="_blank" title="GitHub">
+                            <svg class="social-icon" viewBox="0 0 24 24">
+                                <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                            </svg>
+                        </a>
+                    </div>
+                </nav>
             </div>
+        </header>
 
-            <h3 class="text-xl md:text-2xl font-semibold mb-6 text-center subsection-title">Miembros Destacados</h3>
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                <div class="collaborator-card p-4 rounded-lg text-center">
-                    <img src="https://github.com/AdamBourbahh.png" alt="Foto de perfil de GitHub de Adam Bourbahh Romero" class="w-24 h-24 rounded-full mx-auto mb-3 border-2 border-ugr-red object-cover" onerror="this.onerror=null;this.src='https://placehold.co/100x100/F8E0E3/AD001E?text=AB';">
-                    <h4 class="text-lg font-semibold mb-1" style="color: var(--ugr-text-primary);">Cofundador y presidente</h4>
-                    <a href="https://github.com/AdamBourbahh" target="_blank" class="text-sm inline-flex items-center">
-                        <i class="fab fa-github mr-2"></i> AdamBourbahh
-                    </a>
+        <!-- Contenido principal -->
+        <main class="landing-content">
+            <h1 class="landing-title">Club de Programación Competitiva UGR</h1>
+            <p class="landing-subtitle">Tu espacio para aprender, competir y crecer en el mundo de los algoritmos</p>
+            
+            <!-- Sección "Quizás te puede interesar" -->
+            <div class="suggestions-grid">
+                <div class="suggestion-card" data-link="aprende.html">
+                    <div class="suggestion-icon">🎓</div>
+                    <h3 class="suggestion-title">Aprende</h3>
+                    <p class="suggestion-description">Aprende los conceptos básicos de algoritmos y estructuras de datos</p>
                 </div>
-                <div class="collaborator-card p-4 rounded-lg text-center">
-                    <img src="https://github.com/NGonzalez018.png" alt="Foto de perfil de GitHub de Nicolás González Fernández" class="w-24 h-24 rounded-full mx-auto mb-3 border-2 border-ugr-red object-cover" onerror="this.onerror=null;this.src='https://placehold.co/100x100/F8E0E3/AD001E?text=NG';">
-                    <h4 class="text-lg font-semibold mb-1" style="color: var(--ugr-text-primary);">Cofundador y administrador</h4>
-                    <a href="https://github.com/NGonzalez018" target="_blank" class="text-sm inline-flex items-center">
-                        <i class="fab fa-github mr-2"></i> NGonzalez018
-                    </a>
+                
+                <div class="suggestion-card" data-link="compite.html">
+                    <div class="suggestion-icon">🏆</div>
+                    <h3 class="suggestion-title">Compite</h3>
+                    <p class="suggestion-description">Participa en nuestros retos semanales y mejora tus habilidades</p>
                 </div>
-                <div class="collaborator-card p-4 rounded-lg text-center">
-                    <img src="https://github.com/Jaime-espin.png" alt="Foto de perfil de GitHub de Jaime Espín Rodríguez" class="w-24 h-24 rounded-full mx-auto mb-3 border-2 border-ugr-red object-cover" onerror="this.onerror=null;this.src='https://placehold.co/100x100/F8E0E3/AD001E?text=JE';">
-                    <h4 class="text-lg font-semibold mb-1" style="color: var(--ugr-text-primary);">Cofundador y administrador</h4>
-                    <a href="https://github.com/Jaime-espin" target="_blank" class="text-sm inline-flex items-center">
-                        <i class="fab fa-github mr-2"></i> Jaime-espin
-                    </a>
-                </div>
-                <div class="collaborator-card p-4 rounded-lg text-center">
-                    <img src="https://github.com/mhanii.png" alt="Foto de perfil de GitHub de Hani Mahmoud" class="w-24 h-24 rounded-full mx-auto mb-3 border-2 border-ugr-red object-cover" onerror="this.onerror=null;this.src='https://placehold.co/100x100/F8E0E3/AD001E?text=HM';">
-                    <h4 class="text-lg font-semibold mb-1" style="color: var(--ugr-text-primary);">Cofundador y admistrador</h4>
-                    <a href="https://github.com/mhanii" target="_blank" class="text-sm inline-flex items-center">
-                        <i class="fab fa-github mr-2"></i> mhanii
-                    </a>
+                
+                <div class="suggestion-card" data-link="comparte.html">
+                    <div class="suggestion-icon">👥</div>
+                    <h3 class="suggestion-title">Comparte</h3>
+                    <p class="suggestion-description">Conecta con otros programadores y comparte conocimiento</p>
                 </div>
             </div>
-        </section>
-    </main>
+        </main>
+    </div>
 
-    <button id="scrollTopBtn" title="Volver arriba">&#8679;</button>
-
-    <div id="customTooltip"></div>
-
-    <footer class="footer-bar text-center py-6 md:py-8 mt-10 md:mt-12">
-        <p class="text-sm md:text-base">&copy; <span id="currentYear"></span> Club de Programación Competitiva UGR. ¡Feliz codificación!</p>
-        <p class="text-sm md:text-base mt-1">Inspirado en los colores de la <a href="https://www.ugr.es" target="_blank" class="underline hover:text-white">Universidad de Granada</a>.</p>
-    </footer>
-
-    <script src="js/script.js"></script> </body>
+    <!-- JavaScript Externo -->
+    <script src="js/main.js"></script>
+</body>
 </html>
