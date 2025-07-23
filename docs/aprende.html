@@ -4,6 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
+    <!-- Favicon y logos para diferentes dispositivos -->
+    <link rel="icon" type="image/png" href="web-rsc/logo.png">
+    <link rel="apple-touch-icon" href="web-rsc/logo.png">
+    <link rel="shortcut icon" href="web-rsc/logo.png">
+    
     <!-- Título optimizado para SEO -->
     <title>Aprende Algoritmos y Programación Competitiva | Club CPC UGR Granada</title>
     
@@ -20,6 +25,17 @@
     <meta property="og:url" content="https://algoritmiaUgr.github.io/aprende.html">
     <meta property="og:site_name" content="Club de Programación Competitiva UGR">
     <meta property="og:locale" content="es_ES">
+    <meta property="og:image" content="https://algoritmiaUgr.github.io/web-rsc/logo.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Logo Club de Programación Competitiva UGR">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Aprende Algoritmos y Programación Competitiva">
+    <meta name="twitter:description" content="Recursos de algoritmos y estructuras de datos del Club de Programación Competitiva UGR">
+    <meta name="twitter:image" content="https://algoritmiaUgr.github.io/web-rsc/logo.png">
+    <meta name="twitter:image:alt" content="Logo Club de Programación Competitiva UGR">
     
     <!-- Schema.org para mejor SEO -->
     <script type="application/ld+json">
@@ -52,12 +68,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <!-- Red neuronal de fondo -->
-    <div class="neural-network">
-        <canvas id="neural-canvas"></canvas>
-    </div>
-
-    <!-- Contenido superpuesto -->
+    <!-- Contenido principal -->
     <div class="content-overlay">
         <!-- Header moderno -->
         <header class="modern-header">
@@ -70,13 +81,46 @@
                 </a>
                 
                 <nav class="nav-section">
+                    <!-- Botón hamburguesa para móvil -->
+                    <button class="mobile-menu-toggle" aria-label="Abrir menú">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+                    
                     <ul class="nav-links">
-                        <li><a href="inicio.html" class="nav-link">Inicio</a></li>
                         <li><a href="sobre-nosotros.html" class="nav-link">Sobre Nosotros</a></li>
                         <li><a href="aprende.html" class="nav-link active">Aprende</a></li>
                         <li><a href="compite.html" class="nav-link">Compite</a></li>
                         <li><a href="comparte.html" class="nav-link">Comparte</a></li>
                     </ul>
+                    
+                    <!-- Sidebar móvil -->
+                    <div class="mobile-sidebar">
+                        <div class="sidebar-content">
+                            <div class="sidebar-header">
+                                <h3>Navegación</h3>
+                                <button class="sidebar-close" aria-label="Cerrar menú">&times;</button>
+                            </div>
+                            <nav class="sidebar-nav">
+                                <a href="sobre-nosotros.html" class="sidebar-link">Sobre Nosotros</a>
+                                <a href="aprende.html" class="sidebar-link">Aprende</a>
+                                <a href="compite.html" class="sidebar-link">Compite</a>
+                                <a href="comparte.html" class="sidebar-link">Comparte</a>
+                            </nav>
+                            <div class="sidebar-social">
+                                <a href="https://github.com/AlgoritmiaUgr" target="_blank" class="sidebar-social-link">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                                    </svg>
+                                    GitHub
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Overlay para cerrar sidebar -->
+                    <div class="sidebar-overlay"></div>
                     
                     <div class="social-icons">
                         <a href="https://github.com/AlgoritmiaUgr" target="_blank" title="GitHub">
@@ -89,218 +133,405 @@
             </div>
         </header>
 
-        <!-- Contenido principal -->
-        <main class="main-content">
-            <div class="page-header">
-                <h1 class="page-title">Algoritmos y Programación Competitiva en Granada</h1>
-                <p class="page-subtitle">Aprende estructuras de datos, algoritmos y técnicas de programación competitiva con el Club CPC de la Universidad de Granada. Recursos gratuitos para competiciones como ACM-ICPC, Codeforces y LeetCode.</p>
-            </div>
-
-            <!-- Categorías de recursos -->
-            <div class="resource-categories">
-                <!-- Algoritmos -->
-                <div class="resource-category">
-                    <div class="card-icon">🧠</div>
-                    <h2 class="card-title">Algoritmos para Programación Competitiva</h2>
-                    <p class="card-description">Fundamentos algorítmicos esenciales para competiciones de programación y entrevistas técnicas en Granada</p>
-                    <ul class="resource-list">
-                        <li class="resource-item">
-                            <a href="#" class="resource-link">Introducción a Algoritmos</a>
-                            <span class="difficulty-badge difficulty-easy">Fácil</span>
-                        </li>
-                        <li class="resource-item">
-                            <a href="#" class="resource-link">Recursividad</a>
-                            <span class="difficulty-badge difficulty-easy">Fácil</span>
-                        </li>
-                        <li class="resource-item">
-                            <a href="#" class="resource-link">Divide y Vencerás</a>
-                            <span class="difficulty-badge difficulty-medium">Medio</span>
-                        </li>
-                        <li class="resource-item">
-                            <a href="#" class="resource-link">Programación Dinámica</a>
-                            <span class="difficulty-badge difficulty-hard">Difícil</span>
-                        </li>
-                        <li class="resource-item">
-                            <a href="#" class="resource-link">Backtracking</a>
-                            <span class="difficulty-badge difficulty-medium">Medio</span>
-                        </li>
-                    </ul>
+        <!-- Contenido principal con sidebar -->
+        <main class="learning-layout">
+            <!-- Sidebar de aprendizaje -->
+            <aside class="learning-sidebar collapsed">
+                <div class="sidebar-toggle">
+                    <button class="toggle-btn" aria-label="Abrir/Cerrar menú de aprendizaje">
+                        <span class="hamburger-line"></span>
+                        <span class="hamburger-line"></span>
+                        <span class="hamburger-line"></span>
+                    </button>
                 </div>
-
-                <!-- Estructuras de Datos -->
-                <div class="resource-category">
-                    <div class="card-icon">🏗️</div>
-                    <h2 class="card-title">Estructuras de Datos Universidad Granada</h2>
-                    <p class="card-description">Aprende estructuras de datos fundamentales para programación competitiva y desarrollo de software</p>
-                    <ul class="resource-list">
-                        <li class="resource-item">
-                            <a href="#" class="resource-link">Arrays y Strings</a>
-                            <span class="difficulty-badge difficulty-easy">Fácil</span>
-                        </li>
-                        <li class="resource-item">
-                            <a href="#" class="resource-link">Listas Enlazadas</a>
-                            <span class="difficulty-badge difficulty-easy">Fácil</span>
-                        </li>
-                        <li class="resource-item">
-                            <a href="#" class="resource-link">Pilas y Colas</a>
-                            <span class="difficulty-badge difficulty-easy">Fácil</span>
-                        </li>
-                        <li class="resource-item">
-                            <a href="#" class="resource-link">Árboles</a>
-                            <span class="difficulty-badge difficulty-medium">Medio</span>
-                        </li>
-                        <li class="resource-item">
-                            <a href="#" class="resource-link">Grafos</a>
-                            <span class="difficulty-badge difficulty-hard">Difícil</span>
-                        </li>
-                    </ul>
-                </div>
-
-                <!-- Técnicas Avanzadas -->
-                <div class="resource-category">
-                    <div class="card-icon">⚡</div>
-                    <h2 class="card-title">Técnicas Avanzadas para Competiciones</h2>
-                    <p class="card-description">Estrategias especializadas para ACM-ICPC, Codeforces, AtCoder y otras competiciones internacionales</p>
-                    <ul class="resource-list">
-                        <li class="resource-item">
-                            <a href="#" class="resource-link">Two Pointers</a>
-                            <span class="difficulty-badge difficulty-medium">Medio</span>
-                        </li>
-                        <li class="resource-item">
-                            <a href="#" class="resource-link">Sliding Window</a>
-                            <span class="difficulty-badge difficulty-medium">Medio</span>
-                        </li>
-                        <li class="resource-item">
-                            <a href="#" class="resource-link">Binary Search</a>
-                            <span class="difficulty-badge difficulty-medium">Medio</span>
-                        </li>
-                        <li class="resource-item">
-                            <a href="#" class="resource-link">Greedy Algorithms</a>
-                            <span class="difficulty-badge difficulty-medium">Medio</span>
-                        </li>
-                        <li class="resource-item">
-                            <a href="#" class="resource-link">Graph Algorithms</a>
-                            <span class="difficulty-badge difficulty-hard">Difícil</span>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-
-            <!-- Recursos externos -->
-            <div class="external-resources">
-                <h2 class="section-title">🌐 Plataformas de Programación Competitiva Recomendadas</h2>
-                <p style="text-align: center; color: rgba(51, 51, 51, 0.7); margin-bottom: 2rem;">
-                    Practica algoritmos y estructuras de datos en las mejores plataformas de programación competitiva del mundo. Desde el Club CPC UGR recomendamos estas plataformas para estudiantes de Granada y toda España.
-                </p>
                 
-                <div class="external-grid">
-                    <div class="external-item">
-                        <span class="external-item-icon">🎯</span>
-                        <h3 class="external-item-title">LeetCode</h3>
-                        <p class="external-item-description">Plataforma líder para entrevistas técnicas, algoritmos y estructuras de datos. Perfecta para estudiantes UGR</p>
-                        <a href="https://leetcode.com" target="_blank" class="external-link">Visitar</a>
+                <div class="sidebar-content">
+                    <div class="sidebar-header">
+                        <h2 class="sidebar-title">Ponte ya, anda!</h2>
                     </div>
-                    
-                    <div class="external-item">
-                        <span class="external-item-icon">🏆</span>
-                        <h3 class="external-item-title">Codeforces</h3>
-                        <p class="external-item-description">Competiciones de programación semanales y comunidad internacional. Usada en ACM-ICPC</p>
-                        <a href="https://codeforces.com" target="_blank" class="external-link">Visitar</a>
-                    </div>
-                    
-                    <div class="external-item">
-                        <span class="external-item-icon">💻</span>
-                        <h3 class="external-item-title">AtCoder</h3>
-                        <p class="external-item-description">Problemas de alta calidad con explicaciones detalladas. Ideal para aprender algoritmos avanzados</p>
-                        <a href="https://atcoder.jp" target="_blank" class="external-link">Visitar</a>
-                    </div>
-                    
-                    <div class="external-item">
-                        <span class="external-item-icon">🎮</span>
-                        <h3 class="external-item-title">HackerRank</h3>
-                        <p class="external-item-description">Challenges por categorías, certificaciones y preparación para entrevistas de trabajo</p>
-                        <a href="https://hackerrank.com" target="_blank" class="external-link">Visitar</a>
-                    </div>
-                    
-                    <div class="external-item">
-                        <span class="external-item-icon">⚔️</span>
-                        <h3 class="external-item-title">CodeChef</h3>
-                        <p class="external-item-description">Concursos mensuales y problemas de programación competitiva para todos los niveles</p>
-                        <a href="https://codechef.com" target="_blank" class="external-link">Visitar</a>
-                    </div>
-                    
-                    <div class="external-item">
-                        <span class="external-item-icon">🎲</span>
-                        <h3 class="external-item-title">TopCoder</h3>
-                        <p class="external-item-description">Plataforma pionera en competitive programming con algoritmos matemáticos avanzados</p>
-                        <a href="https://topcoder.com" target="_blank" class="external-link">Visitar</a>
-                    </div>
+                    <nav class="learning-nav">
+                        <!-- Algoritmos -->
+                        <div class="nav-category">
+                            <h3 class="category-title">
+                                <span class="category-icon">🎓</span>
+                                Principiante
+                            </h3>
+                            <ul class="topic-list">
+                                <li><a href="#" class="topic-link" data-topic="introduccion">Introducción</a></li>
+                                <li><a href="#" class="topic-link" data-topic="recursividad">Arrays</a></li>
+                                <li><a href="#" class="topic-link" data-topic="divide-venceras">PrefixSum</a></li>
+                                <li><a href="#" class="topic-link" data-topic="Recursividad">Recursividad</a></li>
+                                <li><a href="#" class="topic-link" data-topic="Búsqueda">Búsqueda</a></li>
+                                <li><a href="#" class="topic-link" data-topic="Ordenación">Ordenación</a></li>
+                                <li><a href="#" class="topic-link" data-topic="Sets">Sets</a></li>
+                                <li><a href="#" class="topic-link" data-topic="Maps">Maps</a></li>
+                                <li><a href="#" class="topic-link" data-topic="Linked-lists">Linked-lists</a></li>
+                                <li><a href="#" class="topic-link" data-topic="Two Pointers">Two Pointers</a></li>
+                                <li><a href="#" class="topic-link" data-topic="Sliding Window">Sliding Window</a></li>
+                                <li><a href="#" class="topic-link" data-topic="Backtracking">Backtracking</a></li>
+                                <li><a href="#" class="topic-link" data-topic="Divide y vencerás">Divide y vencerás</a></li>
+                                <li><a href="#" class="topic-link" data-topic="Programación Dinámica">Programación Dinámica</a></li>
+                                <li><a href="#" class="topic-link" data-topic="Árboles">Árboles</a></li>
+                                <li><a href="#" class="topic-link" data-topic="Pilas y Colas">Pilas y Colas</a></li>  
+                                <li><a href="#" class="topic-link" data-topic="Grafos">Grafos</a></li>
+                            </ul>
+                        </div>
+                        <!-- Técnicas Avanzadas -->
+                        <div class="nav-category">
+                            <h3 class="category-title">
+                                <span class="category-icon">⚡</span>
+                                Técnicas Avanzadas
+                            </h3>
+                            <ul class="topic-list">
+                                <li><a href="#" class="topic-link" data-topic="two-pointers">Algoritmos voraces</a></li>
+                                <li><a href="#" class="topic-link" data-topic="sliding-window">Algoritmos de grafos</a></li>
+                                <li><a href="#" class="topic-link" data-topic="sliding-window">Bitmasking</a></li>
+                            </ul>
+                        </div>
+                        <!-- Preparación para Competencias -->
+                        <div class="nav-category">
+                            <h3 class="category-title">
+                                <span class="category-icon">🏆</span>
+                                Competencias
+                            </h3>
+                            <ul class="topic-list">
+                                <li><a href="#" class="topic-link" data-topic="SWERC">SWERC</a></li>
+                                <li><a href="#" class="topic-link" data-topic="codeforces">Codeforces</a></li>
+                                <li><a href="#" class="topic-link" data-topic="leetcode">LeetCode</a></li>
+                                <li><a href="#" class="topic-link" data-topic="Ada Byron">Ada Byron</a></li>
+                            </ul>
+                        </div>
+                    </nav>
                 </div>
-            </div>
-
-            <!-- Guía de inicio -->
-            <div class="content-section">
-                <h2 class="section-title">🚀 Guía de Inicio en Programación Competitiva UGR</h2>
-                <div class="content-grid">
-                    <div class="content-card">
-                        <div class="card-icon">1️⃣</div>
-                        <h3 class="card-title">Fundamentos de Algoritmos</h3>
-                        <p class="card-description">Comienza con arrays, strings, algoritmos de ordenación (quicksort, mergesort) y búsqueda binaria. Base esencial para competiciones.</p>
-                    </div>
-
-                    <div class="content-card">
-                        <div class="card-icon">2️⃣</div>
-                        <h3 class="card-title">Estructuras de Datos Lineales</h3>
-                        <p class="card-description">Domina listas enlazadas, pilas (stacks), colas (queues) y deques antes de avanzar a estructuras más complejas como árboles.</p>
-                    </div>
-
-                    <div class="content-card">
-                        <div class="card-icon">3️⃣</div>
-                        <h3 class="card-title">Recursión y Programación Dinámica</h3>
-                        <p class="card-description">Aprende recursión, memoización y programación dinámica (DP) para resolver problemas de optimización complejos.</p>
-                    </div>
-
-                    <div class="content-card">
-                        <div class="card-icon">4️⃣</div>
-                        <h3 class="card-title">Árboles y Algoritmos de Grafos</h3>
-                        <p class="card-description">Explora BST, árboles de segmento, algoritmos DFS/BFS, Dijkstra y otros algoritmos de grafos para ACM-ICPC.</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Sección específica para SEO local de Granada -->
-            <div class="content-section">
-                <h2 class="section-title">🏛️ Programación Competitiva en Granada</h2>
-                <p class="section-content">
-                    El <strong>Club de Programación Competitiva de la Universidad de Granada</strong> es la comunidad líder en <strong>algoritmos y estructuras de datos en Granada</strong>. Nuestros miembros participan regularmente en competiciones nacionales e internacionales como <strong>ACM-ICPC</strong>, representando a la <strong>UGR</strong> en eventos de programación competitiva.
-                </p>
-                <p class="section-content">
-                    Como <strong>club universitario en Granada</strong>, ofrecemos recursos gratuitos para estudiantes de informática, matemáticas e ingeniería que quieran mejorar sus habilidades en <strong>competitive programming</strong>. Desde algoritmos básicos hasta técnicas avanzadas de optimización, nuestro material está diseñado para estudiantes de la <strong>Universidad de Granada</strong> y cualquier persona interesada en la programación competitiva en <strong>Andalucía</strong>.
-                </p>
-                
-                <div class="highlight-grid">
-                    <div class="highlight-box">
-                        <h3 class="highlight-title">📍 Ubicación</h3>
-                        <p class="highlight-text">Universidad de Granada, Facultad de Ciencias. Nos reunimos semanalmente para practicar algoritmos y resolver problemas de programación competitiva.</p>
-                    </div>
-                    <div class="highlight-box">
-                        <h3 class="highlight-title">🎯 Objetivos</h3>
-                        <p class="highlight-text">Fomentar el aprendizaje de algoritmos, estructuras de datos y técnicas de programación competitiva entre estudiantes de Granada y toda España.</p>
-                    </div>
-                    <div class="highlight-box">
-                        <h3 class="highlight-title">🏆 Logros</h3>
-                        <p class="highlight-text">Participación regular en ACM-ICPC, SWERC y otras competiciones internacionales representando a la Universidad de Granada.</p>
-                    </div>
-                    <div class="highlight-box">
-                        <h3 class="highlight-title">👨‍💻 Comunidad</h3>
-                        <p class="highlight-text">Más de 100 estudiantes activos de diferentes carreras de la UGR: Informática, Matemáticas, Ingeniería y otras ramas STEM.</p>
+            </aside>
+            
+            <!-- Contenido principal -->
+            <div class="learning-content">
+                <div class="content-area" id="main-content">
+                    <!-- Contenido por defecto -->
+                    <div class="welcome-section">
+                        <div class="welcome-header">
+                            <h1 class="welcome-title">¡Bienvenido al Centro de Aprendizaje!</h1>
+                            <p class="welcome-subtitle">Tu camino hacia la maestría en algoritmos y programación competitiva</p>
+                        </div>
+                        
+                        <div class="intro-cards">
+                            <div class="intro-card">
+                                <div class="intro-icon">🎯</div>
+                                <h3 class="intro-title">Aprendizaje Estructurado</h3>
+                                <p class="intro-description">Nuestro currículo está diseñado siguiendo las mejores prácticas para el aprendizaje de algoritmos, desde conceptos básicos hasta técnicas avanzadas de programación competitiva.</p>
+                            </div>
+                            
+                            <div class="intro-card">
+                                <div class="intro-icon">📈</div>
+                                <h3 class="intro-title">Progreso Medible</h3>
+                                <p class="intro-description">Cada tema incluye ejercicios prácticos, ejemplos de código y problemas de diferentes niveles de dificultad para que puedas medir tu progreso.</p>
+                            </div>
+                            
+                            <div class="intro-card">
+                                <div class="intro-icon">🤝</div>
+                                <h3 class="intro-title">Comunidad Activa</h3>
+                                <p class="intro-description">Forma parte de una comunidad de estudiantes y profesionales que comparten tu pasión por los algoritmos y la programación competitiva.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="getting-started">
+                            <h2 class="section-title">🚀 ¿Por dónde empezar?</h2>
+                            <div class="path-recommendations">
+                                <div class="path-card beginner">
+                                    <div class="path-header">
+                                        <span class="path-icon">�</span>
+                                        <h3 class="path-title">Principiante</h3>
+                                    </div>
+                                    <p class="path-description">Si eres nuevo en programación competitiva, te recomendamos empezar con:</p>
+                                    <ul class="path-topics">
+                                        <li>Arrays y Strings</li>
+                                        <li>Introducción a Algoritmos</li>
+                                        <li>Pilas y Colas</li>
+                                        <li>Recursividad básica</li>
+                                    </ul>
+                                </div>
+                                
+                                <div class="path-card intermediate">
+                                    <div class="path-header">
+                                        <span class="path-icon">�</span>
+                                        <h3 class="path-title">Intermedio</h3>
+                                    </div>
+                                    <p class="path-description">Si ya tienes experiencia básica, continúa con:</p>
+                                    <ul class="path-topics">
+                                        <li>Árboles y Grafos</li>
+                                        <li>Programación Dinámica</li>
+                                        <li>Binary Search</li>
+                                        <li>Two Pointers</li>
+                                    </ul>
+                                </div>
+                                
+                                <div class="path-card advanced">
+                                    <div class="path-header">
+                                        <span class="path-icon">🏆</span>
+                                        <h3 class="path-title">Avanzado</h3>
+                                    </div>
+                                    <p class="path-description">Para competidores experimentados:</p>
+                                    <ul class="path-topics">
+                                        <li>Algoritmos de Grafos Avanzados</li>
+                                        <li>String Algorithms</li>
+                                        <li>Técnicas de Optimización</li>
+                                        <li>Preparación ACM-ICPC</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="resources-overview">
+                            <h2 class="section-title">� Recursos Disponibles</h2>
+                            <div class="resource-stats">
+                                <div class="stat-card">
+                                    <div class="stat-number">25+</div>
+                                    <div class="stat-label">Temas de Algoritmos</div>
+                                </div>
+                                <div class="stat-card">
+                                    <div class="stat-number">200+</div>
+                                    <div class="stat-label">Problemas Prácticos</div>
+                                </div>
+                                <div class="stat-card">
+                                    <div class="stat-number">15+</div>
+                                    <div class="stat-label">Estructuras de Datos</div>
+                                </div>
+                                <div class="stat-card">
+                                    <div class="stat-number">50+</div>
+                                    <div class="stat-label">Ejemplos de Código</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="platforms-section">
+                            <h2 class="section-title">� Plataformas Recomendadas</h2>
+                            <p class="section-description">Practica lo que aprendes en estas plataformas de programación competitiva:</p>
+                            <div class="platforms-grid">
+                                <a href="https://leetcode.com" target="_blank" class="platform-card">
+                                    <span class="platform-icon">🎯</span>
+                                    <span class="platform-name">LeetCode</span>
+                                    <span class="platform-desc">Entrevistas técnicas</span>
+                                </a>
+                                <a href="https://codeforces.com" target="_blank" class="platform-card">
+                                    <span class="platform-icon">🏆</span>
+                                    <span class="platform-name">Codeforces</span>
+                                    <span class="platform-desc">Competencias semanales</span>
+                                </a>
+                                <a href="https://atcoder.jp" target="_blank" class="platform-card">
+                                    <span class="platform-icon">💻</span>
+                                    <span class="platform-name">AtCoder</span>
+                                    <span class="platform-desc">Problemas de calidad</span>
+                                </a>
+                                <a href="https://hackerrank.com" target="_blank" class="platform-card">
+                                    <span class="platform-icon">�</span>
+                                    <span class="platform-name">HackerRank</span>
+                                    <span class="platform-desc">Challenges por categoría</span>
+                                </a>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </main>
     </div>
-
-    <!-- JavaScript Externo -->
-    <script src="js/main.js"></script>
+    
+    <!-- JavaScript para sidebar móvil y funcionalidad de aprendizaje -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Funcionalidad del sidebar móvil (navegación principal)
+            const mobileToggle = document.querySelector('.mobile-menu-toggle');
+            const sidebar = document.querySelector('.mobile-sidebar');
+            const sidebarClose = document.querySelector('.sidebar-close');
+            const sidebarOverlay = document.querySelector('.sidebar-overlay');
+            const sidebarLinks = document.querySelectorAll('.sidebar-link');
+            
+            // Abrir sidebar móvil
+            if (mobileToggle) {
+                mobileToggle.addEventListener('click', function() {
+                    sidebar.classList.add('active');
+                    sidebarOverlay.classList.add('active');
+                    document.body.style.overflow = 'hidden';
+                });
+            }
+            
+            // Cerrar sidebar móvil
+            function closeSidebar() {
+                if (sidebar && sidebarOverlay) {
+                    sidebar.classList.remove('active');
+                    sidebarOverlay.classList.remove('active');
+                    document.body.style.overflow = '';
+                }
+            }
+            
+            if (sidebarClose) sidebarClose.addEventListener('click', closeSidebar);
+            if (sidebarOverlay) sidebarOverlay.addEventListener('click', closeSidebar);
+            
+            // Cerrar sidebar al hacer clic en un enlace
+            sidebarLinks.forEach(link => {
+                link.addEventListener('click', closeSidebar);
+            });
+            
+            // Cerrar sidebar con Escape
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && sidebar && sidebar.classList.contains('active')) {
+                    closeSidebar();
+                }
+            });
+            
+            // Funcionalidad de la sidebar de aprendizaje
+            const topicLinks = document.querySelectorAll('.topic-link');
+            const mainContent = document.getElementById('main-content');
+            const learningSidebar = document.querySelector('.learning-sidebar');
+            const toggleBtn = document.querySelector('.toggle-btn');
+            
+            // Toggle de la sidebar de aprendizaje
+            if (toggleBtn) {
+                toggleBtn.addEventListener('click', function() {
+                    learningSidebar.classList.toggle('collapsed');
+                    toggleBtn.classList.toggle('active');
+                    
+                    // Cambiar el aria-label
+                    if (learningSidebar.classList.contains('collapsed')) {
+                        toggleBtn.setAttribute('aria-label', 'Abrir menú de aprendizaje');
+                    } else {
+                        toggleBtn.setAttribute('aria-label', 'Cerrar menú de aprendizaje');
+                    }
+                });
+            }
+            
+            topicLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    // Remover clase active de todos los enlaces
+                    topicLinks.forEach(l => l.classList.remove('active'));
+                    // Agregar clase active al enlace clickeado
+                    this.classList.add('active');
+                    
+                    // Obtener el tema seleccionado
+                    const topic = this.getAttribute('data-topic');
+                    const topicTitle = this.textContent;
+                    
+                    // Cargar contenido del tema
+                    loadTopicContent(topic, topicTitle);
+                });
+            });
+            
+            function loadTopicContent(topic, title) {
+                // Contenido dinámico basado en el tema seleccionado
+                const topicContents = {
+                    'introduccion': {
+                        title: 'Introducción a Algoritmos',
+                        icon: '📚',
+                        description: 'Fundamentos básicos de algoritmos y programación competitiva',
+                        content: `
+                            <div class="topic-content">
+                                <h3>¿Qué son los algoritmos?</h3>
+                                <p>Un algoritmo es una secuencia finita de pasos bien definidos para resolver un problema computacional.</p>
+                                
+                                <h3>Conceptos clave:</h3>
+                                <ul>
+                                    <li><strong>Complejidad temporal:</strong> O(n), O(log n), O(n²)</li>
+                                    <li><strong>Complejidad espacial:</strong> Memoria utilizada</li>
+                                    <li><strong>Correctitud:</strong> El algoritmo produce la salida esperada</li>
+                                    <li><strong>Eficiencia:</strong> Optimización de recursos</li>
+                                </ul>
+                                
+                                <h3>Problemas de práctica:</h3>
+                                <div class="practice-problems">
+                                    <a href="https://leetcode.com/problems/two-sum/" target="_blank" class="problem-link">Two Sum - LeetCode</a>
+                                    <a href="https://codeforces.com/problemset/problem/1/A" target="_blank" class="problem-link">Theatre Square - Codeforces</a>
+                                </div>
+                            </div>
+                        `
+                    },
+                    'arrays': {
+                        title: 'Arrays y Strings',
+                        icon: '📊',
+                        description: 'Estructuras de datos fundamentales para almacenar colecciones de elementos',
+                        content: `
+                            <div class="topic-content">
+                                <h3>Arrays (Arreglos)</h3>
+                                <p>Estructura de datos que almacena elementos del mismo tipo en posiciones contiguas de memoria.</p>
+                                
+                                <h3>Operaciones básicas:</h3>
+                                <ul>
+                                    <li><strong>Acceso:</strong> O(1) - arr[i]</li>
+                                    <li><strong>Búsqueda:</strong> O(n) - buscar elemento</li>
+                                    <li><strong>Inserción:</strong> O(n) - insertar en posición</li>
+                                    <li><strong>Eliminación:</strong> O(n) - eliminar elemento</li>
+                                </ul>
+                                
+                                <h3>Strings (Cadenas)</h3>
+                                <p>Secuencia de caracteres, implementada como array de caracteres.</p>
+                                
+                                <h3>Problemas de práctica:</h3>
+                                <div class="practice-problems">
+                                    <a href="https://leetcode.com/problems/reverse-string/" target="_blank" class="problem-link">Reverse String - LeetCode</a>
+                                    <a href="https://leetcode.com/problems/valid-anagram/" target="_blank" class="problem-link">Valid Anagram - LeetCode</a>
+                                </div>
+                            </div>
+                        `
+                    },
+                    'recursividad': {
+                        title: 'Recursividad',
+                        icon: '🔄',
+                        description: 'Técnica donde una función se llama a sí misma para resolver subproblemas',
+                        content: `
+                            <div class="topic-content">
+                                <h3>Concepto de Recursividad</h3>
+                                <p>La recursividad es una técnica de programación donde una función se llama a sí misma para resolver un problema más pequeño.</p>
+                                
+                                <h3>Componentes esenciales:</h3>
+                                <ul>
+                                    <li><strong>Caso base:</strong> Condición que detiene la recursión</li>
+                                    <li><strong>Caso recursivo:</strong> La función se llama a sí misma</li>
+                                    <li><strong>Progreso:</strong> Cada llamada debe acercarse al caso base</li>
+                                </ul>
+                                
+                                <h3>Ejemplo: Factorial</h3>
+                                <pre><code>def factorial(n):
+    if n <= 1:  # Caso base
+        return 1
+    return n * factorial(n - 1)  # Caso recursivo</code></pre>
+                                
+                                <h3>Problemas de práctica:</h3>
+                                <div class="practice-problems">
+                                    <a href="https://leetcode.com/problems/fibonacci-number/" target="_blank" class="problem-link">Fibonacci Number - LeetCode</a>
+                                    <a href="https://leetcode.com/problems/climbing-stairs/" target="_blank" class="problem-link">Climbing Stairs - LeetCode</a>
+                                </div>
+                            </div>
+                        `
+                    }
+                    // Aquí puedes agregar más temas...
+                };
+                
+                const topicData = topicContents[topic] || {
+                    title: title,
+                    icon: '📖',
+                    description: 'Contenido en desarrollo',
+                    content: `
+                        <div class="topic-content">
+                            <h3>Contenido en desarrollo</h3>
+                            <p>Este tema está siendo preparado por nuestro equipo. ¡Pronto estará disponible!</p>
+                            <p>Mientras tanto, puedes explorar otros temas disponibles en la sidebar.</p>
+                        </div>
+                    `
+                };
+                
+                mainContent.innerHTML = `
+                    <div class="topic-header">
+                        <div class="topic-icon">${topicData.icon}</div>
+                        <div class="topic-info">
+                            <h1 class="topic-title">${topicData.title}</h1>
+                            <p class="topic-description">${topicData.description}</p>
+                        </div>
+                    </div>
+                    ${topicData.content}
+                `;
+            }
+        });
+    </script>
 </body>
 </html>
