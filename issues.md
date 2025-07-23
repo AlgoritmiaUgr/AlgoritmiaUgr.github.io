@@ -1,4 +1,4 @@
-# info:
+# Issues:
 ❌=No corregido (por defecto) <br>
 ✅=Corregido (cambiar al hacer)
 
