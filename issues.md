@@ -1,5 +1,5 @@
 # info:
-❌=No corregido (por defecto)
+❌=No corregido (por defecto) <br>
 ✅=Corregido (cambiar al hacer)
 ## 22/07 Adam Bourbahh ->Equipo
 ---
