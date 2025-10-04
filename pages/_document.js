@@ -15,7 +15,34 @@ class MyDocument extends Document {
     return (
       <Html lang="es" className="bg-pure-white dark:bg-pure-black">
         <Head>
+          {/* Favicon y iconos */}
+          <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+          <link rel="icon" type="image/svg+xml" href="/imagenes/logo_claro.svg" />
+          <link rel="apple-touch-icon" href="/imagenes/logo_claro.svg" />
+          <link rel="manifest" href="/manifest.json" />
+          
+          {/* Meta tags básicos */}
           <meta name="color-scheme" content="dark light" />
+          <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
+          <meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)" />
+          
+          {/* SEO Meta Tags */}
+          <meta name="description" content="Club de Programación Competitiva de la Universidad de Granada. Aprende algoritmos, estructuras de datos y compite en olimpiadas de programación." />
+          <meta name="keywords" content="programación competitiva, algoritmos, UGR, Universidad de Granada, competencias de programación, ACM ICPC" />
+          <meta name="author" content="Club de Programación Competitiva UGR" />
+          
+          {/* Open Graph / Facebook */}
+          <meta property="og:type" content="website" />
+          <meta property="og:title" content="Club de Programación Competitiva UGR" />
+          <meta property="og:description" content="Aprende algoritmos, estructuras de datos y compite en olimpiadas de programación" />
+          <meta property="og:image" content="/imagenes/logo_claro.svg" />
+          
+          {/* Twitter */}
+          <meta name="twitter:card" content="summary_large_image" />
+          <meta name="twitter:title" content="Club de Programación Competitiva UGR" />
+          <meta name="twitter:description" content="Aprende algoritmos, estructuras de datos y compite en olimpiadas de programación" />
+          <meta name="twitter:image" content="/imagenes/logo_claro.svg" />
+          
           <script
             id="theme-init"
             dangerouslySetInnerHTML={{ __html: noFlashThemeScript }}
