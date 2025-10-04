@@ -1,0 +1,10 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://cpcugr.vercel.app/sitemap.xml
+
+# Directorios no indexables
+Disallow: /api/
+Disallow: /admin/
+Disallow: /_next/
