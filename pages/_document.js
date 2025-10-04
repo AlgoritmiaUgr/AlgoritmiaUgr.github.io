@@ -26,6 +26,9 @@ class MyDocument extends Document {
           <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
           <meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)" />
           
+          {/* Google Search Console Verification */}
+          <meta name="google-site-verification" content="hmTGHY5ABwcu3eWPDZxZgTEDdNhvorfNBMAfuWm6f1k" />
+          
           {/* SEO Meta Tags */}
           <meta name="description" content="Club de Programación Competitiva de la Universidad de Granada. Aprende algoritmos, estructuras de datos y compite en olimpiadas de programación." />
           <meta name="keywords" content="programación competitiva, algoritmos, UGR, Universidad de Granada, competencias de programación, ACM ICPC" />
