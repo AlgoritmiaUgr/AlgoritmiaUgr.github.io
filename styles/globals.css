@@ -1,0 +1,253 @@
+/* Importar fuente de forma optimizada */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap') layer(fonts);
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* CSS Crítico - Aplicado inmediatamente */
+html,
+body,
+body > div:first-child,
+div#__next,
+div#__next > div {
+  height: 100%;
+  width: 100%;
+}
+
+/* Smooth scrolling for anchor links */
+html {
+  scroll-behavior: smooth;
+}
+
+:root {
+  font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  
+  /* Mejorar rendering de texto */
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  
+  /* Variables CSS para modo oscuro/claro */
+  --bg-primary: #ffffff;
+  --text-primary: #000000;
+  
+  color-scheme: light dark;
+  color: var(--text-primary);
+  background-color: var(--bg-primary);
+}
+
+/* Variables para modo oscuro */
+.dark {
+  --bg-primary: #000000;
+  --text-primary: #ffffff;
+}
+
+a {
+  font-weight: 500;
+  color: #646cff;
+  text-decoration: inherit;
+}
+a:hover {
+  color: #535bf2;
+}
+
+body {
+  margin: 0;
+  display: flex;
+  place-items: center;
+  min-width: 320px;
+  min-height: 100vh;
+  background-color: #ffffff;
+}
+
+/* Fondo negro intenso para modo oscuro */
+.dark body {
+  background-color: #000000 !important;
+}
+
+.dark {
+  background-color: #000000 !important;
+}
+
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+}
+
+button {
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: #000000;
+  cursor: pointer;
+  transition: border-color 0.25s;
+}
+button:hover {
+  border-color: #646cff;
+}
+button:focus,
+button:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    color: #213547;
+    background-color: #ffffff;
+  }
+  a:hover {
+    color: #747bff;
+  }
+  button {
+    background-color: #f9f9f9;
+  }
+}
+
+/* Scrollbar personalizada */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.5);
+}
+
+/* Efectos de transición mejorados */
+.transition-all {
+  transition-property: all;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+
+/* Animaciones personalizadas */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.6s ease-out;
+}
+
+@keyframes pulse-slow {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+.animate-pulse-slow {
+  animation: pulse-slow 3s ease-in-out infinite;
+}
+
+/* Mejoras de accesibilidad */
+.focus\:outline-warm-orange:focus {
+  outline: 2px solid #ff6b35;
+  outline-offset: 2px;
+}
+
+/* Estilos para código */
+pre, code {
+  font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+}
+
+.code-block {
+  background: rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  padding: 1rem;
+  overflow-x: auto;
+}
+
+.dark .code-block {
+  background: rgba(0, 0, 0, 0.8);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Estilos para KaTeX en modo oscuro */
+.dark .katex {
+  color: rgb(229, 231, 235) !important; /* text-gray-200 */
+}
+
+.dark .katex .mord {
+  color: rgb(229, 231, 235) !important;
+}
+
+.dark .katex .mop {
+  color: rgb(209, 213, 219) !important; /* text-gray-300 */
+}
+
+.dark .katex .mbin {
+  color: rgb(156, 163, 175) !important; /* text-gray-400 */
+}
+
+.dark .katex .mrel {
+  color: rgb(156, 163, 175) !important; /* text-gray-400 */
+}
+
+.dark .katex .mpunct {
+  color: rgb(156, 163, 175) !important; /* text-gray-400 */
+}
+
+.dark .katex .mopen,
+.dark .katex .mclose {
+  color: rgb(209, 213, 219) !important; /* text-gray-300 */
+}
+
+/* Estilos para matemáticas inline y en bloque */
+.katex-display {
+  margin: 1.5rem 0 !important;
+  text-align: center;
+}
+
+.katex {
+  font-size: 1.1em !important;
+}
+
+/* Mejoras para fórmulas matemáticas */
+.markdown-content .katex-display {
+  background: rgba(0, 0, 0, 0.02);
+  border-radius: 8px;
+  padding: 1rem;
+  margin: 1.5rem 0;
+}
+
+.dark .markdown-content .katex-display {
+  background: rgba(0, 0, 0, 0.9);
+}
+
+/* Estilos para matemáticas inline */
+.markdown-content .katex {
+  background: rgba(0, 0, 0, 0.05);
+  padding: 0.2rem 0.4rem;
+  border-radius: 4px;
+  margin: 0 0.1rem;
+}
+
+.dark .markdown-content .katex {
+  background: rgba(0, 0, 0, 0.8);
+} 
