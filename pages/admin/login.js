@@ -30,111 +30,116 @@ export default function AdminLogin() {
 
   return (
     <Layout>
-      <div className="min-h-screen flex items-center justify-center px-4 py-12 bg-gradient-to-br from-white via-gray-50 to-white dark:from-black dark:via-gray-950 dark:to-black">
-        <div className="max-w-md w-full space-y-8">
+      <div className="min-h-screen flex items-center justify-center px-4 py-12 bg-pure-white dark:bg-pure-black relative overflow-hidden">
+        {/* Background Effects - Igual que la web principal */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          {/* Light mode clouds */}
+          <div className="dark:hidden">
+            <div className="absolute -top-48 left-1/2 -translate-x-1/2 w-[400px] h-[400px] bg-gradient-radial from-warm-orange/30 via-warm-pink/20 to-transparent blur-3xl animate-cloud-glow"></div>
+            <div className="absolute top-1/3 -left-32 w-[250px] h-[250px] bg-gradient-radial from-warm-red/25 via-warm-orange/15 to-transparent blur-2xl animate-cloud-glow" style={{animationDelay: '1s'}}></div>
+            <div className="absolute bottom-20 right-1/4 w-[200px] h-[200px] bg-gradient-radial from-warm-pink/35 via-warm-red/20 to-transparent blur-xl animate-cloud-glow" style={{animationDelay: '2s'}}></div>
+          </div>
+
+          {/* Dark mode clouds - solo blanco */}
+          <div className="hidden dark:block">
+            <div className="absolute -top-48 left-1/2 -translate-x-1/2 w-[400px] h-[400px] bg-gradient-radial from-white/20 via-white/10 to-transparent blur-3xl animate-cloud-glow"></div>
+            <div className="absolute top-1/3 -left-32 w-[250px] h-[250px] bg-gradient-radial from-white/18 via-white/8 to-transparent blur-2xl animate-cloud-glow" style={{animationDelay: '1s'}}></div>
+            <div className="absolute bottom-20 right-1/4 w-[200px] h-[200px] bg-gradient-radial from-white/25 via-white/12 to-transparent blur-xl animate-cloud-glow" style={{animationDelay: '2s'}}></div>
+          </div>
+        </div>
+
+        <div className="max-w-md w-full space-y-12 relative z-10">
           {/* Header */}
           <div className="text-center">
-            <div className="mx-auto h-20 w-20 flex items-center justify-center rounded-2xl bg-gradient-to-br from-red-500/10 to-orange-500/10 dark:from-red-500/20 dark:to-orange-500/20 border border-red-500/20 dark:border-red-500/30">
-              <Lock className="h-10 w-10 text-red-500 dark:text-red-400" />
+            <div className="mx-auto h-16 w-16 flex items-center justify-center mb-8">
+              <Lock className="h-16 w-16 text-black dark:text-pure-white opacity-60" strokeWidth={1} />
             </div>
-            <h2 className="mt-8 text-4xl font-bold bg-gradient-to-r from-black to-gray-700 dark:from-white dark:to-gray-300 bg-clip-text text-transparent">
+            <h2 className="text-4xl sm:text-5xl font-light text-black dark:text-pure-white leading-tight mb-3">
               Panel de Administrador
             </h2>
-            <p className="mt-3 text-base text-gray-600 dark:text-gray-400">
+            <p className="text-sm font-light text-black/70 dark:text-pure-white/70">
               CPC UGR - Acceso restringido
             </p>
           </div>
 
           {/* Form */}
-          <form className="mt-10 space-y-6" onSubmit={handleSubmit}>
-            <div className="rounded-2xl shadow-xl bg-white/80 dark:bg-gray-900/80 backdrop-blur-xl border border-gray-200 dark:border-gray-800 p-8 space-y-6">
-              {/* Email */}
-              <div>
-                <label htmlFor="email" className="block text-sm font-semibold text-gray-900 dark:text-white mb-3">
-                  Correo electrónico
-                </label>
-                <div className="relative">
-                  <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                    <Mail className="h-5 w-5 text-gray-400 dark:text-gray-500" />
-                  </div>
-                  <input
-                    id="email"
-                    name="email"
-                    type="email"
-                    autoComplete="email"
-                    required
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    className="appearance-none block w-full pl-12 pr-4 py-3.5 border border-gray-300 dark:border-gray-700 rounded-xl bg-white dark:bg-black text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-red-500 dark:focus:ring-red-400 focus:border-transparent transition-all"
-                    placeholder="admin@cpcugr.com"
-                  />
+          <form className="space-y-8" onSubmit={handleSubmit}>
+            {/* Email */}
+            <div>
+              <label htmlFor="email" className="block text-sm font-light text-black dark:text-pure-white mb-2">
+                Correo electrónico
+              </label>
+              <div className="relative">
+                <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                  <Mail className="h-5 w-5 text-black/40 dark:text-pure-white/40" strokeWidth={1.5} />
                 </div>
+                <input
+                  id="email"
+                  name="email"
+                  type="email"
+                  autoComplete="email"
+                  required
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="appearance-none block w-full pl-12 pr-4 py-3 border-b border-black/10 dark:border-pure-white/10 bg-transparent text-black dark:text-pure-white placeholder-black/40 dark:placeholder-pure-white/40 focus:outline-none focus:border-red-500 dark:focus:border-red-400 transition-colors font-light"
+                  placeholder="admin@cpcugr.com"
+                />
               </div>
-
-              {/* Password */}
-              <div>
-                <label htmlFor="password" className="block text-sm font-semibold text-gray-900 dark:text-white mb-3">
-                  Contraseña
-                </label>
-                <div className="relative">
-                  <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                    <Lock className="h-5 w-5 text-gray-400 dark:text-gray-500" />
-                  </div>
-                  <input
-                    id="password"
-                    name="password"
-                    type={showPassword ? 'text' : 'password'}
-                    autoComplete="current-password"
-                    required
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    className="appearance-none block w-full pl-12 pr-12 py-3.5 border border-gray-300 dark:border-gray-700 rounded-xl bg-white dark:bg-black text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-red-500 dark:focus:ring-red-400 focus:border-transparent transition-all"
-                    placeholder="••••••••"
-                  />
-                  <button
-                    type="button"
-                    onClick={() => setShowPassword(!showPassword)}
-                    className="absolute inset-y-0 right-0 pr-4 flex items-center text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition-colors"
-                  >
-                    {showPassword ? <EyeOff className="h-5 w-5" /> : <Eye className="h-5 w-5" />}
-                  </button>
-                </div>
-              </div>
-
-              {/* Error Message */}
-              {error && (
-                <div className="rounded-xl bg-red-50 dark:bg-red-900/20 p-4 border border-red-200 dark:border-red-800">
-                  <p className="text-sm font-medium text-red-800 dark:text-red-300">
-                    {error}
-                  </p>
-                </div>
-              )}
-
-              {/* Submit Button */}
-              <button
-                type="submit"
-                disabled={isLoading}
-                className="w-full flex justify-center items-center py-4 px-6 border border-transparent rounded-xl shadow-lg text-base font-semibold text-white bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 disabled:opacity-50 disabled:cursor-not-allowed transition-all transform hover:scale-[1.02] active:scale-[0.98]"
-              >
-                {isLoading ? (
-                  <>
-                    <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white mr-3"></div>
-                    Iniciando sesión...
-                  </>
-                ) : (
-                  'Iniciar Sesión'
-                )}
-              </button>
             </div>
+
+            {/* Password */}
+            <div>
+              <label htmlFor="password" className="block text-sm font-light text-black dark:text-pure-white mb-2">
+                Contraseña
+              </label>
+              <div className="relative">
+                <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                  <Lock className="h-5 w-5 text-black/40 dark:text-pure-white/40" strokeWidth={1.5} />
+                </div>
+                <input
+                  id="password"
+                  name="password"
+                  type={showPassword ? 'text' : 'password'}
+                  autoComplete="current-password"
+                  required
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  className="appearance-none block w-full pl-12 pr-12 py-3 border-b border-black/10 dark:border-pure-white/10 bg-transparent text-black dark:text-pure-white placeholder-black/40 dark:placeholder-pure-white/40 focus:outline-none focus:border-red-500 dark:focus:border-red-400 transition-colors font-light"
+                  placeholder="••••••••"
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute inset-y-0 right-0 pr-4 flex items-center text-black/40 dark:text-pure-white/40 hover:text-black/70 dark:hover:text-pure-white/70 transition-colors"
+                >
+                  {showPassword ? <EyeOff className="h-5 w-5" strokeWidth={1.5} /> : <Eye className="h-5 w-5" strokeWidth={1.5} />}
+                </button>
+              </div>
+            </div>
+
+            {/* Error Message */}
+            {error && (
+              <div className="py-3 px-4 border-l-2 border-red-500 bg-red-500/5">
+                <p className="text-sm font-light text-red-600 dark:text-red-400">
+                  {error}
+                </p>
+              </div>
+            )}
+
+            {/* Submit Button */}
+            <button
+              type="submit"
+              disabled={isLoading}
+              className="w-full py-3 px-6 bg-transparent border border-black/10 dark:border-pure-white/10 text-black dark:text-pure-white font-light transition-all hover:border-red-500 dark:hover:border-red-400 hover:text-red-500 dark:hover:text-red-400 disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              {isLoading ? 'Iniciando sesión...' : 'Iniciar Sesión'}
+            </button>
           </form>
 
           {/* Footer Info */}
-          <div className="text-center">
-            <p className="text-xs text-gray-500 dark:text-gray-500">
+          <div className="text-center pt-8 border-t border-black/10 dark:border-pure-white/10">
+            <p className="text-xs font-light text-black/50 dark:text-pure-white/50">
               Acceso exclusivo para administradores del CPC UGR
-            </p>
-            <p className="text-xs text-gray-400 dark:text-gray-600 mt-1">
-              © 2025 Club de Programación Competitiva - Universidad de Granada
             </p>
           </div>
         </div>
