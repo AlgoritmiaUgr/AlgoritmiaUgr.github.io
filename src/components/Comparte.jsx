@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { prefixPath } from '../utils/basePath';
 
 // Configurable Google Calendar & community URLs (set in .env.local)
@@ -8,13 +8,31 @@ const CALENDAR_ADD_URL = process.env.NEXT_PUBLIC_GOOGLE_CALENDAR_ADD_URL ||
   'https://calendar.google.com/calendar/u/0?cid=Y3BjdWdyQGdtYWlsLmNvbQ';
 const WHATSAPP_INVITE_URL = process.env.NEXT_PUBLIC_WHATSAPP_INVITE_URL || 'https://chat.whatsapp.com/EJP8DQe7Zqe2nk9QTO17z0';
 const DISCORD_INVITE_URL = process.env.NEXT_PUBLIC_DISCORD_INVITE_URL || 'https://discord.gg/5petbUmA';
-const REUNION_IMAGE_URL = process.env.NEXT_PUBLIC_REUNION_IMAGE_URL || '';
 const CHAT_ILLUSTRATION_URL = process.env.NEXT_PUBLIC_CHAT_ILLUSTRATION_URL || '';
 
 const Comparte = () => {
   const [showContact, setShowContact] = useState(false);
+  const [latestMeeting, setLatestMeeting] = useState(null);
   const openContact = () => setShowContact(true);
   const closeContact = () => setShowContact(false);
+
+  // Cargar la última reunión
+  useEffect(() => {
+    const loadLatestMeeting = async () => {
+      try {
+        const response = await fetch('/api/meetings');
+        const data = await response.json();
+        if (data.success && data.data && data.data.length > 0) {
+          // Ordenar por fecha más reciente
+          const sorted = data.data.sort((a, b) => new Date(b.date) - new Date(a.date));
+          setLatestMeeting(sorted[0]);
+        }
+      } catch (error) {
+        console.error('Error cargando última reunión:', error);
+      }
+    };
+    loadLatestMeeting();
+  }, []);
 
   return (
   <section className="relative overflow-hidden">
@@ -85,10 +103,10 @@ const Comparte = () => {
             {/* Imagen de reunión con info overlay */}
             <div className="relative group/img">
               <div className="relative rounded-xl overflow-hidden border border-black/5 dark:border-white/10 bg-white/50 dark:bg-white/[0.03] h-[280px] lg:h-[380px] shadow">
-                {REUNION_IMAGE_URL ? (
+                {latestMeeting && latestMeeting.photos && latestMeeting.photos.length > 0 ? (
                   <img
-                    src={REUNION_IMAGE_URL}
-                    alt="Foto de una reunión del club"
+                    src={latestMeeting.photos[0]}
+                    alt={`Foto de ${latestMeeting.title}`}
                     className="w-full h-full object-cover group-hover/img:scale-[1.03] transition-transform duration-500"
                     loading="lazy"
                   />
@@ -104,8 +122,16 @@ const Comparte = () => {
                 )}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/35 via-transparent to-transparent opacity-0 group-hover/img:opacity-100 transition-opacity duration-300"></div>
                 <div className="absolute bottom-3 left-3 right-3 transform translate-y-2 group-hover/img:translate-y-0 opacity-0 group-hover/img:opacity-100 transition-all duration-300">
-                  <h3 className="text-white font-medium text-lg mb-1">Última reunión del club</h3>
-                  <p className="text-white/80 text-sm">Compartiendo conocimientos y experiencias</p>
+                  <h3 className="text-white font-medium text-lg mb-1">
+                    {latestMeeting ? latestMeeting.title : 'Última reunión del club'}
+                  </h3>
+                  <p className="text-white/80 text-sm">
+                    {latestMeeting ? new Date(latestMeeting.date).toLocaleDateString('es-ES', { 
+                      day: 'numeric', 
+                      month: 'long', 
+                      year: 'numeric' 
+                    }) : 'Compartiendo conocimientos y experiencias'}
+                  </p>
                 </div>
               </div>
             </div>

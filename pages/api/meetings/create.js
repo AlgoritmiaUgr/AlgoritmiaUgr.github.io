@@ -25,6 +25,15 @@ export default async function handler(req, res) {
 
     await redis.set(`meeting:${newMeeting.id}`, newMeeting);
 
+    // Revalidar las páginas afectadas
+    try {
+      await res.revalidate('/reuniones');
+      await res.revalidate(`/reuniones/${slug}`);
+      await res.revalidate('/comparte');
+    } catch (revalidateError) {
+      console.warn('Revalidación no disponible:', revalidateError.message);
+    }
+
     res.status(200).json({ success: true, data: newMeeting });
   } catch (error) {
     console.error('Error creando reunión:', error);

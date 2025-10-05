@@ -75,6 +75,13 @@ export default async function handler(req, res) {
     // Guardar en Vercel KV con la clave content:{id}
     await redis.set(`content:${newContent.id}`, newContent);
 
+    // Revalidar la página de Aprende
+    try {
+      await res.revalidate('/aprende');
+    } catch (revalidateError) {
+      console.warn('Revalidación no disponible:', revalidateError.message);
+    }
+
     return res.status(201).json({
       success: true,
       message: 'Contenido guardado exitosamente',

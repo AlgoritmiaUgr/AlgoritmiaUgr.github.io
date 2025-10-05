@@ -53,6 +53,13 @@ export default async function handler(req, res) {
       );
     }
 
+    // Revalidar la página de Aprende
+    try {
+      await res.revalidate('/aprende');
+    } catch (revalidateError) {
+      console.warn('Revalidación no disponible:', revalidateError.message);
+    }
+
     return res.status(200).json({
       success: true,
       message: 'Contenido eliminado exitosamente'

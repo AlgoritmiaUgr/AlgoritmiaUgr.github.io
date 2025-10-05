@@ -27,6 +27,20 @@ export default async function handler(req, res) {
 
     await redis.set(`meeting:${id}`, updatedMeeting);
 
+    // Revalidar las páginas afectadas
+    try {
+      await res.revalidate('/reuniones');
+      await res.revalidate('/comparte');
+      if (existingMeeting.slug) {
+        await res.revalidate(`/reuniones/${existingMeeting.slug}`);
+      }
+      if (updatedMeeting.slug && updatedMeeting.slug !== existingMeeting.slug) {
+        await res.revalidate(`/reuniones/${updatedMeeting.slug}`);
+      }
+    } catch (revalidateError) {
+      console.warn('Revalidación no disponible:', revalidateError.message);
+    }
+
     res.status(200).json({ success: true, data: updatedMeeting });
   } catch (error) {
     console.error('Error actualizando reunión:', error);
