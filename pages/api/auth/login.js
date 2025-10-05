@@ -13,9 +13,15 @@ export default async function handler(req, res) {
       return res.status(400).json({ error: 'Email y contraseña requeridos' });
     }
 
-    // Obtener credenciales de variables de entorno (más seguro)
-    const ADMIN_EMAIL = process.env.ADMIN_EMAIL || 'cpcugr@gmail.com';
-    const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || 'EANg#f*HHs^Bg6hDfChdKNo2';
+    // Obtener credenciales de variables de entorno
+    const ADMIN_EMAIL = process.env.ADMIN_EMAIL;
+    const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD;
+
+    // Verificar que las variables de entorno estén configuradas
+    if (!ADMIN_EMAIL || !ADMIN_PASSWORD) {
+      console.error('ERROR: Variables de entorno ADMIN_EMAIL y ADMIN_PASSWORD no configuradas');
+      return res.status(500).json({ error: 'Error de configuración del servidor' });
+    }
 
     // Verificar credenciales
     if (email === ADMIN_EMAIL && password === ADMIN_PASSWORD) {

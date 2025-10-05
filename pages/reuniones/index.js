@@ -1,16 +1,38 @@
 import Link from 'next/link';
 import Head from 'next/head';
 import { prefixPath } from '../../src/utils/basePath';
-import { meetings } from '../../src/data/meetings';
+import { redis } from '../../src/lib/upstash';
 
-// Orden descendente por fecha
-const posts = [...meetings].sort((a,b) => {
-  const da = a.date ? new Date(a.date).getTime() : 0;
-  const db = b.date ? new Date(b.date).getTime() : 0;
-  return db - da;
-});
+export async function getStaticProps() {
+  try {
+    const keys = await redis.keys('meeting:*');
+    const meetings = await Promise.all(
+      keys.map(async (key) => await redis.get(key))
+    );
+    
+    const validMeetings = meetings.filter(Boolean);
+    
+    // Orden descendente por fecha
+    const posts = [...validMeetings].sort((a, b) => {
+      const da = a.date ? new Date(a.date).getTime() : 0;
+      const db = b.date ? new Date(b.date).getTime() : 0;
+      return db - da;
+    });
+    
+    return {
+      props: { posts },
+      revalidate: 60 // Revalidate every 60 seconds
+    };
+  } catch (error) {
+    console.error('Error loading meetings:', error);
+    return {
+      props: { posts: [] },
+      revalidate: 60
+    };
+  }
+}
 
-export default function ReunionesIndex() {
+export default function ReunionesIndex({ posts }) {
   return (
     <>
       <Head>
@@ -38,9 +60,9 @@ export default function ReunionesIndex() {
               <Link key={post.slug} href={`/reuniones/${post.slug}`} className="group">
                 <div className="rounded-2xl overflow-hidden bg-white/60 dark:bg-white/[0.05] border border-black/5 dark:border-white/10 shadow hover:shadow-lg transition-shadow h-full flex flex-col">
                   <div className="aspect-video bg-white/40 dark:bg-white/[0.04]">
-                    {post.cover ? (
+                    {post.photos && post.photos.length > 0 ? (
                       // eslint-disable-next-line @next/next/no-img-element
-                      <img src={prefixPath(post.cover)} alt={post.title} className="w-full h-full object-cover" />
+                      <img src={post.photos[0]} alt={post.title} className="w-full h-full object-cover" />
                     ) : (
                       <div className="w-full h-full bg-gradient-to-br from-warm-orange/15 via-warm-pink/10 to-warm-red/15" />
                     )}

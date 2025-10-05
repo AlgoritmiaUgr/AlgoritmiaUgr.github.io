@@ -110,7 +110,7 @@ export default function AdminLogin() {
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute inset-y-0 right-0 pr-4 flex items-center text-black/40 dark:text-pure-white/40 hover:text-black/70 dark:hover:text-pure-white/70 transition-colors"
+                  className="absolute inset-y-0 right-0 pr-4 flex items-center text-black/40 dark:text-pure-white/40 bg-transparent hover:text-black/70 dark:hover:text-pure-white/70 transition-colors"
                 >
                   {showPassword ? <EyeOff className="h-5 w-5" strokeWidth={1.5} /> : <Eye className="h-5 w-5" strokeWidth={1.5} />}
                 </button>

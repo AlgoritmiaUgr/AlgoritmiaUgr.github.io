@@ -1,22 +1,61 @@
 import Head from 'next/head';
 import { prefixPath } from '../../src/utils/basePath';
-import { meetings } from '../../src/data/meetings';
+import ReactMarkdown from 'react-markdown';
+import remarkMath from 'remark-math';
+import remarkGfm from 'remark-gfm';
+import rehypeKatex from 'rehype-katex';
+import rehypeRaw from 'rehype-raw';
+import { redis } from '../../src/lib/upstash';
 
 export async function getStaticPaths() {
-  return {
-    paths: meetings.map(m => ({ params: { slug: m.slug } })),
-    fallback: false
-  };
+  try {
+    const keys = await redis.keys('meeting:*');
+    const meetings = await Promise.all(
+      keys.map(async (key) => await redis.get(key))
+    );
+    
+    const validMeetings = meetings.filter(Boolean);
+    
+    return {
+      paths: validMeetings.map(m => ({ params: { slug: m.slug } })),
+      fallback: 'blocking'
+    };
+  } catch (error) {
+    console.error('Error loading meetings for paths:', error);
+    return {
+      paths: [],
+      fallback: 'blocking'
+    };
+  }
 }
 
 export async function getStaticProps({ params }) {
-  const meeting = meetings.find(m => m.slug === params.slug) || null;
-  return { props: { meeting } };
+  try {
+    const keys = await redis.keys('meeting:*');
+    const meetings = await Promise.all(
+      keys.map(async (key) => await redis.get(key))
+    );
+    
+    const meeting = meetings.find(m => m && m.slug === params.slug) || null;
+    
+    return { 
+      props: { meeting },
+      revalidate: 60 // Revalidate every 60 seconds
+    };
+  } catch (error) {
+    console.error('Error loading meeting:', error);
+    return { 
+      props: { meeting: null },
+      revalidate: 60
+    };
+  }
 }
 
 export default function ReunionPost({ meeting }) {
   if (!meeting) return null;
-  const { title, date, cover, location, content } = meeting;
+  
+  const { title, date, photos, content } = meeting;
+  
   return (
     <>
       <Head>
@@ -26,19 +65,34 @@ export default function ReunionPost({ meeting }) {
         <header className="mb-6 text-center">
           <h1 className="text-3xl sm:text-4xl font-light text-black dark:text-white mb-2">{title}</h1>
           <div className="text-sm text-gray-500 dark:text-gray-400">
-            {date ? new Date(date).toLocaleDateString('es-ES') : ''} {location ? `· ${location}` : ''}
+            {date ? new Date(date).toLocaleDateString('es-ES') : ''}
           </div>
         </header>
-        {cover && (
-          <img src={prefixPath(cover)} alt={title} className="rounded-xl w-full object-cover mb-6" />
-        )}
+        
         <div className="prose prose-neutral dark:prose-invert max-w-none">
-          {content.split('\n').map((line,i) => line.trim().startsWith('#') ? (
-            <h2 key={i} className="text-xl font-semibold mt-6 mb-3">{line.replace(/^#+\s*/, '')}</h2>
-          ) : line.trim() === '' ? <div key={i} className="h-2" /> : (
-            <p key={i} className="mb-3 leading-relaxed">{line}</p>
-          ))}
+          <ReactMarkdown
+            remarkPlugins={[remarkMath, remarkGfm]}
+            rehypePlugins={[rehypeRaw, rehypeKatex]}
+          >
+            {content}
+          </ReactMarkdown>
         </div>
+        
+        {photos && photos.length > 0 && (
+          <div className="mt-8 pt-8 border-t border-black/10 dark:border-white/10">
+            <h2 className="text-xl font-light text-black dark:text-white mb-4">Galería de Fotos</h2>
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+              {photos.map((photo, idx) => (
+                <img
+                  key={idx}
+                  src={photo}
+                  alt={`Foto ${idx + 1}`}
+                  className="w-full h-48 object-cover rounded-lg border border-black/10 dark:border-white/10"
+                />
+              ))}
+            </div>
+          </div>
+        )}
       </article>
     </>
   );

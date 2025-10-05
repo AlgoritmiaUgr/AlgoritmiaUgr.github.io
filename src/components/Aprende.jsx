@@ -1,6 +1,11 @@
 import { staticContent } from '../data/staticContent';
-import { useState } from 'react';
-import { ChevronDown, ChevronRight } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { ChevronDown, ChevronRight, Download } from 'lucide-react';
+import ReactMarkdown from 'react-markdown';
+import remarkMath from 'remark-math';
+import remarkGfm from 'remark-gfm';
+import rehypeKatex from 'rehype-katex';
+import rehypeRaw from 'rehype-raw';
 
 const Aprende = () => {
   // Selector de modo: 'libre' | 'apuntes' | null
@@ -8,91 +13,128 @@ const Aprende = () => {
   // Página mínima: mostramos sólo la Introducción desde datos estáticos
   const introPage = staticContent.pages.find((p) => p.id === 'introduccion') || staticContent.pages[0];
 
+  // Contenido dinámico desde la API
+  const [dynamicContents, setDynamicContents] = useState([]);
+  const [sectionDescriptions, setSectionDescriptions] = useState({});
+  const [sectionsMap, setSectionsMap] = useState({});
+  const [aprendeIntroduction, setAprendeIntroduction] = useState('');
+  const [loading, setLoading] = useState(true);
+
   // Contenido seleccionado: null hasta que el usuario elige algo en la sidebar
   const [selectedContent, setSelectedContent] = useState(null);
   // Estado de colapsables para secciones
-  const [expanded, setExpanded] = useState({ estructuras: false, algoritmos: false, retos: false, extra: false });
+  const [expanded, setExpanded] = useState({});
   const toggle = (key) => setExpanded((p) => ({ ...p, [key]: !p[key] }));
 
-  // Descripciones de secciones (SPA): qué contiene cada bloque, por modo
-  const sectionDescriptions = {
-    libre: {
-      estructuras: {
-        title: 'Estructuras de datos',
-        intro:
-          'Domina las estructuras fundamentales para resolver problemas con eficiencia. Empezaremos por lo básico y subiremos de complejidad con ejemplos prácticos.',
-        bullets: [
-          'Arrays, listas enlazadas y colas/pilas',
-          'Conjuntos y mapas (hash y ordenados)',
-          'Árboles y grafos: nociones esenciales',
-          'Cuándo usar cada estructura y costes típicos',
-        ],
-      },
-      algoritmos: {
-        title: 'Algorítmica',
-        intro:
-          'Técnicas y patrones para diseñar soluciones: de aproximaciones greedy a programación dinámica, con foco en la intuición y la práctica.',
-        bullets: [
-          'Complejidad temporal/espacial y análisis asintótico',
-          'Búsqueda, ordenación y dos punteros',
-          'Divide y vencerás, backtracking',
-          'Programación dinámica (DP) paso a paso',
-        ],
-      },
-      retos: {
-        title: 'Retos',
-        intro:
-          'Colecciones de ejercicios graduados para poner en práctica lo aprendido. Pensados para mantener un ritmo constante y medir progreso.',
-        bullets: [
-          'Katas por nivel (fácil → intermedio → avanzado)',
-          'Retos temáticos (ED, grafos, DP, greedy)',
-          'Pistas opcionales y soluciones comentadas',
-        ],
-      },
-      'reto-1': {
-        title: 'Reto #1',
-        intro: 'Primer reto de práctica para calentar motores: aplica conceptos básicos con un enunciado corto.',
-        bullets: ['Entrada/Salida simple', 'Complejidad O(n)', 'Casos borde típicos'],
-      },
-      'reto-2': {
-        title: 'Reto #2',
-        intro: 'Segundo reto con un pequeño giro: refuerza patrones vistos y prueba una optimización ligera.',
-        bullets: ['Pensar invariantes', 'Evitar doble bucle cuando sea posible', 'Probar con inputs grandes'],
-      },
-      extra: {
-        title: 'Extra',
-        intro:
-          'Recursos complementarios para profundizar o variar el aprendizaje. Consejos, herramientas y lecturas recomendadas.',
-        bullets: [
-          'Buenas prácticas de código y estilo',
-          'Herramientas: jueces online, depuración, plantillas',
-          'Lecturas y referencias para seguir creciendo',
-        ],
-      },
-    },
-    apuntes: {
-      estructuras: {
-        title: 'Estructuras de datos (Apuntes)',
-        intro:
-          'Resumenes orientados a asignaturas: definiciones, propiedades y operaciones típicas con notación de coste y ejemplos concisos.',
-        bullets: [
-          'Listas, colas y pilas: ADTs y complejidades',
-          'Diccionarios/mapas y sets: implementación y uso',
-          'Árboles (BST, AVL) y grafos: conceptos básicos',
-        ],
-      },
-      algoritmos: {
-        title: 'Algorítmica (Apuntes)',
-        intro:
-          'Esquemas clásicos y patrones de examen: demostraciones breves, pseudocódigo y análisis de complejidad.',
-        bullets: [
-          'Greedy: criterio y pruebas de optimalidad',
-          'Divide y vencerás y recursión de Master',
-          'Backtracking y poda',
-          'Programación dinámica: formulación y tablas',
-        ],
-      },
-    },
+  // Cargar contenidos dinámicos al montar
+  useEffect(() => {
+    loadContents();
+    loadSections();
+    loadSectionDescriptions();
+    loadAprendeIntroduction();
+  }, []);
+
+  const loadSections = async () => {
+    try {
+      const response = await fetch('/api/sections');
+      const data = await response.json();
+      
+      if (data.success) {
+        setSectionsMap(data.sections);
+        
+        // Inicializar estado de expanded para todas las secciones
+        const initialExpanded = {};
+        Object.entries(data.sections).forEach(([category, sections]) => {
+          sections.forEach(section => {
+            const sectionName = typeof section === 'string' ? section : section.name;
+            const key = `${category}:${sectionName}`;
+            initialExpanded[key] = false;
+          });
+        });
+        setExpanded(initialExpanded);
+      }
+    } catch (error) {
+      console.error('Error cargando secciones:', error);
+    }
+  };
+
+  const loadAprendeIntroduction = async () => {
+    try {
+      const response = await fetch('/api/aprende/introduction');
+      const data = await response.json();
+      
+      if (data.success && data.introduction) {
+        setAprendeIntroduction(data.introduction);
+      }
+    } catch (error) {
+      console.error('Error cargando introducción de aprende:', error);
+    }
+  };
+
+  const loadSectionDescriptions = async () => {
+    try {
+      const response = await fetch('/api/sections/descriptions');
+      const data = await response.json();
+      
+      if (data.success) {
+        // Convertir array a objeto para fácil acceso
+        const descriptionsMap = {};
+        data.data.forEach(desc => {
+          const key = `${desc.category}:${desc.section}`;
+          descriptionsMap[key] = desc.description;
+        });
+        setSectionDescriptions(descriptionsMap);
+      }
+    } catch (error) {
+      console.error('Error cargando descripciones:', error);
+    }
+  };
+
+  const loadContents = async () => {
+    try {
+      const response = await fetch('/api/content');
+      const data = await response.json();
+      
+      if (data.success) {
+        const normalized = (data.data || []).map((item, index) => ({
+          ...item,
+          order: typeof item.order === 'number' ? item.order : index,
+        }));
+
+        setDynamicContents(normalized);
+      }
+    } catch (error) {
+      console.error('Error cargando contenidos:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // Filtrar contenidos por categoría y sección
+  const getContentsBySection = (category, section) => {
+    const normalizedCategory = category || 'Aprendizaje Libre';
+
+    return dynamicContents
+      .filter(
+        (content) => (content.category || 'Aprendizaje Libre') === normalizedCategory && content.section === section
+      )
+      .slice()
+      .sort((a, b) => {
+        const orderA = typeof a.order === 'number' ? a.order : Number.MAX_SAFE_INTEGER;
+        const orderB = typeof b.order === 'number' ? b.order : Number.MAX_SAFE_INTEGER;
+
+        if (orderA !== orderB) {
+          return orderA - orderB;
+        }
+
+        return new Date(b.createdAt) - new Date(a.createdAt);
+      });
+  };
+
+  // Obtener descripción de una sección desde la base de datos
+  const getSectionDescription = (category, section) => {
+    const key = `${category}:${section}`;
+    return sectionDescriptions[key] || '';
   };
 
   const isActive = (key) => selectedContent === key;
@@ -128,111 +170,113 @@ const Aprende = () => {
             </div>
           )}
           <div className="space-y-2">
-            <div>
-              <button
-                type="button"
-                onClick={() => {
-                  toggle('estructuras');
-                  setSelectedContent('estructuras');
-                }}
-                className={`${itemBtnClass(isActive('estructuras'))} flex items-center justify-between`}
-                aria-expanded={expanded.estructuras}
-                aria-current={isActive('estructuras') ? 'page' : undefined}
-              >
-                <span>ESTRUCTURAS DE DATOS</span>
-                <span className="ml-2">{expanded.estructuras ? <ChevronDown size={14} /> : <ChevronRight size={14} />}</span>
-              </button>
-              {expanded.estructuras && (
-                <div className="mt-1 pl-3 text-xs text-black/70 dark:text-white/70">
-                  {/* Contenido interno opcional en el futuro */}
-                </div>
-              )}
-            </div>
-            <div>
-              <button
-                type="button"
-                onClick={() => {
-                  toggle('algoritmos');
-                  setSelectedContent('algoritmos');
-                }}
-                className={`${itemBtnClass(isActive('algoritmos'))} flex items-center justify-between`}
-                aria-expanded={expanded.algoritmos}
-                aria-current={isActive('algoritmos') ? 'page' : undefined}
-              >
-                <span>ALGORÍTMICA</span>
-                <span className="ml-2">{expanded.algoritmos ? <ChevronDown size={14} /> : <ChevronRight size={14} />}</span>
-              </button>
-              {expanded.algoritmos && (
-                <div className="mt-1 pl-3 text-xs text-black/70 dark:text-white/70">
-                  {/* Contenido interno opcional en el futuro */}
-                </div>
-              )}
-            </div>
-            {learningMode === 'libre' && (
-              <>
-                <div>
-                  <button
-                    type="button"
-                    onClick={() => {
-                      toggle('retos');
-                      setSelectedContent('retos');
-                    }}
-                    className={`${itemBtnClass(isActive('retos'))} flex items-center justify-between`}
-                    aria-expanded={expanded.retos}
-                    aria-current={isActive('retos') ? 'page' : undefined}
-                  >
-                    <span>RETOS</span>
-                    <span className="ml-2">{expanded.retos ? <ChevronDown size={14} /> : <ChevronRight size={14} />}</span>
-                  </button>
-                  {expanded.retos && (
-                    <div className="mt-1 pl-3 space-y-1">
+            {/* Renderizar secciones dinámicamente */}
+            {(() => {
+              const category = learningMode === 'libre' ? 'Aprendizaje Libre' : 'Universitario';
+              const sections = sectionsMap[category] || [];
+              
+              return sections
+                .sort((a, b) => {
+                  const orderA = typeof a === 'object' ? a.order : 0;
+                  const orderB = typeof b === 'object' ? b.order : 0;
+                  return orderA - orderB;
+                })
+                .map((section) => {
+                  const sectionName = typeof section === 'string' ? section : section.name;
+                  const subsections = typeof section === 'object' ? (section.subsections || []) : [];
+                  const sectionKey = `${category}:${sectionName}`;
+                  
+                  return (
+                    <div key={sectionName}>
                       <button
                         type="button"
-                        onClick={() => setSelectedContent('reto-1')}
-                        className={`w-full text-left text-xs px-2 py-1 rounded-md transition-colors bg-transparent border-0 ${
-                          isActive('reto-1')
-                            ? 'bg-black/10 dark:bg-white/10 text-black dark:text-white'
-                            : 'text-black/80 dark:text-white/80 hover:bg-black/5 dark:hover:bg-white/10'
-                        }`}
+                        onClick={() => {
+                          toggle(sectionKey);
+                          setSelectedContent(sectionKey);
+                        }}
+                        className={`${itemBtnClass(isActive(sectionKey))} flex items-center justify-between`}
+                        aria-expanded={expanded[sectionKey]}
+                        aria-current={isActive(sectionKey) ? 'page' : undefined}
                       >
-                        Reto #1
+                        <span>{sectionName.toUpperCase()}</span>
+                        <span className="ml-2">{expanded[sectionKey] ? <ChevronDown size={14} /> : <ChevronRight size={14} />}</span>
                       </button>
-                      <button
-                        type="button"
-                        onClick={() => setSelectedContent('reto-2')}
-                        className={`w-full text-left text-xs px-2 py-1 rounded-md transition-colors bg-transparent border-0 ${
-                          isActive('reto-2')
-                            ? 'bg-black/10 dark:bg-white/10 text-black dark:text-white'
-                            : 'text-black/80 dark:text-white/80 hover:bg-black/5 dark:hover:bg-white/10'
-                        }`}
-                      >
-                        Reto #2
-                      </button>
+                      {expanded[sectionKey] && (
+                        <div className="mt-1 pl-3 space-y-1">
+                          {/* Subsecciones si existen */}
+                          {subsections.length > 0 && subsections.map((subsection) => {
+                            const subsectionContents = getContentsBySection(category, sectionName).filter(
+                              c => c.subsection === subsection
+                            );
+
+                            const subsectionKey = `${sectionKey}:${subsection}`;
+
+                            return (
+                              <div key={subsection} className="mb-2">
+                                <button
+                                  type="button"
+                                  onClick={() => toggle(subsectionKey)}
+                                  className={`w-full flex items-center justify-between text-xs px-2 py-1 rounded-md transition-colors bg-transparent border-0 ${
+                                    expanded[subsectionKey]
+                                      ? 'bg-black/10 dark:bg-white/10 text-black dark:text-white font-semibold'
+                                      : 'text-black/70 dark:text-white/70 hover:bg-black/5 dark:hover:bg-white/10'
+                                  }`}
+                                >
+                                  <span>{subsection}</span>
+                                  <span className="ml-1">{expanded[subsectionKey] ? <ChevronDown size={12} /> : <ChevronRight size={12} />}</span>
+                                </button>
+                                {expanded[subsectionKey] && (
+                                  <div className="mt-1 pl-3 space-y-1">
+                                    {subsectionContents.length > 0 ? (
+                                      subsectionContents.map((content) => (
+                                        <button
+                                          key={content.id}
+                                          type="button"
+                                          onClick={() => setSelectedContent(`content-${content.id}`)}
+                                          className={`w-full text-left text-xs px-2 py-1 rounded-md transition-colors bg-transparent border-0 ${
+                                            isActive(`content-${content.id}`)
+                                              ? 'bg-black/10 dark:bg-white/10 text-black dark:text-white'
+                                              : 'text-black/80 dark:text-white/80 hover:bg-black/5 dark:hover:bg-white/10'
+                                          }`}
+                                        >
+                                          {content.title}
+                                        </button>
+                                      ))
+                                    ) : (
+                                      <p className="text-xs text-black/60 dark:text-white/60 italic">
+                                        Aún no hay contenidos en esta subsección.
+                                      </p>
+                                    )}
+                                  </div>
+                                )}
+                              </div>
+                            );
+                          })}
+                          
+                          {/* Contenidos sin subsección (o si no hay subsecciones) */}
+                          {getContentsBySection(category, sectionName)
+                            .filter(c => !c.subsection || subsections.length === 0)
+                            .map((content) => (
+                              <button
+                                key={content.id}
+                                type="button"
+                                onClick={() => setSelectedContent(`content-${content.id}`)}
+                                className={`w-full text-left text-xs px-2 py-1 rounded-md transition-colors bg-transparent border-0 ${
+                                  isActive(`content-${content.id}`)
+                                    ? 'bg-black/10 dark:bg-white/10 text-black dark:text-white'
+                                    : 'text-black/80 dark:text-white/80 hover:bg-black/5 dark:hover:bg-white/10'
+                                }`}
+                              >
+                                {content.title}
+                              </button>
+                            ))
+                          }
+                        </div>
+                      )}
                     </div>
-                  )}
-                </div>
-                <div>
-                  <button
-                    type="button"
-                    onClick={() => {
-                      toggle('extra');
-                      setSelectedContent('extra');
-                    }}
-                    className={`${itemBtnClass(isActive('extra'))} flex items-center justify-between`}
-                    aria-expanded={expanded.extra}
-                    aria-current={isActive('extra') ? 'page' : undefined}
-                  >
-                    <span>EXTRA</span>
-                    <span className="ml-2">{expanded.extra ? <ChevronDown size={14} /> : <ChevronRight size={14} />}</span>
-                  </button>
-                  {expanded.extra && (
-                    <div className="mt-1 pl-3 text-xs text-black/70 dark:text-white/70">
-                      {/* Contenido interno opcional en el futuro */}
-                    </div>
-                  )}
-                </div>
-              </>
-            )}
+                  );
+                });
+            })()}
           </div>
         </aside>
       )}
@@ -278,71 +322,108 @@ const Aprende = () => {
           {learningMode === 'libre' && selectedContent === 'introduccion' && (
             <article>
               <header className="mb-6">
-                <h2 className="text-2xl font-semibold text-black dark:text-white mb-1">{introPage.title}</h2>
-                {introPage.description && <p className="text-sm text-black/60 dark:text-white/60">{introPage.description}</p>}
+                <h2 className="text-2xl font-semibold text-black dark:text-white mb-1">Introducción a la Programación Competitiva</h2>
               </header>
-              <div className="space-y-8">
-                {introPage.sections?.map((section) => (
-                  <section key={section.id}>
-                    <h3 id={section.id} className="text-xl font-medium text-black dark:text-white mb-3">{section.title}</h3>
-                    <div className="prose prose-gray dark:prose-invert max-w-none">
-                      {(() => {
-                        const nodes = [];
-                        const lines = section.content.split('\n');
-                        let listBuffer = [];
-                        const flushList = (keyBase) => {
-                          if (listBuffer.length > 0) {
-                            nodes.push(
-                              <ul key={`${keyBase}-ul`} className="list-disc pl-6 my-3">
-                                {listBuffer.map((item, i) => (<li key={`${keyBase}-li-${i}`}>{item}</li>))}
-                              </ul>
-                            );
-                            listBuffer = [];
-                          }
-                        };
-                        lines.forEach((line, idx) => {
-                          const t = line.trim();
-                          const keyBase = `${section.id}-${idx}`;
-                          if (t === '') { flushList(keyBase); nodes.push(<div key={`${keyBase}-sp`} className="h-2" />); return; }
-                          if (t.startsWith('```')) { flushList(keyBase); nodes.push(<pre key={`${keyBase}-code`} className="code-block" />); return; }
-                          if (t.startsWith('#')) { flushList(keyBase); nodes.push(<h4 key={`${keyBase}-h`} className="text-lg font-semibold mt-5 mb-2 text-black dark:text-white">{t.replace(/^#+\s*/, '')}</h4>); return; }
-                          if (t.startsWith('* ')) { listBuffer.push(t.replace(/^\*\s+/, '')); return; }
-                          flushList(keyBase);
-                          nodes.push(<p key={`${keyBase}-p`} className="text-black/80 dark:text-white/80 leading-relaxed">{line}</p>);
-                        });
-                        flushList(`${section.id}-end`);
-                        return nodes;
-                      })()}
-                    </div>
-                  </section>
-                ))}
-              </div>
+              {aprendeIntroduction ? (
+                <div className="prose prose-gray dark:prose-invert max-w-none">
+                  <ReactMarkdown
+                    remarkPlugins={[remarkMath, remarkGfm]}
+                    rehypePlugins={[rehypeRaw, rehypeKatex]}
+                  >
+                    {aprendeIntroduction}
+                  </ReactMarkdown>
+                </div>
+              ) : (
+                <div className="text-black/60 dark:text-white/60">
+                  <p>No hay introducción configurada aún. Puedes añadirla desde el panel de administración.</p>
+                </div>
+              )}
             </article>
           )}
 
-          {/* Descripciones de secciones para ambos modos */}
-          {learningMode && selectedContent && selectedContent !== 'introduccion' && (
-            (() => {
-              const mode = learningMode;
-              const desc = sectionDescriptions[mode]?.[selectedContent];
-              if (!desc) return null;
-              return (
-                <article>
-                  <header className="mb-6">
-                    <h2 className="text-2xl font-semibold text-black dark:text-white mb-1">{desc.title}</h2>
-                    {desc.intro && <p className="text-sm text-black/60 dark:text-white/60">{desc.intro}</p>}
-                  </header>
-                  {Array.isArray(desc.bullets) && desc.bullets.length > 0 && (
-                    <ul className="list-disc pl-6 text-black/80 dark:text-white/80 space-y-2">
-                      {desc.bullets.map((b, i) => (
-                        <li key={`b-${i}`}>{b}</li>
-                      ))}
-                    </ul>
-                  )}
-                </article>
-              );
-            })()
-          )}
+          {/* Renderizar contenido dinámico de la base de datos */}
+          {learningMode && selectedContent && selectedContent.startsWith('content-') && (() => {
+            const contentId = selectedContent.replace('content-', '');
+            const content = dynamicContents.find(c => c.id === contentId);
+            if (!content) return null;
+            
+            return (
+              <article>
+                <header className="mb-6">
+                  <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between mb-2">
+                    <div className="flex flex-wrap items-center gap-2">
+                      {content.category ? (
+                        <span className="px-2 py-1 border border-red-500/20 text-red-500 text-xs font-light">
+                          {content.category}
+                        </span>
+                      ) : null}
+                      <span className="px-2 py-1 border border-black/10 dark:border-pure-white/10 text-black/60 dark:text-pure-white/60 text-xs font-light">
+                        {content.section}
+                      </span>
+                    </div>
+                    {content.pdfAttachment?.url && (
+                      <a
+                        href={content.pdfAttachment.url}
+                        download={content.pdfAttachment.name || `${content.title || 'contenido'}.pdf`}
+                        className="inline-flex items-center gap-2 self-start rounded-full border border-black/10 dark:border-pure-white/10 bg-pure-white/80 dark:bg-white/10 px-3 py-1.5 text-xs font-medium text-black/80 dark:text-pure-white/80 transition-colors hover:border-red-500 dark:hover:border-red-400 hover:text-red-500 dark:hover:text-red-400"
+                      >
+                        <Download className="h-3.5 w-3.5" strokeWidth={1.5} />
+                        <span>Descargar PDF</span>
+                      </a>
+                    )}
+                  </div>
+                  <h2 className="text-2xl font-semibold text-black dark:text-white mb-1">{content.title}</h2>
+                </header>
+                <div className="prose prose-gray dark:prose-invert max-w-none prose-headings:font-light prose-p:font-light prose-li:font-light prose-code:font-mono">
+                  <ReactMarkdown
+                    remarkPlugins={[remarkMath, remarkGfm]}
+                    rehypePlugins={[rehypeRaw, rehypeKatex]}
+                  >
+                    {content.content}
+                  </ReactMarkdown>
+                </div>
+              </article>
+            );
+          })()}
+
+          {/* Descripciones de secciones dinámicas desde la base de datos */}
+          {learningMode && selectedContent && selectedContent !== 'introduccion' && !selectedContent.startsWith('content-') && (() => {
+            // selectedContent ahora es del formato "category:section"
+            const parts = selectedContent.split(':');
+            if (parts.length < 2) return null;
+            
+            const category = parts[0];
+            const sectionName = parts[1];
+            
+            const description = getSectionDescription(category, sectionName);
+            
+            if (!description) return (
+              <article>
+                <header className="mb-6">
+                  <h2 className="text-2xl font-semibold text-black dark:text-white mb-1">{sectionName}</h2>
+                  <p className="text-sm text-black/60 dark:text-white/60 italic">
+                    No hay descripción para esta sección aún. Puedes añadirla desde el panel de administración.
+                  </p>
+                </header>
+              </article>
+            );
+            
+            return (
+              <article>
+                <header className="mb-6">
+                  <h2 className="text-2xl font-semibold text-black dark:text-white mb-1">{sectionName}</h2>
+                </header>
+                <div className="prose prose-gray dark:prose-invert max-w-none prose-headings:font-light prose-p:font-light prose-li:font-light">
+                  <ReactMarkdown
+                    remarkPlugins={[remarkMath, remarkGfm]}
+                    rehypePlugins={[rehypeRaw, rehypeKatex]}
+                  >
+                    {description}
+                  </ReactMarkdown>
+                </div>
+              </article>
+            );
+          })()}
         </div>
       </div>
     </div>

@@ -8,6 +8,9 @@ out/
 build/
 dist/
 
+# Data files (contenidos creados dinámicamente)
+data/contents/*.json
+
 # Environment variables
 .env
 .env.local

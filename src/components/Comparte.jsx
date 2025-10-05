@@ -73,12 +73,6 @@ const Comparte = () => {
                   </svg>
                   Abrir en Google Calendar
                 </a>
-                <a href={CALENDAR_ADD_URL} target="_blank" rel="noopener noreferrer" className="group inline-flex items-center justify-center rounded-lg px-5 py-2.5 text-sm font-medium text-black/80 dark:text-white/80 bg-white/70 dark:bg-white/[0.06] border border-black/10 dark:border-white/20 hover:bg-white dark:hover:bg-white/[0.15] transition-all duration-200 shadow-md hover:shadow-lg">
-                  <svg className="w-4 h-4 mr-2 group-hover:scale-110 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
-                  </svg>
-                  Suscribirse
-                </a>
                 <a href={prefixPath('/reuniones')} className="group inline-flex items-center justify-center rounded-lg px-5 py-2.5 text-sm font-medium text-black/80 dark:text-white/80 bg-white/70 dark:bg-white/[0.06] border border-black/10 dark:border-white/20 hover:bg-white dark:hover:bg-white/[0.15] transition-all duration-200 shadow-md hover:shadow-lg">
                   <svg className="w-4 h-4 mr-2 group-hover:translate-x-0.5 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
