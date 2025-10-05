@@ -1,6 +1,5 @@
 import { IncomingForm } from 'formidable';
 import fs from 'fs';
-import path from 'path';
 
 export const config = {
   api: {
@@ -14,18 +13,10 @@ export default async function handler(req, res) {
   }
 
   const form = new IncomingForm({
-    uploadDir: path.join(process.cwd(), 'public', 'fotos'),
-    keepExtensions: true,
     maxFileSize: 10 * 1024 * 1024, // 10MB
   });
 
-  // Asegurar que el directorio existe
-  const uploadDir = path.join(process.cwd(), 'public', 'fotos');
-  if (!fs.existsSync(uploadDir)) {
-    fs.mkdirSync(uploadDir, { recursive: true });
-  }
-
-  form.parse(req, (err, fields, files) => {
+  form.parse(req, async (err, fields, files) => {
     if (err) {
       console.error('Error parsing form:', err);
       return res.status(500).json({ error: 'Error al subir la imagen' });
@@ -36,12 +27,24 @@ export default async function handler(req, res) {
       return res.status(400).json({ error: 'No se encontró ninguna imagen' });
     }
 
-    // Get the file object (can be array or single object)
-    const uploadedFile = Array.isArray(file) ? file[0] : file;
-    
-    const filename = path.basename(uploadedFile.filepath);
-    const url = `/fotos/${filename}`;
+    try {
+      // Get the file object (can be array or single object)
+      const uploadedFile = Array.isArray(file) ? file[0] : file;
+      
+      // Leer el archivo y convertirlo a base64
+      const fileBuffer = fs.readFileSync(uploadedFile.filepath);
+      const base64Data = fileBuffer.toString('base64');
+      const mimeType = uploadedFile.mimetype || 'image/jpeg';
+      const dataUrl = `data:${mimeType};base64,${base64Data}`;
 
-    res.status(200).json({ success: true, url });
+      // Limpiar el archivo temporal
+      fs.unlinkSync(uploadedFile.filepath);
+
+      // Retornar la data URL para que se guarde en Redis junto con el contenido
+      res.status(200).json({ success: true, url: dataUrl });
+    } catch (error) {
+      console.error('Error procesando imagen:', error);
+      return res.status(500).json({ error: 'Error al procesar la imagen' });
+    }
   });
 }
