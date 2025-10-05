@@ -1,4 +1,5 @@
 import { IncomingForm } from 'formidable';
+import { put } from '@vercel/blob';
 import fs from 'fs';
 
 export const config = {
@@ -31,20 +32,24 @@ export default async function handler(req, res) {
       // Get the file object (can be array or single object)
       const uploadedFile = Array.isArray(file) ? file[0] : file;
       
-      // Leer el archivo y convertirlo a base64
+      // Leer el archivo temporal
       const fileBuffer = fs.readFileSync(uploadedFile.filepath);
-      const base64Data = fileBuffer.toString('base64');
-      const mimeType = uploadedFile.mimetype || 'image/jpeg';
-      const dataUrl = `data:${mimeType};base64,${base64Data}`;
+      const originalName = uploadedFile.originalFilename || 'photo.jpg';
+      
+      // Subir a Vercel Blob
+      const blob = await put(originalName, fileBuffer, {
+        access: 'public',
+        contentType: uploadedFile.mimetype || 'image/jpeg',
+      });
 
       // Limpiar el archivo temporal
       fs.unlinkSync(uploadedFile.filepath);
 
-      // Retornar la data URL para que se guarde en Redis junto con el contenido
-      res.status(200).json({ success: true, url: dataUrl });
+      // Retornar la URL pública de Vercel Blob
+      res.status(200).json({ success: true, url: blob.url });
     } catch (error) {
-      console.error('Error procesando imagen:', error);
-      return res.status(500).json({ error: 'Error al procesar la imagen' });
+      console.error('Error subiendo imagen a Blob:', error);
+      return res.status(500).json({ error: 'Error al subir la imagen' });
     }
   });
 }

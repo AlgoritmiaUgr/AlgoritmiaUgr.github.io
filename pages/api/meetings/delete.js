@@ -1,4 +1,5 @@
 import { redis } from '../../../src/lib/upstash';
+import { del } from '@vercel/blob';
 
 export default async function handler(req, res) {
   if (req.method !== 'DELETE') {
@@ -12,9 +13,24 @@ export default async function handler(req, res) {
       return res.status(400).json({ error: 'ID requerido' });
     }
 
-    // Obtener el slug antes de borrar para revalidar
+    // Obtener la reunión antes de borrar para revalidar y eliminar fotos
     const meeting = await redis.get(`meeting:${id}`);
     const slug = meeting?.slug;
+
+    // Eliminar fotos de Vercel Blob si existen
+    if (meeting?.photos && Array.isArray(meeting.photos)) {
+      for (const photoUrl of meeting.photos) {
+        // Solo eliminar si es una URL de Vercel Blob (no base64)
+        if (photoUrl.startsWith('https://') && photoUrl.includes('blob.vercel-storage.com')) {
+          try {
+            await del(photoUrl);
+          } catch (blobError) {
+            console.warn('Error eliminando foto de Blob:', blobError);
+            // Continuar aunque falle la eliminación de una foto
+          }
+        }
+      }
+    }
 
     await redis.del(`meeting:${id}`);
 
