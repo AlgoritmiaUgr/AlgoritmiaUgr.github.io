@@ -45,13 +45,23 @@ export default function App({ Component, pageProps }) {
   }, [isMobileMenuOpen, isContentSidebarOpen]);
 
   const toggleMobileMenu = () => {
-    setIsMobileMenuOpen(!isMobileMenuOpen);
-    if (isContentSidebarOpen) setIsContentSidebarOpen(false); // Cerrar el otro menú
+    setIsMobileMenuOpen((prev) => {
+      const next = !prev;
+      if (next && isContentSidebarOpen) {
+        setIsContentSidebarOpen(false);
+      }
+      return next;
+    });
   };
 
   const toggleContentSidebar = () => {
-    setIsContentSidebarOpen(!isContentSidebarOpen);
-    if (isMobileMenuOpen) setIsMobileMenuOpen(false); // Cerrar el otro menú
+    setIsContentSidebarOpen((prev) => {
+      const next = !prev;
+      if (next && isMobileMenuOpen) {
+        setIsMobileMenuOpen(false);
+      }
+      return next;
+    });
   };
 
   return (

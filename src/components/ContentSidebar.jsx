@@ -12,19 +12,21 @@ const ContentSidebar = ({
   itemBtnClass,
   getContentsBySection,
 }) => {
-  if (!isOpen) return null;
-
   return (
     <>
-      {/* Overlay */}
-      <div 
-        className="fixed inset-0 bg-black/50 backdrop-blur-sm z-40 lg:hidden"
-        onClick={onClose}
-        aria-hidden="true"
-      />
+      {/* Overlay - solo visible cuando está abierto */}
+      {isOpen && (
+        <div 
+          className="fixed inset-0 bg-black/50 backdrop-blur-sm z-40 lg:hidden"
+          onClick={onClose}
+          aria-hidden="true"
+        />
+      )}
 
-      {/* Content Sidebar - Left side */}
-      <aside className="fixed top-16 left-0 w-80 h-[calc(100vh-4rem)] bg-pure-white/95 dark:bg-pure-black/95 backdrop-blur-md border-r border-black/10 dark:border-white/10 overflow-y-auto z-50 lg:hidden transform transition-transform duration-300 ease-in-out">
+      {/* Content Sidebar - Left side con animación */}
+      <aside className={`fixed top-16 left-0 w-80 h-[calc(100vh-4rem)] bg-pure-white/95 dark:bg-pure-black/95 backdrop-blur-md border-r border-black/10 dark:border-white/10 overflow-y-auto z-50 lg:hidden transform transition-transform duration-300 ease-in-out ${
+        isOpen ? 'translate-x-0 pointer-events-auto' : '-translate-x-full pointer-events-none'
+      }`}>
         <div className="px-4 py-5">
           <h2 className="text-xs font-semibold uppercase tracking-wider text-black dark:text-white mb-4 text-center">CONTENIDOS</h2>
           
