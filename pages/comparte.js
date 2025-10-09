@@ -3,7 +3,7 @@ import Comparte from '../src/components/Comparte'
 import Layout from '../src/components/Layout'
 import MobileMenu from '../src/components/MobileMenu'
 
-export default function CompartePage({ isMobileMenuOpen, onMobileMenuClose }) {
+export default function CompartePage({ isMobileMenuOpen, onMobileMenuClose, setShowContentSidebarButton }) {
   return (
     <Layout>
       <Head>

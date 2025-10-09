@@ -1,11 +1,11 @@
-import { Github, Settings, Menu, X } from 'lucide-react';
+import { Github, Settings, Menu, X, PanelLeft } from 'lucide-react';
 import { useRouter } from 'next/router';
 import { memo, useMemo, useState } from 'react';
 import ThemeToggle from './ThemeToggle';
 import { useTheme } from '../context/ThemeContext';
 import { prefixPath } from '../utils/basePath';
 
-const Header = memo(({ onMobileMenuToggle, isMobileMenuOpen }) => {
+const Header = memo(({ onMobileMenuToggle, isMobileMenuOpen, onContentSidebarToggle, showContentSidebar = false }) => {
   const router = useRouter();
   const { mounted } = useTheme();
   
@@ -33,29 +33,44 @@ const Header = memo(({ onMobileMenuToggle, isMobileMenuOpen }) => {
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-pure-white/5 dark:bg-pure-black/20 backdrop-blur-sm">
       <div className="w-full h-16 flex items-center justify-between px-4 sm:px-6 lg:px-8">
-          {/* Logo and Brand */}
-          <div 
-            className="flex items-center space-x-3 cursor-pointer"
-            onClick={handleLogoClick}
-          >
-            {/* Logo */}
-            <div className="w-16 h-16 flex-shrink-0" suppressHydrationWarning>
-              {/* Logo para modo claro */}
-              <img 
-                src={prefixPath('/imagenes/logo_claro.svg')} 
-                alt="CPC UGR Logo" 
-                className="w-full h-full block dark:hidden"
-              />
-              {/* Logo para modo oscuro */}
-              <img 
-                src={prefixPath('/imagenes/logo_oscuro.svg')} 
-                alt="CPC UGR Logo" 
-                className="w-full h-full hidden dark:block"
-              />
-            </div>
-            {/* Brand Text */}
-            <div className="text-lg font-light text-black dark:text-pure-white">
-              CPC UGR
+          {/* Left side: Content Sidebar Button (only on mobile for Aprende page) + Logo */}
+          <div className="flex items-center space-x-3">
+            {/* Content Sidebar Toggle - Solo visible en móvil y cuando showContentSidebar es true */}
+            {showContentSidebar && (
+              <button
+                onClick={onContentSidebarToggle}
+                className="lg:hidden text-gray-600 dark:text-pure-white hover:text-gray-900 dark:hover:text-gray-300 transition-colors duration-200 bg-transparent border-0 p-0"
+                aria-label="Abrir contenidos"
+                style={{ background: 'transparent' }}
+              >
+                <PanelLeft className="h-6 w-6" />
+              </button>
+            )}
+
+            {/* Logo and Brand */}
+            <div 
+              className="flex items-center space-x-3 cursor-pointer"
+              onClick={handleLogoClick}
+            >
+              {/* Logo */}
+              <div className="w-16 h-16 flex-shrink-0" suppressHydrationWarning>
+                {/* Logo para modo claro */}
+                <img 
+                  src={prefixPath('/imagenes/logo_claro.svg')} 
+                  alt="CPC UGR Logo" 
+                  className="w-full h-full block dark:hidden"
+                />
+                {/* Logo para modo oscuro */}
+                <img 
+                  src={prefixPath('/imagenes/logo_oscuro.svg')} 
+                  alt="CPC UGR Logo" 
+                  className="w-full h-full hidden dark:block"
+                />
+              </div>
+              {/* Brand Text */}
+              <div className="text-lg font-light text-black dark:text-pure-white">
+                CPC UGR
+              </div>
             </div>
           </div>
 

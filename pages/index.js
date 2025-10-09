@@ -6,7 +6,7 @@ import SobreNosotros from '../src/components/SobreNosotros'
 import MobileMenu from '../src/components/MobileMenu'
 import { prefixPath } from '../src/utils/basePath'
 
-export default function Home({ isMobileMenuOpen, onMobileMenuClose }) {
+export default function Home({ isMobileMenuOpen, onMobileMenuClose, setShowContentSidebarButton }) {
   return (
     <>
       <Head>

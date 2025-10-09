@@ -3,7 +3,7 @@ import Noticias from '../src/components/Noticias'
 import Layout from '../src/components/Layout'
 import MobileMenu from '../src/components/MobileMenu'
 
-export default function NoticiasPage({ isMobileMenuOpen, onMobileMenuClose }) {
+export default function NoticiasPage({ isMobileMenuOpen, onMobileMenuClose, setShowContentSidebarButton }) {
   return (
     <Layout>
       <Head>

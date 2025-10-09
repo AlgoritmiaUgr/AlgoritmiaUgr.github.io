@@ -7,8 +7,9 @@ import remarkGfm from 'remark-gfm';
 import rehypeKatex from 'rehype-katex';
 import rehypeRaw from 'rehype-raw';
 import MobileMenu from './MobileMenu';
+import ContentSidebar from './ContentSidebar';
 
-const Aprende = ({ isMobileMenuOpen, onMobileMenuClose }) => {
+const Aprende = ({ isMobileMenuOpen, onMobileMenuClose, isContentSidebarOpen, onContentSidebarClose, setShowContentSidebarButton }) => {
   // Selector de modo: 'libre' | 'apuntes' | null
   const [learningMode, setLearningMode] = useState(null);
   // Página mínima: mostramos sólo la Introducción desde datos estáticos
@@ -34,6 +35,20 @@ const Aprende = ({ isMobileMenuOpen, onMobileMenuClose }) => {
     loadSectionDescriptions();
     loadAprendeIntroduction();
   }, []);
+
+  // Notificar al componente padre cuando cambie learningMode
+  useEffect(() => {
+    if (setShowContentSidebarButton) {
+      setShowContentSidebarButton(learningMode !== null);
+    }
+    
+    // Cleanup: ocultar el botón cuando se desmonte el componente
+    return () => {
+      if (setShowContentSidebarButton) {
+        setShowContentSidebarButton(false);
+      }
+    };
+  }, [learningMode, setShowContentSidebarButton]);
 
   const loadSections = async () => {
     try {
@@ -148,20 +163,28 @@ const Aprende = ({ isMobileMenuOpen, onMobileMenuClose }) => {
 
   return (
     <div className="w-full">
-      {/* Mobile Menu */}
+      {/* Mobile Navigation Menu */}
       <MobileMenu
         isOpen={isMobileMenuOpen}
         onClose={onMobileMenuClose}
-        learningMode={learningMode}
-        sectionsMap={sectionsMap}
-        expanded={expanded}
-        toggle={toggle}
-        setSelectedContent={setSelectedContent}
-        isActive={isActive}
-        itemBtnClass={itemBtnClass}
-        getContentsBySection={getContentsBySection}
-        showContentSidebar={true}
+        showContentSidebar={false}
       />
+
+      {/* Mobile Content Sidebar - Solo cuando hay learningMode */}
+      {learningMode && (
+        <ContentSidebar
+          isOpen={isContentSidebarOpen}
+          onClose={onContentSidebarClose}
+          learningMode={learningMode}
+          sectionsMap={sectionsMap}
+          expanded={expanded}
+          toggle={toggle}
+          setSelectedContent={setSelectedContent}
+          isActive={isActive}
+          itemBtnClass={itemBtnClass}
+          getContentsBySection={getContentsBySection}
+        />
+      )}
 
       {/* Sidebar fija bajo el header: solo tras elegir modo */}
       {learningMode && (
