@@ -3,9 +3,10 @@ import Link from 'next/link'
 import HeroSection from '../src/components/HeroSection'
 import Layout from '../src/components/Layout'
 import SobreNosotros from '../src/components/SobreNosotros'
+import MobileMenu from '../src/components/MobileMenu'
 import { prefixPath } from '../src/utils/basePath'
 
-export default function Home() {
+export default function Home({ isMobileMenuOpen, onMobileMenuClose }) {
   return (
     <>
       <Head>
@@ -14,6 +15,14 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="icon" href={prefixPath('/favicon.ico')} />
       </Head>
+
+      {/* Mobile Menu */}
+      <MobileMenu
+        isOpen={isMobileMenuOpen}
+        onClose={onMobileMenuClose}
+        showContentSidebar={false}
+      />
+
       {/* Top fold: hero + cards with better spacing */}
       <section className="relative z-10 min-h-[75vh] flex flex-col justify-center pb-8">
         {/* Hero (centered) */}

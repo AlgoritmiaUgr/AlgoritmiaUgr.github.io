@@ -6,8 +6,9 @@ import remarkMath from 'remark-math';
 import remarkGfm from 'remark-gfm';
 import rehypeKatex from 'rehype-katex';
 import rehypeRaw from 'rehype-raw';
+import MobileMenu from './MobileMenu';
 
-const Aprende = () => {
+const Aprende = ({ isMobileMenuOpen, onMobileMenuClose }) => {
   // Selector de modo: 'libre' | 'apuntes' | null
   const [learningMode, setLearningMode] = useState(null);
   // Página mínima: mostramos sólo la Introducción desde datos estáticos
@@ -147,6 +148,21 @@ const Aprende = () => {
 
   return (
     <div className="w-full">
+      {/* Mobile Menu */}
+      <MobileMenu
+        isOpen={isMobileMenuOpen}
+        onClose={onMobileMenuClose}
+        learningMode={learningMode}
+        sectionsMap={sectionsMap}
+        expanded={expanded}
+        toggle={toggle}
+        setSelectedContent={setSelectedContent}
+        isActive={isActive}
+        itemBtnClass={itemBtnClass}
+        getContentsBySection={getContentsBySection}
+        showContentSidebar={true}
+      />
+
       {/* Sidebar fija bajo el header: solo tras elegir modo */}
       {learningMode && (
         <aside className="hidden lg:block fixed top-16 left-0 w-64 h-[calc(100vh-4rem)] border-r border-gray-200 dark:border-gray-700 px-4 py-5 overflow-y-auto bg-transparent z-20">
