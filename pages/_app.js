@@ -17,15 +17,12 @@ const BackgroundEffects = dynamic(() => import('../src/components/BackgroundEffe
 
 export default function App({ Component, pageProps }) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [isContentSidebarOpen, setIsContentSidebarOpen] = useState(false);
-  const [showContentSidebarButton, setShowContentSidebarButton] = useState(false);
   const router = useRouter();
 
   // Cerrar ambos menús cuando cambia la ruta
   useEffect(() => {
     const handleRouteChange = () => {
       setIsMobileMenuOpen(false);
-      setIsContentSidebarOpen(false);
     };
 
     router.events.on('routeChangeStart', handleRouteChange);
@@ -37,31 +34,15 @@ export default function App({ Component, pageProps }) {
 
   // Prevenir scroll cuando cualquier menú está abierto
   useEffect(() => {
-    if (isMobileMenuOpen || isContentSidebarOpen) {
+    if (isMobileMenuOpen) {
       document.body.style.overflow = 'hidden';
     } else {
       document.body.style.overflow = 'unset';
     }
-  }, [isMobileMenuOpen, isContentSidebarOpen]);
+  }, [isMobileMenuOpen]);
 
   const toggleMobileMenu = () => {
-    setIsMobileMenuOpen((prev) => {
-      const next = !prev;
-      if (next && isContentSidebarOpen) {
-        setIsContentSidebarOpen(false);
-      }
-      return next;
-    });
-  };
-
-  const toggleContentSidebar = () => {
-    setIsContentSidebarOpen((prev) => {
-      const next = !prev;
-      if (next && isMobileMenuOpen) {
-        setIsMobileMenuOpen(false);
-      }
-      return next;
-    });
+    setIsMobileMenuOpen((prev) => !prev);
   };
 
   return (
@@ -87,17 +68,12 @@ export default function App({ Component, pageProps }) {
             <Header 
               onMobileMenuToggle={toggleMobileMenu}
               isMobileMenuOpen={isMobileMenuOpen}
-              onContentSidebarToggle={toggleContentSidebar}
-              showContentSidebar={showContentSidebarButton}
             />
             <main className="w-full relative z-10 pt-20">
               <Component 
                 {...pageProps} 
                 isMobileMenuOpen={isMobileMenuOpen}
                 onMobileMenuClose={() => setIsMobileMenuOpen(false)}
-                isContentSidebarOpen={isContentSidebarOpen}
-                onContentSidebarClose={() => setIsContentSidebarOpen(false)}
-                setShowContentSidebarButton={setShowContentSidebarButton}
               />
             </main>
           </div>

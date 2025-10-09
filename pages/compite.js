@@ -3,7 +3,7 @@ import Compite from '../src/components/Compite'
 import Layout from '../src/components/Layout'
 import MobileMenu from '../src/components/MobileMenu'
 
-export default function CompitePage({ isMobileMenuOpen, onMobileMenuClose, setShowContentSidebarButton }) {
+export default function CompitePage({ isMobileMenuOpen, onMobileMenuClose }) {
   return (
     <Layout>
       <Head>
@@ -15,7 +15,6 @@ export default function CompitePage({ isMobileMenuOpen, onMobileMenuClose, setSh
       <MobileMenu
         isOpen={isMobileMenuOpen}
         onClose={onMobileMenuClose}
-        showContentSidebar={false}
       />
 
       <Compite />

@@ -6,7 +6,7 @@ import SobreNosotros from '../src/components/SobreNosotros'
 import MobileMenu from '../src/components/MobileMenu'
 import { prefixPath } from '../src/utils/basePath'
 
-export default function Home({ isMobileMenuOpen, onMobileMenuClose, setShowContentSidebarButton }) {
+export default function Home({ isMobileMenuOpen, onMobileMenuClose }) {
   return (
     <>
       <Head>
@@ -20,7 +20,6 @@ export default function Home({ isMobileMenuOpen, onMobileMenuClose, setShowConte
       <MobileMenu
         isOpen={isMobileMenuOpen}
         onClose={onMobileMenuClose}
-        showContentSidebar={false}
       />
 
       {/* Top fold: hero + cards with better spacing */}

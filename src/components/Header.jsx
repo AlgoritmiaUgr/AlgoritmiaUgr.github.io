@@ -1,13 +1,11 @@
-import { Github, Settings, Menu, X, PanelLeft } from 'lucide-react';
+import { Github, Menu, X } from 'lucide-react';
 import { useRouter } from 'next/router';
-import { memo, useMemo, useState } from 'react';
+import { memo, useMemo } from 'react';
 import ThemeToggle from './ThemeToggle';
-import { useTheme } from '../context/ThemeContext';
 import { prefixPath } from '../utils/basePath';
 
-const Header = memo(({ onMobileMenuToggle, isMobileMenuOpen, onContentSidebarToggle, showContentSidebar = false }) => {
+const Header = memo(({ onMobileMenuToggle, isMobileMenuOpen }) => {
   const router = useRouter();
-  const { mounted } = useTheme();
   
   // Optimización: memoizar navItems para evitar recreación en cada render
   const navItems = useMemo(() => [
@@ -33,20 +31,8 @@ const Header = memo(({ onMobileMenuToggle, isMobileMenuOpen, onContentSidebarTog
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-pure-white/5 dark:bg-pure-black/20 backdrop-blur-sm">
       <div className="w-full h-16 flex items-center justify-between px-4 sm:px-6 lg:px-8">
-          {/* Left side: Content Sidebar Button (only on mobile for Aprende page) + Logo */}
+          {/* Left side: Logo */}
           <div className="flex items-center space-x-3">
-            {/* Content Sidebar Toggle - Solo visible en móvil y cuando showContentSidebar es true */}
-            {showContentSidebar && (
-              <button
-                onClick={onContentSidebarToggle}
-                className="lg:hidden text-gray-600 dark:text-pure-white hover:text-gray-900 dark:hover:text-gray-300 transition-colors duration-200 bg-transparent border-0 p-0"
-                aria-label="Abrir contenidos"
-                style={{ background: 'transparent' }}
-              >
-                <PanelLeft className="h-6 w-6" />
-              </button>
-            )}
-
             {/* Logo and Brand */}
             <div 
               className="flex items-center space-x-3 cursor-pointer"

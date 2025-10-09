@@ -1,4 +1,3 @@
-import { staticContent } from '../data/staticContent';
 import { useState, useEffect } from 'react';
 import { ChevronDown, ChevronRight, Download } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
@@ -7,20 +6,16 @@ import remarkGfm from 'remark-gfm';
 import rehypeKatex from 'rehype-katex';
 import rehypeRaw from 'rehype-raw';
 import MobileMenu from './MobileMenu';
-import ContentSidebar from './ContentSidebar';
 
-const Aprende = ({ isMobileMenuOpen, onMobileMenuClose, isContentSidebarOpen, onContentSidebarClose, setShowContentSidebarButton }) => {
+const Aprende = ({ isMobileMenuOpen, onMobileMenuClose }) => {
   // Selector de modo: 'libre' | 'apuntes' | null
   const [learningMode, setLearningMode] = useState(null);
-  // Página mínima: mostramos sólo la Introducción desde datos estáticos
-  const introPage = staticContent.pages.find((p) => p.id === 'introduccion') || staticContent.pages[0];
 
   // Contenido dinámico desde la API
   const [dynamicContents, setDynamicContents] = useState([]);
   const [sectionDescriptions, setSectionDescriptions] = useState({});
   const [sectionsMap, setSectionsMap] = useState({});
   const [aprendeIntroduction, setAprendeIntroduction] = useState('');
-  const [loading, setLoading] = useState(true);
 
   // Contenido seleccionado: null hasta que el usuario elige algo en la sidebar
   const [selectedContent, setSelectedContent] = useState(null);
@@ -35,20 +30,6 @@ const Aprende = ({ isMobileMenuOpen, onMobileMenuClose, isContentSidebarOpen, on
     loadSectionDescriptions();
     loadAprendeIntroduction();
   }, []);
-
-  // Notificar al componente padre cuando cambie learningMode
-  useEffect(() => {
-    if (setShowContentSidebarButton) {
-      setShowContentSidebarButton(learningMode !== null);
-    }
-    
-    // Cleanup: ocultar el botón cuando se desmonte el componente
-    return () => {
-      if (setShowContentSidebarButton) {
-        setShowContentSidebarButton(false);
-      }
-    };
-  }, [learningMode, setShowContentSidebarButton]);
 
   const loadSections = async () => {
     try {
@@ -121,8 +102,6 @@ const Aprende = ({ isMobileMenuOpen, onMobileMenuClose, isContentSidebarOpen, on
       }
     } catch (error) {
       console.error('Error cargando contenidos:', error);
-    } finally {
-      setLoading(false);
     }
   };
 
@@ -161,35 +140,124 @@ const Aprende = ({ isMobileMenuOpen, onMobileMenuClose, isContentSidebarOpen, on
         : 'bg-transparent text-black/80 dark:text-white/80 hover:bg-black/5 dark:hover:bg-white/10'
     }`;
 
+  const renderSectionExplorer = () => {
+    if (!learningMode) return null;
+
+    const category = learningMode === 'libre' ? 'Aprendizaje Libre' : 'Universitario';
+
+    return (sectionsMap[category] || [])
+      .slice()
+      .sort((a, b) => {
+        const orderA = typeof a === 'object' ? a.order ?? 0 : 0;
+        const orderB = typeof b === 'object' ? b.order ?? 0 : 0;
+        return orderA - orderB;
+      })
+      .map((section) => {
+        const sectionName = typeof section === 'string' ? section : section.name;
+        const subsections = typeof section === 'object' ? section.subsections || [] : [];
+        const sectionKey = `${category}:${sectionName}`;
+
+        return (
+          <div key={sectionName}>
+            <button
+              type="button"
+              onClick={() => {
+                toggle(sectionKey);
+                setSelectedContent(sectionKey);
+              }}
+              className={`${itemBtnClass(isActive(sectionKey))} flex items-center justify-between`}
+              aria-expanded={!!expanded[sectionKey]}
+              aria-current={isActive(sectionKey) ? 'page' : undefined}
+            >
+              <span>{sectionName.toUpperCase()}</span>
+              <span className="ml-2">{expanded[sectionKey] ? <ChevronDown size={14} /> : <ChevronRight size={14} />}</span>
+            </button>
+            {expanded[sectionKey] && (
+              <div className="mt-1 pl-3 space-y-1">
+                {subsections.length > 0 && subsections.map((subsection) => {
+                  const subsectionContents = getContentsBySection(category, sectionName).filter(
+                    (c) => c.subsection === subsection
+                  );
+
+                  const subsectionKey = `${sectionKey}:${subsection}`;
+
+                  return (
+                    <div key={subsection} className="mb-2">
+                      <button
+                        type="button"
+                        onClick={() => toggle(subsectionKey)}
+                        className={`w-full flex items-center justify-between text-xs px-2 py-1 rounded-md transition-colors bg-transparent border-0 ${
+                          expanded[subsectionKey]
+                            ? 'bg-black/10 dark:bg-white/10 text-black dark:text-white font-semibold'
+                            : 'text-black/70 dark:text-white/70 hover:bg-black/5 dark:hover:bg-white/10'
+                        }`}
+                      >
+                        <span>{subsection}</span>
+                        <span className="ml-1">{expanded[subsectionKey] ? <ChevronDown size={12} /> : <ChevronRight size={12} />}</span>
+                      </button>
+                      {expanded[subsectionKey] && (
+                        <div className="mt-1 pl-3 space-y-1">
+                          {subsectionContents.length > 0 ? (
+                            subsectionContents.map((content) => (
+                              <button
+                                key={content.id}
+                                type="button"
+                                onClick={() => setSelectedContent(`content-${content.id}`)}
+                                className={`w-full text-left text-xs px-2 py-1 rounded-md transition-colors bg-transparent border-0 ${
+                                  isActive(`content-${content.id}`)
+                                    ? 'bg-black/10 dark:bg-white/10 text-black dark:text-white'
+                                    : 'text-black/80 dark:text-white/80 hover:bg-black/5 dark:hover:bg-white/10'
+                                }`}
+                              >
+                                {content.title}
+                              </button>
+                            ))
+                          ) : (
+                            <p className="text-xs text-black/60 dark:text-white/60 italic">
+                              Aún no hay contenidos en esta subsección.
+                            </p>
+                          )}
+                        </div>
+                      )}
+                    </div>
+                  );
+                })}
+
+                {getContentsBySection(category, sectionName)
+                  .filter((c) => !c.subsection || subsections.length === 0)
+                  .map((content) => (
+                    <button
+                      key={content.id}
+                      type="button"
+                      onClick={() => setSelectedContent(`content-${content.id}`)}
+                      className={`w-full text-left text-xs px-2 py-1 rounded-md transition-colors bg-transparent border-0 ${
+                        isActive(`content-${content.id}`)
+                          ? 'bg-black/10 dark:bg-white/10 text-black dark:text-white'
+                          : 'text-black/80 dark:text-white/80 hover:bg-black/5 dark:hover:bg-white/10'
+                      }`}
+                    >
+                      {content.title}
+                    </button>
+                  ))}
+              </div>
+            )}
+          </div>
+        );
+      });
+  };
+
   return (
     <div className="w-full">
       {/* Mobile Navigation Menu */}
       <MobileMenu
         isOpen={isMobileMenuOpen}
         onClose={onMobileMenuClose}
-        showContentSidebar={false}
       />
-
-      {/* Mobile Content Sidebar - Solo cuando hay learningMode */}
-      {learningMode && (
-        <ContentSidebar
-          isOpen={isContentSidebarOpen}
-          onClose={onContentSidebarClose}
-          learningMode={learningMode}
-          sectionsMap={sectionsMap}
-          expanded={expanded}
-          toggle={toggle}
-          setSelectedContent={setSelectedContent}
-          isActive={isActive}
-          itemBtnClass={itemBtnClass}
-          getContentsBySection={getContentsBySection}
-        />
-      )}
 
       {/* Sidebar fija bajo el header: solo tras elegir modo */}
       {learningMode && (
         <aside className="hidden lg:block fixed top-16 left-0 w-64 h-[calc(100vh-4rem)] border-r border-gray-200 dark:border-gray-700 px-4 py-5 overflow-y-auto bg-transparent z-20">
-          <h2 className="text-xs font-semibold uppercase tracking-wider text-black dark:text-white mb-4 text-center">CONTENIDOS</h2>
+          <h2 className="text-xs font-semibold uppercase tracking-wider text-black dark:text-white mb-4 text-center">Secciones</h2>
           {learningMode === 'libre' && (
             <div className="mb-4">
               <button
@@ -208,121 +276,38 @@ const Aprende = ({ isMobileMenuOpen, onMobileMenuClose, isContentSidebarOpen, on
               </button>
             </div>
           )}
-          <div className="space-y-2">
-            {/* Renderizar secciones dinámicamente */}
-            {(() => {
-              const category = learningMode === 'libre' ? 'Aprendizaje Libre' : 'Universitario';
-              const sections = sectionsMap[category] || [];
-              
-              return sections
-                .sort((a, b) => {
-                  const orderA = typeof a === 'object' ? a.order : 0;
-                  const orderB = typeof b === 'object' ? b.order : 0;
-                  return orderA - orderB;
-                })
-                .map((section) => {
-                  const sectionName = typeof section === 'string' ? section : section.name;
-                  const subsections = typeof section === 'object' ? (section.subsections || []) : [];
-                  const sectionKey = `${category}:${sectionName}`;
-                  
-                  return (
-                    <div key={sectionName}>
-                      <button
-                        type="button"
-                        onClick={() => {
-                          toggle(sectionKey);
-                          setSelectedContent(sectionKey);
-                        }}
-                        className={`${itemBtnClass(isActive(sectionKey))} flex items-center justify-between`}
-                        aria-expanded={expanded[sectionKey]}
-                        aria-current={isActive(sectionKey) ? 'page' : undefined}
-                      >
-                        <span>{sectionName.toUpperCase()}</span>
-                        <span className="ml-2">{expanded[sectionKey] ? <ChevronDown size={14} /> : <ChevronRight size={14} />}</span>
-                      </button>
-                      {expanded[sectionKey] && (
-                        <div className="mt-1 pl-3 space-y-1">
-                          {/* Subsecciones si existen */}
-                          {subsections.length > 0 && subsections.map((subsection) => {
-                            const subsectionContents = getContentsBySection(category, sectionName).filter(
-                              c => c.subsection === subsection
-                            );
-
-                            const subsectionKey = `${sectionKey}:${subsection}`;
-
-                            return (
-                              <div key={subsection} className="mb-2">
-                                <button
-                                  type="button"
-                                  onClick={() => toggle(subsectionKey)}
-                                  className={`w-full flex items-center justify-between text-xs px-2 py-1 rounded-md transition-colors bg-transparent border-0 ${
-                                    expanded[subsectionKey]
-                                      ? 'bg-black/10 dark:bg-white/10 text-black dark:text-white font-semibold'
-                                      : 'text-black/70 dark:text-white/70 hover:bg-black/5 dark:hover:bg-white/10'
-                                  }`}
-                                >
-                                  <span>{subsection}</span>
-                                  <span className="ml-1">{expanded[subsectionKey] ? <ChevronDown size={12} /> : <ChevronRight size={12} />}</span>
-                                </button>
-                                {expanded[subsectionKey] && (
-                                  <div className="mt-1 pl-3 space-y-1">
-                                    {subsectionContents.length > 0 ? (
-                                      subsectionContents.map((content) => (
-                                        <button
-                                          key={content.id}
-                                          type="button"
-                                          onClick={() => setSelectedContent(`content-${content.id}`)}
-                                          className={`w-full text-left text-xs px-2 py-1 rounded-md transition-colors bg-transparent border-0 ${
-                                            isActive(`content-${content.id}`)
-                                              ? 'bg-black/10 dark:bg-white/10 text-black dark:text-white'
-                                              : 'text-black/80 dark:text-white/80 hover:bg-black/5 dark:hover:bg-white/10'
-                                          }`}
-                                        >
-                                          {content.title}
-                                        </button>
-                                      ))
-                                    ) : (
-                                      <p className="text-xs text-black/60 dark:text-white/60 italic">
-                                        Aún no hay contenidos en esta subsección.
-                                      </p>
-                                    )}
-                                  </div>
-                                )}
-                              </div>
-                            );
-                          })}
-                          
-                          {/* Contenidos sin subsección (o si no hay subsecciones) */}
-                          {getContentsBySection(category, sectionName)
-                            .filter(c => !c.subsection || subsections.length === 0)
-                            .map((content) => (
-                              <button
-                                key={content.id}
-                                type="button"
-                                onClick={() => setSelectedContent(`content-${content.id}`)}
-                                className={`w-full text-left text-xs px-2 py-1 rounded-md transition-colors bg-transparent border-0 ${
-                                  isActive(`content-${content.id}`)
-                                    ? 'bg-black/10 dark:bg-white/10 text-black dark:text-white'
-                                    : 'text-black/80 dark:text-white/80 hover:bg-black/5 dark:hover:bg-white/10'
-                                }`}
-                              >
-                                {content.title}
-                              </button>
-                            ))
-                          }
-                        </div>
-                      )}
-                    </div>
-                  );
-                });
-            })()}
-          </div>
+          <div className="space-y-2">{renderSectionExplorer()}</div>
         </aside>
       )}
 
       {/* Contenido principal (margina según sidebar) */}
       <div className={learningMode ? 'lg:ml-64' : undefined}>
-  <div className={learningMode ? 'px-4 sm:px-6 lg:pl-[76px] lg:pr-10 py-10' : 'max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10'}>
+        <div className={learningMode ? 'px-4 sm:px-6 lg:pl-[76px] lg:pr-10 py-10' : 'max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10'}>
+          {learningMode && (
+            <div className="lg:hidden mb-8">
+              <h2 className="text-sm font-semibold uppercase tracking-wider text-black dark:text-white mb-3">Explora las secciones</h2>
+              {learningMode === 'libre' && (
+                <div className="mb-3">
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setSelectedContent('introduccion');
+                      setTimeout(() => {
+                        const el = document.getElementById('que-es');
+                        if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                      }, 50);
+                    }}
+                    className={`${itemBtnClass(isActive('introduccion'))} text-sm text-center`}
+                    aria-current={isActive('introduccion') ? 'page' : undefined}
+                  >
+                    Introducción
+                  </button>
+                </div>
+              )}
+              <div className="space-y-2">{renderSectionExplorer()}</div>
+            </div>
+          )}
+
           {!learningMode && (
             <div className="text-center mb-10">
               <h1 className="text-4xl sm:text-5xl lg:text-6xl font-light text-black dark:text-white mb-5 bg-gradient-to-r from-warm-orange via-warm-pink to-warm-red bg-clip-text text-transparent">Aprende</h1>
@@ -367,7 +352,7 @@ const Aprende = ({ isMobileMenuOpen, onMobileMenuClose, isContentSidebarOpen, on
                 <div className="prose prose-gray dark:prose-invert max-w-none">
                   <ReactMarkdown
                     remarkPlugins={[remarkMath, remarkGfm]}
-                    rehypePlugins={[rehypeRaw, rehypeKatex]}
+                    rehypePlugins={[rehypeKatex, rehypeRaw]}
                   >
                     {aprendeIntroduction}
                   </ReactMarkdown>
@@ -416,7 +401,7 @@ const Aprende = ({ isMobileMenuOpen, onMobileMenuClose, isContentSidebarOpen, on
                 <div className="prose prose-gray dark:prose-invert max-w-none prose-headings:font-light prose-p:font-light prose-li:font-light prose-code:font-mono">
                   <ReactMarkdown
                     remarkPlugins={[remarkMath, remarkGfm]}
-                    rehypePlugins={[rehypeRaw, rehypeKatex]}
+                    rehypePlugins={[rehypeKatex, rehypeRaw]}
                   >
                     {content.content}
                   </ReactMarkdown>
@@ -455,7 +440,7 @@ const Aprende = ({ isMobileMenuOpen, onMobileMenuClose, isContentSidebarOpen, on
                 <div className="prose prose-gray dark:prose-invert max-w-none prose-headings:font-light prose-p:font-light prose-li:font-light">
                   <ReactMarkdown
                     remarkPlugins={[remarkMath, remarkGfm]}
-                    rehypePlugins={[rehypeRaw, rehypeKatex]}
+                    rehypePlugins={[rehypeKatex, rehypeRaw]}
                   >
                     {description}
                   </ReactMarkdown>
