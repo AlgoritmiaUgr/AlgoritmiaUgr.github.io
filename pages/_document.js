@@ -20,7 +20,7 @@ class MyDocument extends Document {
           {/* SEO y Social Media */}
           <meta name="author" content="Club de Programación Competitiva - UGR" />
           <meta name="keywords" content="programación competitiva, algoritmos, estructuras de datos, UGR, Universidad de Granada, coding, competitive programming" />
-          <link rel="canonical" href="https://algoritmia-ugr.vercel.app" />
+          <link rel="canonical" href="https://cpcugr.vercel.app" />
           
           <script
             id="theme-init"

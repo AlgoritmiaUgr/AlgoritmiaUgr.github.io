@@ -32,7 +32,7 @@ export default function App({ Component, pageProps }) {
         <meta property="og:title" content="Club de Programación Competitiva - UGR" />
         <meta property="og:description" content="Plataforma educativa para aprender programación competitiva - Universidad de Granada" />
         <meta property="og:image" content={`${getBasePath()}/imagenes/logo_claro.svg`} />
-        <meta property="og:url" content="https://algoritmia-ugr.vercel.app" />
+        <meta property="og:url" content="https://cpcugr.vercel.app" />
         
         {/* Twitter */}
         <meta name="twitter:card" content="summary_large_image" />
