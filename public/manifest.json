@@ -1,7 +1,7 @@
 {
   "name": "Club de Programación Competitiva UGR",
   "short_name": "CPC UGR",
-  "description": "Plataforma educativa para aprender programación competitiva",
+  "description": "Plataforma educativa para aprender programación competitiva - Universidad de Granada",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#000000",
@@ -9,13 +9,19 @@
   "orientation": "portrait-primary",
   "icons": [
     {
-      "src": "/imagenes/logo_claro.svg",
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "/imagenes/logo_oscuro.svg",
       "sizes": "192x192",
       "type": "image/svg+xml",
       "purpose": "maskable any"
     },
     {
-      "src": "/imagenes/logo_claro.svg", 
+      "src": "/imagenes/logo_oscuro.svg", 
       "sizes": "512x512",
       "type": "image/svg+xml",
       "purpose": "maskable any"
