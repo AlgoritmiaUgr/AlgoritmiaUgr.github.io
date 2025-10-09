@@ -1,11 +1,11 @@
-import { Github, Settings } from 'lucide-react';
+import { Github, Settings, Menu, X } from 'lucide-react';
 import { useRouter } from 'next/router';
-import { memo, useMemo } from 'react';
+import { memo, useMemo, useState } from 'react';
 import ThemeToggle from './ThemeToggle';
 import { useTheme } from '../context/ThemeContext';
 import { prefixPath } from '../utils/basePath';
 
-const Header = memo(() => {
+const Header = memo(({ onMobileMenuToggle, isMobileMenuOpen }) => {
   const router = useRouter();
   const { mounted } = useTheme();
   
@@ -60,8 +60,8 @@ const Header = memo(() => {
           </div>
 
           {/* Right side: Navigation + GitHub + Theme Toggle */}
-          <div className="flex items-center space-x-8">
-            {/* Navigation */}
+          <div className="flex items-center space-x-4 sm:space-x-8">
+            {/* Navigation - Desktop */}
             <nav className="hidden md:flex items-center space-x-8">
               {navItems.map((item) => (
                 <a
@@ -91,6 +91,21 @@ const Header = memo(() => {
 
             {/* Theme Toggle */}
             <ThemeToggle />
+
+            {/* Mobile Menu Button */}
+            <button
+              onClick={onMobileMenuToggle}
+              className="md:hidden text-gray-600 dark:text-pure-white hover:text-gray-900 dark:hover:text-gray-300 transition-colors duration-200 bg-transparent border-0 p-0"
+              aria-label={isMobileMenuOpen ? "Cerrar menú" : "Abrir menú"}
+              aria-expanded={isMobileMenuOpen}
+              style={{ background: 'transparent' }}
+            >
+              {isMobileMenuOpen ? (
+                <X className="h-6 w-6" />
+              ) : (
+                <Menu className="h-6 w-6" />
+              )}
+            </button>
           </div>
         </div>
     </header>
