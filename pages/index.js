@@ -3,25 +3,44 @@ import Link from 'next/link'
 import HeroSection from '../src/components/HeroSection'
 import Layout from '../src/components/Layout'
 import SobreNosotros from '../src/components/SobreNosotros'
-import MobileMenu from '../src/components/MobileMenu'
 import { prefixPath } from '../src/utils/basePath'
 
-export default function Home({ isMobileMenuOpen, onMobileMenuClose }) {
+export default function Home() {
   return (
     <>
       <Head>
-        <title>Club de Programación Competitiva - UGR</title>
-        <meta name="description" content="Club de Programación Competitiva de la Universidad de Granada" />
+        <title>Club de Programación Competitiva UGR | Algoritmos y Estructuras de Datos</title>
+        <meta name="description" content="Comunidad universitaria dedicada a la programación competitiva en Granada. Aprende algoritmos, estructuras de datos y resuelve problemas de forma colaborativa." />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link rel="icon" href={prefixPath('/favicon.ico')} />
+        <meta name="keywords" content="programación competitiva, algoritmos, estructuras de datos, Universidad de Granada, UGR, competitive programming, coding, ACM ICPC, Codeforces, LeetCode" />
+        <link rel="icon" href={prefixPath('/favicon.ico')} />
+        
+        {/* Open Graph */}
+        <meta property="og:title" content="Club de Programación Competitiva UGR" />
+        <meta property="og:description" content="Comunidad universitaria dedicada a la programación competitiva en Granada" />
+        <meta property="og:type" content="website" />
+        
+        {/* Schema.org markup */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Organization",
+            "name": "Club de Programación Competitiva UGR",
+            "url": "https://cpcugr.vercel.app",
+            "logo": "https://cpcugr.vercel.app/favicon.svg",
+            "description": "Comunidad universitaria dedicada a la programación competitiva en la Universidad de Granada",
+            "address": {
+              "@type": "PostalAddress",
+              "addressLocality": "Granada",
+              "addressCountry": "ES"
+            },
+            "memberOf": {
+              "@type": "EducationalOrganization",
+              "name": "Universidad de Granada"
+            }
+          })}
+        </script>
       </Head>
-
-      {/* Mobile Menu */}
-      <MobileMenu
-        isOpen={isMobileMenuOpen}
-        onClose={onMobileMenuClose}
-      />
-
       {/* Top fold: hero + cards with better spacing */}
       <section className="relative z-10 min-h-[75vh] flex flex-col justify-center pb-8">
         {/* Hero (centered) */}

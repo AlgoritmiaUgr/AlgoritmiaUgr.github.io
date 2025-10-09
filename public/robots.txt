@@ -1,10 +1,9 @@
+# Permitir a todos los bots
 User-agent: *
 Allow: /
 
-# Sitemap
+# Sitemaps
 Sitemap: https://cpcugr.vercel.app/sitemap.xml
 
-# Directorios no indexables
-Disallow: /api/
-Disallow: /admin/
-Disallow: /_next/
+# Crawl-delay
+Crawl-delay: 1
