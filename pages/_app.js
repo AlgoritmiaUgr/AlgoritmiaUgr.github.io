@@ -1,4 +1,5 @@
 import '../styles/globals.css'
+import 'katex/dist/katex.min.css'
 import { ThemeProvider } from '../src/context/ThemeContext'
 import { AuthProvider } from '../src/context/AuthContext'
 import dynamic from 'next/dynamic'
