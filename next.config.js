@@ -19,6 +19,15 @@ const nextConfig = {
   eslint: {
     ignoreDuringBuilds: true,
   },
+  async redirects() {
+    return [
+      {
+        source: '/sobre-nosotros',
+        destination: '/aboutus',
+        permanent: true,
+      },
+    ];
+  },
   
   // Note: headers() is omitted because output: 'export' doesn't apply custom headers.
 }

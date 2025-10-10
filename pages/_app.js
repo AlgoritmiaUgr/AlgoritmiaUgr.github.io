@@ -47,8 +47,8 @@ export default function App({ Component, pageProps }) {
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         {/* Prefetch para rutas comunes (respetando basePath) */}
-        <link rel="prefetch" href={`${getBasePath()}/aprende`} />
-        <link rel="prefetch" href={`${getBasePath()}/sobre-nosotros`} />
+  <link rel="prefetch" href={`${getBasePath()}/aprende`} />
+  <link rel="prefetch" href={`${getBasePath()}/aboutus`} />
       </Head>
 
       <ThemeProvider>
