@@ -1,9 +1,0 @@
-# Permitir a todos los bots
-User-agent: *
-Allow: /
-
-# Sitemaps
-Sitemap: https://cpcugr.vercel.app/sitemap.xml
-
-# Crawl-delay
-Crawl-delay: 1
