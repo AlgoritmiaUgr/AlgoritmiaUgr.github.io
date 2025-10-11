@@ -1,4 +1,4 @@
-/** @type {import('next').NextConfig} */
+/**.@type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
   // Habilitado para Vercel con soporte de API routes y SSR
@@ -29,7 +29,24 @@ const nextConfig = {
     ];
   },
   
-  // Note: headers() is omitted because output: 'export' doesn't apply custom headers.
+  // Headers de seguridad HTTP
+  async headers() {
+    return [
+      {
+        source: '/:path*',
+        headers: [
+          { key: 'X-Content-Type-Options', value: 'nosniff' },
+          { key: 'X-Frame-Options', value: 'DENY' },
+          { key: 'X-XSS-Protection', value: '1; mode=block' },
+          { key: 'Referrer-Policy', value: 'strict-origin-when-cross-origin' },
+          { key: 'Permissions-Policy', value: 'camera=(), microphone=(), geolocation=()' },
+          { key: 'Cache-Control', value: 'public, max-age=3600, must-revalidate' },
+          // Headers adicionales para navegadores privacy-focused
+          { key: 'Accept-CH', value: 'Sec-CH-Prefers-Color-Scheme' },
+        ],
+      },
+    ];
+  },
 }
 
 module.exports = nextConfig 

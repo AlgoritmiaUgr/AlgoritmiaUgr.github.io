@@ -1,0 +1,13 @@
+Do Not Track Policy for Club de Programación Competitiva UGR
+
+This website respects the Do Not Track (DNT) header.
+
+When DNT:1 is detected, we:
+- Do not use tracking cookies
+- Do not use analytics trackers
+- Do not share data with third parties
+- Limit data collection to essential functionality
+
+We believe in privacy by design and respect user choice.
+
+For more information: https://cpcugr.vercel.app/privacy

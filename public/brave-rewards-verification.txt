@@ -1,0 +1,12 @@
+This is a Brave Rewards publisher verification file.
+
+Domain: cpcugr.vercel.app
+Verification: verified
+
+Publisher: Club de Programación Competitiva UGR
+Description: Comunidad universitaria dedicada a la programación competitiva en Granada
+Category: Education
+
+Date: 2025-10-11
+
+For more information about Brave Rewards, visit: https://brave.com/brave-rewards/
