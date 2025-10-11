@@ -1,3 +1,31 @@
+/**
+ * Componente SEO Reutilizable
+ * 
+ * Este componente centraliza toda la gestión de metaetiquetas, Open Graph,
+ * Twitter Cards y Schema.org markup para todas las páginas del sitio.
+ * 
+ * Propósito:
+ * - Garantizar consistencia en metaetiquetas across todas las páginas
+ * - Mejorar SEO y visibilidad en motores de búsqueda
+ * - Optimizar compartir en redes sociales
+ * - Implementar datos estructurados para rich snippets
+ * 
+ * Características:
+ * - Open Graph completo (og:title, og:image, og:description, etc.)
+ * - Twitter Cards optimizadas
+ * - Schema.org markup dinámico
+ * - URLs canónicas automáticas
+ * - Soporte para artículos y contenido específico
+ * 
+ * @param {Object} props - Propiedades del componente
+ * @param {string} props.title - Título de la página
+ * @param {string} props.description - Descripción meta
+ * @param {string} props.image - URL de la imagen Open Graph
+ * @param {boolean} props.article - Si es contenido tipo artículo
+ * @param {string} props.publishedTime - Fecha de publicación (para artículos)
+ * @param {string} props.modifiedTime - Fecha de modificación (para artículos)
+ * @param {string} props.author - Autor del contenido (para artículos)
+ */
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 
@@ -61,6 +89,14 @@ export default function SEO({
       {/* Additional meta tags */}
       <meta name="robots" content="index, follow" />
       <meta name="language" content="es" />
+      <meta name="referrer" content="no-referrer-when-downgrade" />
+      <meta name="privacy" content="no-track" />
+      <meta name="rating" content="general" />
+      <meta name="distribution" content="global" />
+      
+      {/* Para navegadores privacy-focused */}
+      <meta name="dcterms.rights" content="© 2025 Club de Programación Competitiva UGR" />
+      <meta name="dcterms.language" content="es" />
       
       {/* Schema.org markup */}
       <script type="application/ld+json">

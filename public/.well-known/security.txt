@@ -1,0 +1,12 @@
+# Security.txt file for Club de Programación Competitiva UGR
+
+Contact: security@ugr.es
+Encryption: https://ugr.es/pgp
+
+Policy: https://cpcugr.vercel.app/security-policy
+Acknowledgments: https://cpcugr.vercel.app/security-hall-of-fame
+
+Preferred-Languages: es, en
+Hiring: https://ugr.es/trabajo
+
+Expires: 2026-10-11T00:00:00.000Z

@@ -1,0 +1,23 @@
+# Robots Privacy Policy
+
+User-agent: *
+
+# We respect privacy-focused crawlers
+Allow: /
+
+# We don't track users
+Disallow: /api/track
+Disallow: /analytics
+
+# We support ethical crawling
+Crawl-delay: 1
+
+# Privacy information
+Privacy: https://cpcugr.vercel.app/privacy
+Contact: info@cpcugr.vercel.app
+
+# This site uses:
+# - No third-party trackers
+# - No behavioral advertising
+# - Minimal data collection
+# - Privacy by design

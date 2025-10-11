@@ -1,3 +1,19 @@
+/**
+ * API Endpoint para generación de imágenes Open Graph
+ * 
+ * Este endpoint genera imágenes dinámicas para redes sociales usando @vercel/og.
+ * Las imágenes son de 1200x630px (formato estándar Open Graph) y se personalizan
+ * con el título y descripción proporcionados como parámetros.
+ * 
+ * Propósito:
+ * - Crear imágenes atractivas para compartir en redes sociales
+ * - Mejorar el engagement y click-through rate
+ * - Mantener branding consistente en todos los shares
+ * 
+ * Uso: GET /api/og?title=Título&description=Descripción&type=website
+ * 
+ * @returns {ImageResponse} Imagen PNG optimizada para Open Graph
+ */
 import { ImageResponse } from '@vercel/og';
 
 export const config = {
